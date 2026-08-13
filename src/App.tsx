@@ -29,7 +29,8 @@ export interface Project {
 
 export interface TechStackItem {
   name: string;
-  color: string;
+  textColorClass: string;
+  icon: React.ReactNode;
 }
 
 export interface ServiceItem {

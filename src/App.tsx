@@ -2509,13 +2509,45 @@ export function NotFoundPage({ navigate }: { navigate: (page: Page) => void }) {
   );
 }
 
+function getInitialRoute(): { page: Page; projectId: number } {
+  if (typeof window === 'undefined') return { page: 'home', projectId: 1 };
+  const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+  const hash = window.location.hash.replace('#', '').toLowerCase();
+
+  if (path === '/work' || hash === 'work') {
+    return { page: 'work', projectId: 1 };
+  } else if (path === '/services' || hash === 'services') {
+    return { page: 'services', projectId: 1 };
+  } else if (path === '/about' || hash === 'about') {
+    return { page: 'about', projectId: 1 };
+  } else if (path === '/pricing' || hash === 'pricing') {
+    return { page: 'pricing', projectId: 1 };
+  } else if (path === '/contact' || hash === 'contact') {
+    return { page: 'contact', projectId: 1 };
+  } else if (path.startsWith('/project/') || path.startsWith('/projects/') || hash.startsWith('project-')) {
+    const pathPart = path.split('/')[2];
+    const hashPart = hash.replace('project-', '');
+    const id = parseInt(pathPart || hashPart, 10);
+    if (!isNaN(id)) {
+      return { page: 'project', projectId: id };
+    } else {
+      return { page: 'work', projectId: 1 };
+    }
+  } else if (path === '' || path === '/' || hash === 'home' || hash === '') {
+    return { page: 'home', projectId: 1 };
+  } else {
+    return { page: '404', projectId: 1 };
+  }
+}
+
 // ==========================================
 // 15. MAIN APP COMPONENT
 // ==========================================
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
-  const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [projectId, setProjectId] = useState<number>(1);
+  const [initialRoute] = useState(getInitialRoute);
+  const [currentPage, setCurrentPage] = useState<Page>(initialRoute.page);
+  const [projectId, setProjectId] = useState<number>(initialRoute.projectId);
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('websoul_theme');

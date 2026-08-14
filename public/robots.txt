@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://websoul.tech/sitemap.xml
+Sitemap: https://www.websoul.tech/sitemap.xml

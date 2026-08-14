@@ -1,8 +1,21 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "websoul.tech"
+        }
+      ],
+      "destination": "https://www.websoul.tech/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
-      "source": "/((?!sitemap\\.xml|robots\\.txt|assets/|websoul_logo/).*)",
+      "source": "/((?!sitemap\\.xml|robots\\.txt|assets/|websoul_logo/|_redirects).*)",
       "destination": "/index.html"
     }
   ]

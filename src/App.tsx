@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // ==========================================
 // 1. TYPES & INTERFACES
 // ==========================================
-export type Page = 'home' | 'work' | 'project' | 'services' | 'about' | 'pricing' | 'contact';
+export type Page = 'home' | 'work' | 'project' | 'services' | 'about' | 'pricing' | 'contact' | '404';
 
 export interface ProjectResult {
   label: string;
@@ -1230,10 +1230,10 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
                 <ButtonPrimary onClick={() => navigate('work')} className="w-full sm:w-auto justify-center text-center">
-                  View My Work →
+                  Explore Web Development Portfolio →
                 </ButtonPrimary>
                 <ButtonSecondary onClick={() => navigate('contact')} className="w-full sm:w-auto justify-center text-center">
-                  Start a Project
+                  Start a Web Project
                 </ButtonSecondary>
               </div>
 
@@ -1379,7 +1379,11 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
                 <div className="aspect-video overflow-hidden relative">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} - Custom ${project.category} Web Development Case Study`}
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="500"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -1515,7 +1519,11 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
             <div className="flex items-center gap-3 sm:gap-4">
               <img
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&auto=format"
-                alt="Maya Patel"
+                alt="Maya Patel - Head of Product Client Testimonial for WebSoul"
+                loading="lazy"
+                decoding="async"
+                width="200"
+                height="200"
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-slate-300 dark:border-slate-600 shrink-0"
               />
               <div>
@@ -1530,6 +1538,9 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
           </div>
         </Reveal>
       </section>
+
+      {/* FAQ SECTION */}
+      <FAQSection />
 
       {/* FINAL CTA */}
       <section className="py-20 sm:py-28 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
@@ -1569,7 +1580,7 @@ export function WorkPage({ navigate }: { navigate: (page: Page, id?: number) => 
           Portfolio
         </span>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          Our Work
+          Web Development Portfolio & Case Studies
         </h1>
         <p className="text-base sm:text-lg text-[#475569] dark:text-slate-400 max-w-xl">
           47 projects shipped. Here are the ones that mattered most.
@@ -1607,7 +1618,11 @@ export function WorkPage({ navigate }: { navigate: (page: Page, id?: number) => 
               <div className="aspect-video overflow-hidden relative">
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} - Custom ${project.category} Web Engineering Case Study`}
+                  loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="500"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-[#0B192C]/80 dark:bg-slate-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -1686,8 +1701,12 @@ export function ProjectDetailPage({
         <div className="aspect-video rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-8 sm:mb-12 shadow-lg">
           <img
             src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
+            alt={`${project.title} - Custom ${project.category} Case Study Showcase`}
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="500"
+            className="w-full aspect-[16/9] object-cover rounded-xl sm:rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl"
           />
         </div>
 
@@ -1808,7 +1827,7 @@ export function ServicesPage({ navigate }: { navigate: (page: Page, id?: number)
             What We Do
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Services engineered for digital growth.
+            Custom Web Development & Engineering Services
           </h1>
           <p className="text-xs sm:text-base text-[#475569] dark:text-slate-400">
             From bespoke custom design to complex full-stack web applications.
@@ -1878,6 +1897,9 @@ export function ServicesPage({ navigate }: { navigate: (page: Page, id?: number)
         </div>
       </Reveal>
 
+      {/* FAQ SECTION */}
+      <FAQSection />
+
       {/* Final CTA */}
       <Reveal className="text-center mt-16 sm:mt-20">
         <div className="bg-[#F8FAFC] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-10 max-w-3xl mx-auto shadow-xs">
@@ -1908,7 +1930,11 @@ export function AboutPage({ navigate }: { navigate: (page: Page, id?: number) =>
           <div className="relative">
             <img
               src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop&auto=format"
-              alt="Web Soul Engineering Team"
+              alt="WebSoul Custom Web Development & Software Engineering Team"
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
               className="w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] object-cover rounded-xl sm:rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl mb-4 sm:mb-6"
             />
             <div className="rounded-xl p-4 sm:p-6 border-l-4 border-l-[#0B192C] dark:border-l-blue-500 bg-[#F8FAFC] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
@@ -1929,7 +1955,7 @@ export function AboutPage({ navigate }: { navigate: (page: Page, id?: number) =>
               About Web Soul
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              I build for performance <span className="gradient-text">and people.</span>
+              About WebSoul — Building for performance <span className="gradient-text">and people.</span>
             </h1>
 
             <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed mb-6 sm:mb-8">
@@ -1992,7 +2018,7 @@ export function PricingPage({ navigate }: { navigate: (page: Page, id?: number) 
             Transparent Pricing
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Simple, predictable investments.
+            Transparent Web Development Pricing & Investment Tiers
           </h1>
           <p className="text-xs sm:text-base text-[#475569] dark:text-slate-400">
             No surprise invoices, hidden fees, or recurring license traps. Just clear scope and fixed delivery.
@@ -2116,7 +2142,7 @@ export function ContactPage() {
               Get In Touch
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Let's build something <span className="gradient-text">great.</span>
+              Get In Touch — Let's build something <span className="gradient-text">great.</span>
             </h1>
             <p className="text-xs sm:text-base text-[#475569] dark:text-slate-400 leading-relaxed mb-6 sm:mb-8">
               Have a project idea, refactor need, or strategic inquiry? Fill out the form or reach out directly via email or socials.
@@ -2337,6 +2363,153 @@ export function LogoIntro({ onComplete, darkMode }: { onComplete: () => void; da
 }
 
 // ==========================================
+// 14. FAQ & NOT FOUND COMPONENTS
+// ==========================================
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export const FAQS: FAQItem[] = [
+  {
+    question: "What custom web development services does WebSoul offer?",
+    answer: "WebSoul provides end-to-end custom web development services including React and Next.js web application development, headless e-commerce storefronts, custom UI/UX design, database architecture, API engineering, and ongoing maintenance."
+  },
+  {
+    question: "Which technologies and frameworks do you use for web development?",
+    answer: "We specialize in modern, high-performance web stacks including Next.js, React.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, MongoDB, Stripe, Sanity CMS, and Vercel cloud infrastructure."
+  },
+  {
+    question: "How long does a custom web development project take?",
+    answer: "Project timelines range from 2 to 3 weeks for high-converting landing pages and business websites, to 4 to 8 weeks for custom SaaS web applications and full-stack e-commerce platforms."
+  },
+  {
+    question: "Are all WebSoul websites optimized for SEO and mobile performance?",
+    answer: "Yes, every digital product we engineer is mobile-first responsive, optimized for Core Web Vitals (sub-1-second load times), and pre-configured with technical SEO best practices, schema markup, and canonical URLs."
+  },
+  {
+    question: "How can I request a project estimate or hire WebSoul?",
+    answer: "You can reach out directly via our contact form or email us at hello@websoul.tech. We review your requirements and provide a detailed proposal and fixed timeline within 24 hours."
+  }
+];
+
+export function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQS.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    let scriptTag = document.getElementById('faq-jsonld') as HTMLScriptElement | null;
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'faq-jsonld';
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(faqSchema);
+
+    return () => {
+      const tag = document.getElementById('faq-jsonld');
+      if (tag) tag.remove();
+    };
+  }, []);
+
+  return (
+    <section className="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Reveal>
+        <div className="text-center mb-10 sm:mb-14">
+          <span className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-blue-400 font-semibold block mb-2">
+            Frequently Asked Questions
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            Frequently Asked Questions About Our Web Engineering
+          </h2>
+          <p className="text-xs sm:text-base text-[#475569] dark:text-slate-400 mt-2">
+            Everything you need to know about our web development services, tech stack, and process.
+          </p>
+        </div>
+      </Reveal>
+
+      <div className="space-y-4">
+        {FAQS.map((faq, idx) => (
+          <Reveal key={idx} delay={idx * 50}>
+            <div className="border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 overflow-hidden transition-all shadow-xs">
+              <button
+                type="button"
+                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                className="w-full p-5 sm:p-6 text-left flex justify-between items-center gap-4 cursor-pointer focus:outline-none"
+                aria-expanded={openIndex === idx}
+              >
+                <h3 className="text-sm sm:text-base font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {faq.question}
+                </h3>
+                <span className="text-lg font-mono-tech font-bold text-[#0B192C] dark:text-blue-400 shrink-0">
+                  {openIndex === idx ? '−' : '+'}
+                </span>
+              </button>
+
+              {openIndex === idx && (
+                <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-xs sm:text-sm text-[#475569] dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60 pt-4">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function NotFoundPage({ navigate }: { navigate: (page: Page) => void }) {
+  useEffect(() => {
+    document.title = '404 Page Not Found | WebSoul';
+    let robots = document.querySelector('meta[name="robots"]');
+    if (robots) {
+      robots.setAttribute('content', 'noindex, follow');
+    }
+    return () => {
+      if (robots) {
+        robots.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+      }
+    };
+  }, []);
+
+  return (
+    <div className="pt-32 pb-24 max-w-4xl mx-auto px-4 text-center min-h-[60vh] flex flex-col items-center justify-center">
+      <span className="text-5xl sm:text-6xl font-bold font-mono-tech text-[#0B192C] dark:text-blue-400 mb-4">
+        404
+      </span>
+      <h1 className="text-2xl sm:text-4xl font-bold text-[#0B192C] dark:text-white mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        Page Not Found
+      </h1>
+      <p className="text-sm sm:text-base text-[#475569] dark:text-slate-400 max-w-md mb-8 leading-relaxed">
+        The page you are looking for does not exist or has been moved. Explore our web development services or return home.
+      </p>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <ButtonPrimary onClick={() => navigate('home')}>
+          Return to Homepage
+        </ButtonPrimary>
+        <ButtonSecondary onClick={() => navigate('services')}>
+          Explore Web Development Services
+        </ButtonSecondary>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
 // 15. MAIN APP COMPONENT
 // ==========================================
 export default function App() {
@@ -2353,6 +2526,209 @@ export default function App() {
     }
     return false;
   });
+
+  // Dynamic SEO Metadata, Open Graph, Twitter Cards, Canonical Tags & JSON-LD Head Manager
+  useEffect(() => {
+    let title = 'WebSoul — Custom Web Development & Design Agency for Growing Businesses';
+    let description = 'WebSoul is a premier web development company crafting high-performing React & Next.js websites, custom web applications, e-commerce storefronts, and digital products.';
+    let canonical = 'https://www.websoul.tech/';
+    let breadcrumbName = 'Home';
+
+    if (currentPage === 'work') {
+      title = 'Web Development Portfolio & Case Studies | WebSoul';
+      description = 'Explore custom web development projects, SaaS analytics platforms, and e-commerce storefronts engineered by WebSoul.';
+      canonical = 'https://www.websoul.tech/work';
+      breadcrumbName = 'Portfolio & Case Studies';
+    } else if (currentPage === 'project') {
+      const project = PROJECTS.find((p) => p.id === projectId);
+      if (project) {
+        title = `${project.title} Case Study | WebSoul Web Development`;
+        description = `${project.title}: ${project.tagline}. ${project.result}. Custom ${project.category} built by WebSoul agency.`;
+        canonical = `https://www.websoul.tech/project/${projectId}`;
+        breadcrumbName = `${project.title} Case Study`;
+      }
+    } else if (currentPage === 'services') {
+      title = 'Web Development & Software Engineering Services | WebSoul';
+      description = 'Professional web development services including custom React/Next.js web applications, headless e-commerce platforms, UI/UX design, and full-stack engineering.';
+      canonical = 'https://www.websoul.tech/services';
+      breadcrumbName = 'Web Development Services';
+    } else if (currentPage === 'about') {
+      title = 'About WebSoul — Custom Web Development & Engineering Team';
+      description = 'Learn about WebSoul, our web development philosophy, engineering capabilities, and dedicated team building fast, high-converting digital products.';
+      canonical = 'https://www.websoul.tech/about';
+      breadcrumbName = 'About WebSoul';
+    } else if (currentPage === 'pricing') {
+      title = 'Web Development Pricing & Flexible Investment Tiers | WebSoul';
+      description = 'Transparent web development pricing packages for custom website design, e-commerce storefronts, and full-stack SaaS web applications.';
+      canonical = 'https://www.websoul.tech/pricing';
+      breadcrumbName = 'Pricing Tiers';
+    } else if (currentPage === 'contact') {
+      title = 'Contact WebSoul — Hire Web Development & Engineering Experts';
+      description = 'Get in touch with WebSoul to discuss your web development project, custom React/Next.js application, or e-commerce platform.';
+      canonical = 'https://www.websoul.tech/contact';
+      breadcrumbName = 'Contact Us';
+    } else if (currentPage === '404') {
+      title = '404 Page Not Found | WebSoul';
+      description = 'The requested page could not be found. Return to WebSoul web development homepage or explore our services.';
+      canonical = 'https://www.websoul.tech/404';
+      breadcrumbName = '404 Page Not Found';
+    }
+
+    document.title = title;
+
+    // Update Meta Description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', description);
+
+    // Update Robots Meta Tag
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) {
+      if (currentPage === '404') {
+        metaRobots.setAttribute('content', 'noindex, follow');
+      } else {
+        metaRobots.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+      }
+    }
+
+    // Update Open Graph Tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', description);
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', canonical);
+
+    // Update Twitter Cards
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) twitterTitle.setAttribute('content', title);
+
+    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDesc) twitterDesc.setAttribute('content', description);
+
+    const twitterUrl = document.querySelector('meta[name="twitter:url"]');
+    if (twitterUrl) twitterUrl.setAttribute('content', canonical);
+
+    // Update Canonical URL
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) canonicalLink.setAttribute('href', canonical);
+
+    // Inject BreadcrumbList JSON-LD Schema for Subpages
+    if (currentPage !== 'home' && currentPage !== '404') {
+      const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.websoul.tech/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": breadcrumbName,
+            "item": canonical
+          }
+        ]
+      };
+
+      let scriptTag = document.getElementById('breadcrumb-jsonld') as HTMLScriptElement | null;
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.id = 'breadcrumb-jsonld';
+        scriptTag.type = 'application/ld+json';
+        document.head.appendChild(scriptTag);
+      }
+      scriptTag.textContent = JSON.stringify(breadcrumbSchema);
+    } else {
+      const scriptTag = document.getElementById('breadcrumb-jsonld');
+      if (scriptTag) scriptTag.remove();
+    }
+
+    // Inject Service Offerings JSON-LD Schema on Services Page
+    if (currentPage === 'services') {
+      const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Web Development & Software Engineering",
+        "provider": {
+          "@type": "Organization",
+          "name": "WebSoul",
+          "url": "https://www.websoul.tech/"
+        },
+        "areaServed": "Global",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Web Engineering Services",
+          "itemListElement": SERVICES.map((service) => ({
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": service.title,
+              "description": service.description
+            }
+          }))
+        }
+      };
+
+      let scriptTag = document.getElementById('services-jsonld') as HTMLScriptElement | null;
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.id = 'services-jsonld';
+        scriptTag.type = 'application/ld+json';
+        document.head.appendChild(scriptTag);
+      }
+      scriptTag.textContent = JSON.stringify(serviceSchema);
+    } else {
+      const scriptTag = document.getElementById('services-jsonld');
+      if (scriptTag) scriptTag.remove();
+    }
+  }, [currentPage, projectId]);
+
+  // Dual Pathname & Hash Location Sync for deep-linking & crawler parsing
+  useEffect(() => {
+    const handleLocationSync = () => {
+      const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+
+      if (path === '/work' || hash === 'work') {
+        setCurrentPage('work');
+      } else if (path === '/services' || hash === 'services') {
+        setCurrentPage('services');
+      } else if (path === '/about' || hash === 'about') {
+        setCurrentPage('about');
+      } else if (path === '/pricing' || hash === 'pricing') {
+        setCurrentPage('pricing');
+      } else if (path === '/contact' || hash === 'contact') {
+        setCurrentPage('contact');
+      } else if (path.startsWith('/project/') || path.startsWith('/projects/') || hash.startsWith('project-')) {
+        const pathPart = path.split('/')[2];
+        const hashPart = hash.replace('project-', '');
+        const id = parseInt(pathPart || hashPart, 10);
+        if (!isNaN(id)) {
+          setProjectId(id);
+          setCurrentPage('project');
+        } else {
+          setCurrentPage('work');
+        }
+      } else if (path === '' || path === '/' || hash === 'home' || hash === '') {
+        setCurrentPage('home');
+      } else {
+        setCurrentPage('404');
+      }
+    };
+
+    handleLocationSync();
+    window.addEventListener('popstate', handleLocationSync);
+    window.addEventListener('hashchange', handleLocationSync);
+    return () => {
+      window.removeEventListener('popstate', handleLocationSync);
+      window.removeEventListener('hashchange', handleLocationSync);
+    };
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -2371,8 +2747,21 @@ export default function App() {
 
   const navigate = (page: Page, id?: number) => {
     setCurrentPage(page);
-    if (id !== undefined) {
+    let targetPath = '/';
+    if (page === 'work') targetPath = '/work';
+    else if (page === 'services') targetPath = '/services';
+    else if (page === 'about') targetPath = '/about';
+    else if (page === 'pricing') targetPath = '/pricing';
+    else if (page === 'contact') targetPath = '/contact';
+    else if (page === 'project' && id !== undefined) {
       setProjectId(id);
+      targetPath = `/project/${id}`;
+    } else if (page === '404') {
+      targetPath = '/404';
+    }
+
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ page, id }, '', targetPath);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -2389,7 +2778,7 @@ export default function App() {
           toggleDarkMode={toggleDarkMode}
         />
 
-        <main>
+        <main id="main-content">
           {currentPage === 'home' && <HomePage navigate={navigate} />}
           {currentPage === 'work' && <WorkPage navigate={navigate} />}
           {currentPage === 'project' && <ProjectDetailPage projectId={projectId} navigate={navigate} />}
@@ -2397,6 +2786,7 @@ export default function App() {
           {currentPage === 'about' && <AboutPage navigate={navigate} />}
           {currentPage === 'pricing' && <PricingPage navigate={navigate} />}
           {currentPage === 'contact' && <ContactPage />}
+          {currentPage === '404' && <NotFoundPage navigate={navigate} />}
         </main>
       </div>
 

@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/((?!sitemap\\.xml|robots\\.txt|assets/|websoul_logo/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

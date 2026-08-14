@@ -1138,10 +1138,10 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
                 </li>
                 <li>
                   <a
-                    href="mailto:hello@websoul.dev"
+                    href="mailto:hello@websoul.tech"
                     className="text-xs sm:text-sm text-[#0B192C] dark:text-blue-400 font-semibold hover:underline font-mono-tech cursor-pointer"
                   >
-                    hello@websoul.dev
+                    hello@websoul.tech
                   </a>
                 </li>
               </ul>
@@ -2127,10 +2127,10 @@ export function ContactPage() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
                 <span className="text-[#64748B] dark:text-slate-400 sm:w-24 shrink-0 font-semibold">EMAIL</span>
                 <a
-                  href="mailto:hello@websoul.dev"
+                  href="mailto:hello@websoul.tech"
                   className="text-[#0B192C] dark:text-blue-400 font-semibold hover:underline link-underline cursor-pointer break-all"
                 >
-                  hello@websoul.dev
+                  hello@websoul.tech
                 </a>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">

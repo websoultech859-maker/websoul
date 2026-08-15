@@ -663,7 +663,7 @@ export function ThemeToggle({
       {darkMode ? (
         <img src="/websoul_logo/favicondark.png" alt="Dark Mode" className="w-5 h-5 object-cover" />
       ) : (
-        <img src="/websoul_logo/favicon.png" alt="Light Mode" className="w-5 h-5 object-cover" />
+        <img src="/favicon.png" alt="Light Mode" className="w-5 h-5 object-cover" />
       )}
     </button>
   );
@@ -2776,7 +2776,7 @@ export default function App() {
       root.classList.remove('dark');
       localStorage.setItem('websoul_theme', 'light');
       faviconLinks.forEach((link) => {
-        link.href = '/websoul_logo/favicon.png';
+        link.href = '/favicon.png';
       });
     }
   }, [darkMode]);

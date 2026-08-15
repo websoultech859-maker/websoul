@@ -2764,20 +2764,12 @@ export default function App() {
 
   useEffect(() => {
     const root = document.documentElement;
-    const faviconLinks = document.querySelectorAll<HTMLLinkElement>("link[rel~='icon']");
-
     if (darkMode) {
       root.classList.add('dark');
       localStorage.setItem('websoul_theme', 'dark');
-      faviconLinks.forEach((link) => {
-        link.href = '/websoul_logo/favicondark.png';
-      });
     } else {
       root.classList.remove('dark');
       localStorage.setItem('websoul_theme', 'light');
-      faviconLinks.forEach((link) => {
-        link.href = '/favicon.png';
-      });
     }
   }, [darkMode]);
 

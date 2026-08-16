@@ -893,19 +893,19 @@ function ServiceIcon({ type }: { type: ServiceItem['icon'] }) {
 // ==========================================
 export function HeaderLogo({ darkMode }: { darkMode?: boolean }) {
   return (
-    <div className="relative h-5 sm:h-6 flex items-center justify-center">
+    <div className="relative h-5 sm:h-6 aspect-[4.85/1] flex items-center justify-center overflow-hidden">
       <img
         src="/websoul_logo/header_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`h-5 sm:h-6 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none absolute' : 'opacity-100 relative'
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       />
       <img
         src="/websoul_logo/dark_mode/header_logo.png"
         alt="Web Soul Logo"
-        className={`h-5 sm:h-6 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute'
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
     </div>
@@ -914,19 +914,19 @@ export function HeaderLogo({ darkMode }: { darkMode?: boolean }) {
 
 export function MobileHeaderLogo({ darkMode }: { darkMode?: boolean }) {
   return (
-    <div className="relative h-6 sm:h-7 flex items-center justify-center">
+    <div className="relative h-6 sm:h-7 aspect-[4.85/1] flex items-center justify-center overflow-hidden">
       <img
         src="/websoul_logo/header_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`h-6 sm:h-7 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none absolute' : 'opacity-100 relative'
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       />
       <img
         src="/websoul_logo/dark_mode/header_logo.png"
         alt="Web Soul Logo"
-        className={`h-6 sm:h-7 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute'
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
     </div>
@@ -935,19 +935,19 @@ export function MobileHeaderLogo({ darkMode }: { darkMode?: boolean }) {
 
 export function FooterLogo({ darkMode }: { darkMode?: boolean }) {
   return (
-    <div className="relative h-16 flex items-center justify-center">
+    <div className="relative h-14 sm:h-16 aspect-[1.38/1] flex items-center justify-center overflow-hidden">
       <img
         src="/websoul_logo/footer_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`h-16 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none absolute' : 'opacity-100 relative'
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.524] translate-y-[2.5%] transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       />
       <img
         src="/websoul_logo/dark_mode/footer_logo.png"
         alt="Web Soul Logo"
-        className={`h-16 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute'
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
     </div>
@@ -956,19 +956,19 @@ export function FooterLogo({ darkMode }: { darkMode?: boolean }) {
 
 export function IntroLogo({ darkMode }: { darkMode?: boolean }) {
   return (
-    <div className="relative h-12 sm:h-16 md:h-20 flex items-center justify-center">
+    <div className="relative h-12 sm:h-16 md:h-20 aspect-[4.85/1] flex items-center justify-center overflow-hidden">
       <img
         src="/websoul_logo/header_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`h-12 sm:h-16 md:h-20 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none absolute' : 'opacity-100 relative'
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       />
       <img
         src="/websoul_logo/dark_mode/header_logo.png"
         alt="Web Soul Logo"
-        className={`h-12 sm:h-16 md:h-20 w-auto object-contain transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute'
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${
+          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
     </div>

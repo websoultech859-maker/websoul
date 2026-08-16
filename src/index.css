@@ -346,4 +346,27 @@ select option {
   color: #0B192C;
 }
 
+/* ==========================================
+   MARQUEE SCROLL ANIMATION FOR REVIEWS
+   ========================================== */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+
 

@@ -66,9 +66,58 @@ export interface CodeSnippet {
   lines: { text: string; type: 'keyword' | 'string' | 'comment' | 'normal' }[][];
 }
 
+export interface TestimonialItem {
+  id: number;
+  quote: string;
+  author: string;
+  role: string;
+  image: string;
+  rating: number;
+  highlightMetric: string;
+}
+
 // ==========================================
 // 2. HARDCODED REALISTIC DATA
 // ==========================================
+export const TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: 1,
+    quote: "Web Soul transformed our slow legacy app into a blazingly fast interface that our users actually enjoy using every single day. Load times dropped by 90%.",
+    author: "Maya Patel",
+    role: "Head of Product at Orbit Analytics",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&auto=format",
+    rating: 5,
+    highlightMetric: "90% Load Reduction",
+  },
+  {
+    id: 2,
+    quote: "The e-commerce platform engineered by WebSoul doubled our conversion rates within 30 days. Their code quality, design polish, and speed of delivery were truly world-class.",
+    author: "Marcus Vance",
+    role: "Founder & CEO at Nexus Commerce",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&auto=format",
+    rating: 5,
+    highlightMetric: "+114% Conversion Rate",
+  },
+  {
+    id: 3,
+    quote: "Working with WebSoul was effortless. They took our complex SaaS dashboard concept and delivered a pixel-perfect, highly responsive React application weeks ahead of deadline.",
+    author: "Sophia Lin",
+    role: "VP of Growth at Pulse AI",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&auto=format",
+    rating: 5,
+    highlightMetric: "3 Weeks Ahead of Schedule",
+  },
+  {
+    id: 4,
+    quote: "WebSoul's full-stack expertise helped us pass rigorous security audits while maintaining a silky-smooth 60fps user experience across all desktop and mobile browsers.",
+    author: "David Reynolds",
+    role: "CTO at FinEdge Solutions",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&auto=format",
+    rating: 5,
+    highlightMetric: "60fps Smooth UX",
+  },
+];
+
 export const PROJECTS: Project[] = [
   {
     id: 1,
@@ -1227,17 +1276,7 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
               <ul className="space-y-2.5 sm:space-y-3">
                 <li>
                   <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white link-underline cursor-pointer font-medium"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com"
+                    href="https://github.com/websoultech859-maker"
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white link-underline cursor-pointer font-medium"
@@ -1247,7 +1286,7 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
                 </li>
                 <li>
                   <a
-                    href="https://upwork.com"
+                    href="https://www.upwork.com/freelancers/~01ccd2af3f92e93ff4?mp_source=share"
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white link-underline cursor-pointer font-medium"
@@ -1257,10 +1296,10 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
                 </li>
                 <li>
                   <a
-                    href="mailto:hello@websoul.tech"
+                    href="mailto:contact@websoul.tech"
                     className="text-xs sm:text-sm text-[#0B192C] dark:text-blue-400 font-semibold hover:underline font-mono-tech cursor-pointer"
                   >
-                    hello@websoul.tech
+                    contact@websoul.tech
                   </a>
                 </li>
               </ul>
@@ -1651,41 +1690,8 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
         </div>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="py-14 sm:py-20 bg-[#F8FAFC] dark:bg-slate-900/60 border-y border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8 xl:px-12 transition-colors duration-300">
-        <Reveal>
-          <div className="max-w-4xl mx-auto rounded-2xl p-6 sm:p-8 md:p-12 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md relative overflow-hidden">
-            <svg className="w-10 h-10 sm:w-12 sm:h-12 mb-4 sm:mb-6 opacity-90 text-[#0B192C] dark:text-blue-400" viewBox="0 0 40 40" fill="currentColor">
-              <path d="M12 22H6C6 16.5 9.5 12 15 11V15C12 16 11 18 11 20H15V28H7V22H12Z" />
-              <path d="M30 22H24C24 16.5 27.5 12 33 11V15C30 16 29 18 29 20H33V28H25V22H30Z" />
-            </svg>
-
-            <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0B192C] dark:text-slate-100 leading-snug mb-6 sm:mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              "Web Soul transformed our slow legacy app into a blazingly fast interface that our users actually enjoy using every single day. Load times dropped by 90%."
-            </blockquote>
-
-            <div className="flex items-center gap-3 sm:gap-4">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&auto=format"
-                alt="Maya Patel - Head of Product Client Testimonial for WebSoul"
-                loading="lazy"
-                decoding="async"
-                width="200"
-                height="200"
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-slate-300 dark:border-slate-600 shrink-0"
-              />
-              <div>
-                <div className="text-sm sm:text-base font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Maya Patel
-                </div>
-                <div className="text-xs font-mono-tech text-[#1E3A8A] dark:text-blue-400 font-semibold">
-                  Head of Product at Orbit Analytics
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
+      {/* TESTIMONIALS */}
+      <TestimonialsSection />
 
       {/* FAQ SECTION */}
       <FAQSection />
@@ -2319,7 +2325,7 @@ export function ContactPage() {
   });
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('hello@websoul.tech');
+    navigator.clipboard.writeText('contact@websoul.tech');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -2356,7 +2362,7 @@ export function ContactPage() {
       });
     } catch (err) {
       console.error('EmailJS submit error:', err);
-      setErrorMessage('Unable to send message at this time. Please try again or reach out to hello@websoul.tech directly.');
+      setErrorMessage('Unable to send message at this time. Please try again or reach out to contact@websoul.tech directly.');
     } finally {
       setLoading(false);
     }
@@ -2397,8 +2403,8 @@ export function ContactPage() {
                     </div>
                     <div>
                       <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">Direct Email</div>
-                      <a href="mailto:hello@websoul.tech" className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all">
-                        hello@websoul.tech
+                      <a href="mailto:contact@websoul.tech" className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all">
+                        contact@websoul.tech
                       </a>
                     </div>
                   </div>
@@ -2423,7 +2429,7 @@ export function ContactPage() {
                   <div>
                     <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">HQ Location</div>
                     <div className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100">
-                      San Francisco, CA <span className="font-normal text-slate-500 text-xs">(Remote Worldwide)</span>
+                      Islamabad, Pakistan <span className="font-normal text-slate-500 text-xs">(Remote Worldwide)</span>
                     </div>
                   </div>
                 </div>
@@ -2439,13 +2445,10 @@ export function ContactPage() {
                     <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">Social Channels</div>
                   </div>
                   <div className="flex gap-2 font-mono-tech text-xs">
-                    <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
-                      LinkedIn
-                    </a>
-                    <a href="https://github.com" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
+                    <a href="https://github.com/websoultech859-maker" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
                       GitHub
                     </a>
-                    <a href="https://upwork.com" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
+                    <a href="https://www.upwork.com/freelancers/~01ccd2af3f92e93ff4?mp_source=share" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
                       Upwork
                     </a>
                   </div>
@@ -2766,9 +2769,210 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "How can I request a project estimate or hire WebSoul?",
-    answer: "You can reach out directly via our contact form or email us at hello@websoul.tech. We review your requirements and provide a detailed proposal and fixed timeline within 24 hours."
+    answer: "You can reach out directly via our contact form or email us at contact@websoul.tech. We review your requirements and provide a detailed proposal and fixed timeline within 24 hours."
   }
 ];
+
+export function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  const current = TESTIMONIALS[currentIndex];
+
+  return (
+    <section className="py-16 sm:py-24 bg-[#F8FAFC] dark:bg-slate-900/60 border-y border-slate-200 dark:border-slate-800 transition-colors duration-300 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <Reveal>
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <span className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-blue-400 font-semibold block mb-2">
+              Client Feedback
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B192C] dark:text-white mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Trusted by engineering & product leaders.
+            </h2>
+            <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-400">
+              See how we've helped fast-growing companies transform load times, UX, and conversion rates.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Featured Spotlight Slider Card */}
+        <Reveal>
+          <div
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className="max-w-4xl mx-auto rounded-3xl p-6 sm:p-10 md:p-14 border border-slate-200/90 dark:border-slate-700/80 bg-white dark:bg-slate-800/90 shadow-xl relative overflow-hidden backdrop-blur-xs transition-all duration-300 mb-12 sm:mb-16"
+          >
+            {/* Background Decorative Gradient Blur */}
+            <div className="absolute -right-16 -top-16 w-64 h-64 bg-blue-500/10 dark:bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -left-16 -bottom-16 w-64 h-64 bg-indigo-500/10 dark:bg-indigo-400/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8 relative z-10">
+              {/* Quote Icon */}
+              <div className="w-12 h-12 rounded-2xl bg-[#0B192C]/5 dark:bg-blue-950/60 border border-[#0B192C]/10 dark:border-blue-500/30 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0">
+                <svg className="w-6 h-6" viewBox="0 0 40 40" fill="currentColor">
+                  <path d="M12 22H6C6 16.5 9.5 12 15 11V15C12 16 11 18 11 20H15V28H7V22H12Z" />
+                  <path d="M30 22H24C24 16.5 27.5 12 33 11V15C30 16 29 18 29 20H33V28H25V22H30Z" />
+                </svg>
+              </div>
+
+              {/* Rating & Metric Badge */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono-tech font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20">
+                  {"★".repeat(current.rating)} 5.0
+                </span>
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono-tech font-bold text-blue-700 dark:text-blue-300 bg-blue-500/10 border border-blue-500/20">
+                  ⚡ {current.highlightMetric}
+                </span>
+              </div>
+            </div>
+
+            {/* Testimonial Quote */}
+            <div className="min-h-[140px] sm:min-h-[120px] flex items-center relative z-10">
+              <blockquote
+                key={current.id}
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0B192C] dark:text-slate-100 leading-snug tracking-tight animate-logo-intro"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                "{current.quote}"
+              </blockquote>
+            </div>
+
+            {/* Footer Author Info & Controls */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 mt-6 border-t border-slate-200/80 dark:border-slate-700/80 relative z-10">
+              <div className="flex items-center gap-3.5">
+                <img
+                  src={current.image}
+                  alt={`${current.author} - ${current.role} Client Testimonial`}
+                  loading="lazy"
+                  decoding="async"
+                  width="200"
+                  height="200"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-[#0B192C]/20 dark:border-blue-400/40 shrink-0 shadow-md"
+                />
+                <div>
+                  <div className="text-sm sm:text-base font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {current.author}
+                  </div>
+                  <div className="text-xs font-mono-tech text-[#1E3A8A] dark:text-blue-400 font-semibold">
+                    {current.role}
+                  </div>
+                </div>
+              </div>
+
+              {/* Slider Controls & Pagination Dots */}
+              <div className="flex items-center gap-4 self-end sm:self-auto">
+                <div className="flex items-center gap-1.5">
+                  {TESTIMONIALS.map((t, idx) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setCurrentIndex(idx)}
+                      aria-label={`Go to testimonial ${idx + 1}`}
+                      className={`h-2 rounded-full transition-all cursor-pointer ${
+                        idx === currentIndex
+                          ? 'w-7 bg-[#0B192C] dark:bg-blue-400'
+                          : 'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handlePrev}
+                    aria-label="Previous testimonial"
+                    className="w-9 h-9 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center text-[#0B192C] dark:text-slate-200 hover:bg-[#0B192C] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all cursor-pointer shadow-xs"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    aria-label="Next testimonial"
+                    className="w-9 h-9 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center text-[#0B192C] dark:text-slate-200 hover:bg-[#0B192C] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all cursor-pointer shadow-xs"
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Scroll Animation Marquee Track */}
+        <Reveal>
+          <div className="relative w-full overflow-hidden py-2">
+            {/* Left/Right Edge Blur Gradients */}
+            <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#F8FAFC] dark:from-[#0F172A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#F8FAFC] dark:from-[#0F172A] to-transparent z-10 pointer-events-none" />
+
+            <div className="animate-marquee gap-6">
+              {[...TESTIMONIALS, ...TESTIMONIALS].map((t, index) => (
+                <div
+                  key={`${t.id}-${index}`}
+                  onClick={() => setCurrentIndex(t.id - 1)}
+                  className={`w-[320px] sm:w-[380px] p-5 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer shrink-0 flex flex-col justify-between ${
+                    currentIndex === (t.id - 1)
+                      ? 'border-blue-500 dark:border-blue-400 bg-white dark:bg-slate-800 shadow-md scale-[1.02]'
+                      : 'border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-800/40 hover:border-slate-300 dark:hover:border-slate-700'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[11px] font-mono-tech font-bold text-amber-500 dark:text-amber-400">
+                        ★★★★★
+                      </span>
+                      <span className="text-[10px] font-mono-tech font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                        {t.highlightMetric}
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#334155] dark:text-slate-300 line-clamp-3 leading-relaxed mb-4">
+                      "{t.quote}"
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 pt-3 border-t border-slate-100 dark:border-slate-700/60">
+                    <img
+                      src={t.image}
+                      alt={t.author}
+                      loading="lazy"
+                      decoding="async"
+                      width="100"
+                      height="100"
+                      className="w-8 h-8 rounded-full object-cover border border-slate-200 dark:border-slate-700"
+                    />
+                    <div className="truncate">
+                      <div className="text-xs font-bold text-[#0B192C] dark:text-white truncate">
+                        {t.author}
+                      </div>
+                      <div className="text-[11px] font-mono-tech text-slate-500 dark:text-slate-400 truncate">
+                        {t.role}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

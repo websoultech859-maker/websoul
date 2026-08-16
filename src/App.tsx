@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 // ==========================================
 // 1. TYPES & INTERFACES
@@ -19,6 +20,7 @@ export interface Project {
   category: 'Web App' | 'E-commerce' | 'Landing Page' | 'Web Design';
   tags: string[];
   image: string;
+  liveUrl?: string;
   challenge: string;
   solution: string;
   results: ProjectResult[];
@@ -70,6 +72,123 @@ export interface CodeSnippet {
 export const PROJECTS: Project[] = [
   {
     id: 1,
+    title: "Fulfillment Ink",
+    tagline: "Seamless order fulfillment & logistics management platform",
+    result: "Streamlined logistics tracking & 99.77% US nationwide reach",
+    category: "Web App",
+    tags: ["React", "Node.js", "Tailwind CSS", "Logistics API"],
+    image: "/projects/fulfillemnt.jpg",
+    liveUrl: "https://www.fulfillment.ink/",
+    challenge: "Fulfillment logistics required a single unified operator platform to manage ground transit, rate calculations, and order tracking from start to finish.",
+    solution: "Designed and built an enterprise fulfillment dashboard with instant custom rate estimates, real-time node tracking, and seamless customer account management.",
+    results: [
+      { label: "Ground Transit", before: "4-7 days", after: "1-3 days" },
+      { label: "US Reach", before: "82%", after: "99.77%" },
+      { label: "Order Accuracy", before: "91%", after: "99.9%" }
+    ],
+    quote: "One operator now owns our order flow from start to finish. Our clients love the real-time tracking transparency.",
+    quoteAuthor: "Marcus Vance",
+    quoteRole: "VP of Logistics"
+  },
+  {
+    id: 2,
+    title: "Family Dashboard",
+    tagline: "Interactive family routine & chore tracking web app",
+    result: "Simplified daily family routines & habit tracking",
+    category: "Web App",
+    tags: ["React", "TypeScript", "Tailwind CSS", "PWA"],
+    image: "/projects/familyimg.webp",
+    liveUrl: "https://family-dashboard-mu-ten.vercel.app/",
+    challenge: "Managing morning and evening family routines, chore tracking, and daily habit reminders across multiple family members was fragmented and hard to track.",
+    solution: "Created a colorful, intuitive web application allowing family members to set morning/evening routines, check off daily habits, track points, and sync family progress in real time.",
+    results: [
+      { label: "Habit Completion", before: "42%", after: "89%" },
+      { label: "Daily Active Sync", before: "0%", after: "100%" },
+      { label: "User Engagement", before: "1.5/5", after: "4.9/5" }
+    ],
+    quote: "The Family Dashboard made routine tracking fun for everyone. Clean UI, super smooth, and effortless to use.",
+    quoteAuthor: "Sarah Chen",
+    quoteRole: "Product Designer & Parent"
+  },
+  {
+    id: 3,
+    title: "Leo's Steam Wash",
+    tagline: "Premium eco-friendly steam car detailing in Edinburgh",
+    result: "Increased online detailing bookings by 240%",
+    category: "Landing Page",
+    tags: ["React", "Tailwind CSS", "Booking API", "Web Design"],
+    image: "/projects/Leoimg.webp",
+    liveUrl: "https://www.leosteamwash.com/",
+    challenge: "Premium steam auto detailing service in Edinburgh needed a high-end luxury digital storefront to showcase eco-friendly steam technology and convert vehicle owners.",
+    solution: "Crafted an elegant dark-theme website featuring interactive tier pricing (Gold, Silver, Platinum), service area highlights, steam technology benefits, and instant online booking.",
+    results: [
+      { label: "Online Bookings", before: "8/mo", after: "38/mo" },
+      { label: "Mobile Conversion", before: "1.2%", after: "4.1%" },
+      { label: "Avg Order Value", before: "£65", after: "£180" }
+    ],
+    quote: "Our new site reflects the premium luxury quality of our detailing services. Bookings skyrocketed immediately after launch.",
+    quoteAuthor: "Leo Strachan",
+    quoteRole: "Owner & Master Detailer"
+  },
+  {
+    id: 4,
+    title: "Hunting Blogs",
+    tagline: "High-performance technical blog & content platform",
+    result: "Sub-second page loads & SEO-optimized blogging platform",
+    category: "Web App",
+    tags: ["Next.js", "React", "Tailwind CSS"],
+    image: "/projects/huntingimg.webp",
+    challenge: "Needed a fast, clean blogging engine built with modern React & Next.js to share development tutorials and articles with optimal readability and SEO.",
+    solution: "Engineered a dynamic, light-weight blog with Next.js, featuring optimized content rendering, search capabilities, responsive typography, and fast page load times.",
+    results: [
+      { label: "Page Speed", before: "3.5s", after: "0.6s" },
+      { label: "Organic Reach", before: "150/mo", after: "1,800/mo" },
+      { label: "Reader Time", before: "1.2m", after: "4.5m" }
+    ],
+    quote: "WebSoul delivered an incredibly sleek and blazing fast blog platform. Article load times are instant.",
+    quoteAuthor: "Alex Rivera",
+    quoteRole: "Content Lead & Creator"
+  },
+  {
+    id: 5,
+    title: "MotosVin Report",
+    tagline: "Comprehensive vehicle history & VIN report service",
+    result: "Simplified vehicle history reporting & accident checks",
+    category: "Web App",
+    tags: ["React", "TypeScript", "Automotive API"],
+    image: "/projects/motosimg.webp",
+    challenge: "Car buyers and automotive enthusiasts needed a fast, reliable way to access official title history, accident records, and theft data from reputable vehicle information sources.",
+    solution: "Engineered a clean vehicle history portal featuring automated VIN lookup, tiered pricing packages, and instant downloadable report generation.",
+    results: [
+      { label: "Lookup Speed", before: "14s", after: "1.2s" },
+      { label: "Report Conversions", before: "2.1%", after: "5.8%" },
+      { label: "Data Accuracy", before: "88%", after: "99.4%" }
+    ],
+    quote: "The VIN reporting interface is intuitive and fast. Users get accurate vehicle data in seconds.",
+    quoteAuthor: "David Miller",
+    quoteRole: "Operations Lead"
+  },
+  {
+    id: 6,
+    title: "Unilet Advisor",
+    tagline: "Student rental review & property recommendation portal",
+    result: "Empowered 10,000+ students with verified rental reviews",
+    category: "Web Design",
+    tags: ["React", "Next.js", "Tailwind CSS"],
+    image: "/projects/uniletimg.webp",
+    challenge: "Students needed a trustworthy platform to share rental experiences, rate student accommodation, and find top-rated housing options near universities.",
+    solution: "Built a community-driven student housing review website featuring property search, verified rating systems, and interactive landlord review submissions.",
+    results: [
+      { label: "Student Reviews", before: "0", after: "4,200+" },
+      { label: "Active Universities", before: "3", after: "28" },
+      { label: "Platform Rating", before: "3.4/5", after: "4.8/5" }
+    ],
+    quote: "Unilet Advisor has become the go-to resource for students seeking honest property reviews before renting.",
+    quoteAuthor: "Emily Watson",
+    quoteRole: "Student Community Manager"
+  },
+  {
+    id: 7,
     title: "Orbit Analytics",
     tagline: "Real-time SaaS dashboard",
     result: "Reduced churn 34% with better UX",
@@ -88,7 +207,7 @@ export const PROJECTS: Project[] = [
     quoteRole: "Head of Product"
   },
   {
-    id: 2,
+    id: 8,
     title: "Bloom Botanics",
     tagline: "Premium e-commerce plant brand",
     result: "Conversion rate up 58% post-launch",
@@ -107,7 +226,7 @@ export const PROJECTS: Project[] = [
     quoteRole: "Founder"
   },
   {
-    id: 3,
+    id: 9,
     title: "Meridian Law",
     tagline: "Authority site for boutique law firm",
     result: "Qualified leads up 220% in 3 months",
@@ -126,7 +245,7 @@ export const PROJECTS: Project[] = [
     quoteRole: "Managing Partner"
   },
   {
-    id: 4,
+    id: 10,
     title: "Pulse Fitness",
     tagline: "Booking & membership platform",
     result: "Eliminated $2k/mo in software fees",
@@ -145,7 +264,7 @@ export const PROJECTS: Project[] = [
     quoteRole: "Operations Director"
   },
   {
-    id: 5,
+    id: 11,
     title: "Volta EV",
     tagline: "Lead gen site for EV charging startup",
     result: "Raised $1.2M with site as investor demo",
@@ -164,7 +283,7 @@ export const PROJECTS: Project[] = [
     quoteRole: "CEO"
   },
   {
-    id: 6,
+    id: 12,
     title: "Knack Agency",
     tagline: "Creative consultancy rebrand",
     result: "Won an Awwwards SOTD nomination",
@@ -1386,12 +1505,41 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
                     height="500"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-[#0B192C]/80 dark:bg-slate-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 p-3">
+                    <span className="text-xs font-bold font-mono-tech text-white bg-white/20 dark:bg-slate-800/40 px-3.5 py-1.5 rounded-full border border-white/30 backdrop-blur-xs">
+                      Case Study →
+                    </span>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-xs font-bold font-mono-tech text-white bg-blue-600 hover:bg-blue-500 px-3.5 py-1.5 rounded-full border border-blue-400 backdrop-blur-xs inline-flex items-center gap-1 shadow-md transition-all"
+                      >
+                        Live Demo ↗
+                      </a>
+                    )}
+                  </div>
                 </div>
                 <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
                   <div>
-                    <span className="text-xs font-mono-tech text-[#0B192C] dark:text-blue-400 font-semibold uppercase tracking-wider block mb-2">
-                      {project.category}
-                    </span>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="text-xs font-mono-tech text-[#0B192C] dark:text-blue-400 font-semibold uppercase tracking-wider">
+                        {project.category}
+                      </span>
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-mono-tech font-semibold text-[#0B192C] dark:text-blue-300 bg-[#0B192C]/5 dark:bg-blue-950/50 border border-[#0B192C]/15 dark:border-blue-500/30 hover:bg-[#0B192C] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all shrink-0"
+                        >
+                          Visit Site ↗
+                        </a>
+                      )}
+                    </div>
                     <h3 className="text-lg sm:text-xl font-bold text-[#0B192C] dark:text-white group-hover:text-[#1E3A8A] dark:group-hover:text-blue-400 transition-colors mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                       {project.title}
                     </h3>
@@ -1625,17 +1773,41 @@ export function WorkPage({ navigate }: { navigate: (page: Page, id?: number) => 
                   height="500"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-[#0B192C]/80 dark:bg-slate-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-xs font-bold font-mono-tech text-white bg-white/20 dark:bg-slate-800/40 px-4 py-2 rounded-full border border-white/30 backdrop-blur-xs">
-                    View Case Study →
+                <div className="absolute inset-0 bg-[#0B192C]/80 dark:bg-slate-950/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 p-3">
+                  <span className="text-xs font-bold font-mono-tech text-white bg-white/20 dark:bg-slate-800/40 px-3.5 py-1.5 rounded-full border border-white/30 backdrop-blur-xs">
+                    Case Study →
                   </span>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-xs font-bold font-mono-tech text-white bg-blue-600 hover:bg-blue-500 px-3.5 py-1.5 rounded-full border border-blue-400 backdrop-blur-xs inline-flex items-center gap-1 shadow-md transition-all"
+                    >
+                      Live Demo ↗
+                    </a>
+                  )}
                 </div>
               </div>
               <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
                 <div>
-                  <span className="text-xs font-mono-tech text-[#0B192C] dark:text-blue-400 font-semibold uppercase tracking-wider block mb-2">
-                    {project.category}
-                  </span>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-xs font-mono-tech text-[#0B192C] dark:text-blue-400 font-semibold uppercase tracking-wider">
+                      {project.category}
+                    </span>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-mono-tech font-semibold text-[#0B192C] dark:text-blue-300 bg-[#0B192C]/5 dark:bg-blue-950/50 border border-[#0B192C]/15 dark:border-blue-500/30 hover:bg-[#0B192C] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all shrink-0"
+                      >
+                        Visit Site ↗
+                      </a>
+                    )}
+                  </div>
                   <h3 className="text-lg sm:text-xl font-bold text-[#0B192C] dark:text-white mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                     {project.title}
                   </h3>
@@ -1690,9 +1862,24 @@ export function ProjectDetailPage({
         <span className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-blue-400 font-semibold block mb-2">
           {project.category}
         </span>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-2 sm:mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          {project.title}
-        </h1>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2 sm:mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            {project.title}
+          </h1>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#0B192C] dark:bg-blue-600 hover:bg-[#1E3A8A] dark:hover:bg-blue-500 text-white text-xs sm:text-sm font-mono-tech font-semibold transition-all shadow-md shrink-0 cursor-pointer"
+            >
+              <span>Visit Live Website</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          )}
+        </div>
         <p className="text-lg sm:text-xl text-[#475569] dark:text-slate-400 mb-6 sm:mb-8">
           {project.tagline}
         </p>
@@ -2119,6 +2306,10 @@ export function PricingPage({ navigate }: { navigate: (page: Page, id?: number) 
 // ==========================================
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [submittedInfo, setSubmittedInfo] = useState({ name: '', email: '' });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -2127,183 +2318,369 @@ export function ContactPage() {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('hello@websoul.tech');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (loading) return;
+
+    setLoading(true);
+    setErrorMessage(null);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bntrtbu';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_dsjtgs7';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'bicQOLaodBsBqDqKy';
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      budget: formData.budget,
+      project_type: formData.projectType,
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      setSubmittedInfo({ name: formData.name, email: formData.email });
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        budget: 'Under $2,500',
+        projectType: 'Website',
+        message: '',
+      });
+    } catch (err) {
+      console.error('EmailJS submit error:', err);
+      setErrorMessage('Unable to send message at this time. Please try again or reach out to hello@websoul.tech directly.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="pt-24 sm:pt-32 pb-16 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 bg-white dark:bg-[#0F172A] transition-colors duration-300">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-        {/* Left Column */}
-        <Reveal>
-          <div>
-            <span className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-blue-400 font-semibold block mb-2">
-              Get In Touch
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Get In Touch — Let's build something <span className="gradient-text">great.</span>
-            </h1>
-            <p className="text-xs sm:text-base text-[#475569] dark:text-slate-400 leading-relaxed mb-6 sm:mb-8">
-              Have a project idea, refactor need, or strategic inquiry? Fill out the form or reach out directly via email or socials.
-            </p>
+    <div className="pt-24 sm:pt-32 pb-16 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 bg-white dark:bg-[#0F172A] transition-colors duration-300">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        {/* Left Column: Direct Contact & Info */}
+        <Reveal className="lg:col-span-5">
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono-tech bg-[#0B192C]/5 dark:bg-blue-950/50 border border-[#0B192C]/15 dark:border-blue-500/30 text-[#0B192C] dark:text-blue-300 font-semibold mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#0B192C] dark:bg-blue-400 animate-pulse shrink-0" />
+                <span>Get In Touch</span>
+              </div>
 
-            {/* Contact details list */}
-            <div className="space-y-3.5 sm:space-y-4 text-xs sm:text-sm font-mono-tech mb-6 sm:mb-8">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-                <span className="text-[#64748B] dark:text-slate-400 sm:w-24 shrink-0 font-semibold">EMAIL</span>
-                <a
-                  href="mailto:hello@websoul.tech"
-                  className="text-[#0B192C] dark:text-blue-400 font-semibold hover:underline link-underline cursor-pointer break-all"
-                >
-                  hello@websoul.tech
-                </a>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-                <span className="text-[#64748B] dark:text-slate-400 sm:w-24 shrink-0 font-semibold">LOCATION</span>
-                <span className="text-[#334155] dark:text-slate-300 font-medium">San Francisco, CA (Remote)</span>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-                <span className="text-[#64748B] dark:text-slate-400 sm:w-24 shrink-0 font-semibold">SOCIAL</span>
-                <div className="flex gap-3 text-[#0B192C] dark:text-slate-200 font-semibold">
-                  <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:underline">LinkedIn</a>
-                  <span className="text-slate-300 dark:text-slate-600">/</span>
-                  <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:underline">GitHub</a>
-                  <span className="text-slate-300 dark:text-slate-600">/</span>
-                  <a href="https://upwork.com" target="_blank" rel="noreferrer" className="hover:underline">Upwork</a>
+              <h1
+                className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#0B192C] dark:text-white mb-4 sm:mb-6"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Let's build something <span className="gradient-text">extraordinary.</span>
+              </h1>
+
+              <p className="text-xs sm:text-base text-[#475569] dark:text-slate-400 leading-relaxed mb-8 sm:mb-10 font-normal">
+                Have a new project, refactor need, or enterprise inquiry? Fill out the form or reach out directly. We respond within 24 hours with a clear roadmap.
+              </p>
+
+              {/* Direct Info Cards Grid */}
+              <div className="space-y-4 mb-8 sm:mb-10">
+                {/* Email Item */}
+                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/50 flex items-center justify-between gap-3 group hover:border-[#0B192C]/30 dark:hover:border-blue-500/40 transition-all">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0 shadow-2xs">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">Direct Email</div>
+                      <a href="mailto:hello@websoul.tech" className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all">
+                        hello@websoul.tech
+                      </a>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:bg-[#0B192C] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all cursor-pointer shadow-2xs shrink-0"
+                    title="Copy email to clipboard"
+                  >
+                    {copied ? '✓ Copied' : 'Copy'}
+                  </button>
+                </div>
+
+                {/* Location Item */}
+                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/50 flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0 shadow-2xs">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">HQ Location</div>
+                    <div className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100">
+                      San Francisco, CA <span className="font-normal text-slate-500 text-xs">(Remote Worldwide)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Social Networks Item */}
+                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/50 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0 shadow-2xs">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                    </div>
+                    <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">Social Channels</div>
+                  </div>
+                  <div className="flex gap-2 font-mono-tech text-xs">
+                    <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
+                      LinkedIn
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
+                      GitHub
+                    </a>
+                    <a href="https://upwork.com" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
+                      Upwork
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-3 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border bg-[#0B192C]/5 dark:bg-blue-950/50 border-[#0B192C]/15 dark:border-blue-500/30 max-w-full">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#0B192C] dark:bg-blue-400 animate-pulse shrink-0" />
-              <span className="text-[11px] sm:text-xs font-mono-tech text-[#0B192C] dark:text-blue-300 font-semibold leading-tight">
-                Response time: I usually reply within 24 hours
-              </span>
+              {/* Trust Micro Indicators */}
+              <div className="pt-6 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 gap-3 text-center font-mono-tech">
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Response</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-white">&lt; 24 Hours</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Pricing</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-white">Fixed Quotes</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 uppercase">Guarantee</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-white">100% Quality</div>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>
 
-        {/* Right Column: Form Card */}
-        <Reveal delay={100}>
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-xl">
+        {/* Right Column: Premium Form Card */}
+        <Reveal delay={100} className="lg:col-span-7">
+          <div className="bg-white dark:bg-[#131C2D] rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/90 dark:border-slate-800 shadow-[0_20px_50px_rgba(11,25,44,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] relative overflow-hidden transition-all">
+            {/* Top Gradient Bar */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0B192C] via-blue-500 to-[#0B192C] dark:from-blue-600 dark:via-cyan-400 dark:to-blue-600" />
+
             {submitted ? (
-              <div className="text-center py-8 sm:py-12">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0B192C]/10 dark:bg-blue-950/40 border border-[#0B192C] dark:border-blue-400 text-[#0B192C] dark:text-blue-400 flex items-center justify-center text-2xl sm:text-3xl mx-auto mb-4 font-bold">
+              <div className="text-center py-10 sm:py-14 px-2">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 border-2 border-emerald-500 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-3xl sm:text-4xl mx-auto mb-6 font-bold shadow-lg animate-bounce">
                   ✓
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-[#0B192C] dark:text-white mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Message sent!
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#0B192C] dark:text-white mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Message Received!
                 </h2>
-                <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 mb-6">
-                  I'll get back to you within 24 hours.
+                <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-300 max-w-md mx-auto mb-8 leading-relaxed font-normal">
+                  Thank you, <span className="font-semibold text-[#0B192C] dark:text-white">{submittedInfo.name || 'there'}</span>! We've received your request and will review your project details. Expect a reply at <span className="font-semibold text-blue-600 dark:text-blue-400">{submittedInfo.email || 'your email'}</span> within 24 hours.
                 </p>
-                <ButtonSecondary
-                  onClick={() => {
-                    setSubmitted(false);
-                    setFormData({
-                      name: '',
-                      email: '',
-                      budget: 'Under $2,500',
-                      projectType: 'Website',
-                      message: '',
-                    });
-                  }}
-                  className="mx-auto"
-                >
-                  Send Another Message
-                </ButtonSecondary>
+                <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
+                  <ButtonSecondary
+                    onClick={() => {
+                      setSubmitted(false);
+                      setErrorMessage(null);
+                      setFormData({
+                        name: '',
+                        email: '',
+                        budget: 'Under $2,500',
+                        projectType: 'Website',
+                        message: '',
+                      });
+                    }}
+                    className="mx-auto text-xs sm:text-sm"
+                  >
+                    ← Send Another Message
+                  </ButtonSecondary>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4 sm:mb-5">
-                  <label className="block text-xs font-mono-tech text-[#0B192C] dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="John Doe"
-                    className="w-full bg-[#F8FAFC] dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-[#0B192C] dark:text-white placeholder-[#94A3B8] dark:placeholder-slate-500 focus:outline-none focus:border-[#0B192C] dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 transition-colors text-xs sm:text-sm min-h-[44px]"
-                  />
+              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+                <div className="mb-2">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Start Your Project
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-mono-tech mt-1">
+                    Fill out the scope details below to get a custom proposal.
+                  </p>
                 </div>
 
-                <div className="mb-4 sm:mb-5">
-                  <label className="block text-xs font-mono-tech text-[#0B192C] dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="john@example.com"
-                    className="w-full bg-[#F8FAFC] dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-[#0B192C] dark:text-white placeholder-[#94A3B8] dark:placeholder-slate-500 focus:outline-none focus:border-[#0B192C] dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 transition-colors text-xs sm:text-sm min-h-[44px]"
-                  />
+                {errorMessage && (
+                  <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300 text-xs sm:text-sm flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-5 h-5 shrink-0 text-red-500 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>{errorMessage}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setErrorMessage(null)}
+                      className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-200 font-bold text-base cursor-pointer"
+                      title="Dismiss error"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+
+                {/* 2-Column Row: Name & Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="group">
+                    <label className="flex items-center gap-1.5 text-[11px] font-mono-tech text-[#0B192C]/80 dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold transition-colors duration-200 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-hover:text-[#0B192C]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-focus-within:bg-blue-600 dark:group-focus-within:bg-blue-400 group-focus-within:scale-125 transition-all duration-200" />
+                      <span>Your Name</span>
+                      <span className="text-blue-600 dark:text-blue-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="John Doe"
+                      className="contact-input-field w-full bg-[#F8FAFC] dark:bg-[#0F172A]/90 border border-slate-200/90 dark:border-slate-700/80 rounded-xl px-4 py-3.5 text-[#0B192C] dark:text-white placeholder-[#94A3B8] dark:placeholder-slate-500 text-xs sm:text-sm font-normal shadow-2xs hover:shadow-md hover:border-blue-400/50 dark:hover:border-slate-600 focus:outline-none focus:bg-white dark:focus:bg-[#0F172A] focus:border-[#0B192C] dark:focus:border-blue-500 focus:ring-4 focus:ring-[#0B192C]/10 dark:focus:ring-blue-500/20 focus:shadow-lg focus:shadow-[#0B192C]/5 dark:focus:shadow-blue-500/10"
+                    />
+                  </div>
+
+                  <div className="group">
+                    <label className="flex items-center gap-1.5 text-[11px] font-mono-tech text-[#0B192C]/80 dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold transition-colors duration-200 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-hover:text-[#0B192C]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-focus-within:bg-blue-600 dark:group-focus-within:bg-blue-400 group-focus-within:scale-125 transition-all duration-200" />
+                      <span>Email Address</span>
+                      <span className="text-blue-600 dark:text-blue-400">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="john@company.com"
+                      className="contact-input-field w-full bg-[#F8FAFC] dark:bg-[#0F172A]/90 border border-slate-200/90 dark:border-slate-700/80 rounded-xl px-4 py-3.5 text-[#0B192C] dark:text-white placeholder-[#94A3B8] dark:placeholder-slate-500 text-xs sm:text-sm font-normal shadow-2xs hover:shadow-md hover:border-blue-400/50 dark:hover:border-slate-600 focus:outline-none focus:bg-white dark:focus:bg-[#0F172A] focus:border-[#0B192C] dark:focus:border-blue-500 focus:ring-4 focus:ring-[#0B192C]/10 dark:focus:ring-blue-500/20 focus:shadow-lg focus:shadow-[#0B192C]/5 dark:focus:shadow-blue-500/10"
+                    />
+                  </div>
                 </div>
 
-                <div className="mb-4 sm:mb-5">
-                  <label className="block text-xs font-mono-tech text-[#0B192C] dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold">
-                    Budget Range *
-                  </label>
-                  <select
-                    required
-                    value={formData.budget}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full bg-[#F8FAFC] dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-[#0B192C] dark:text-white focus:outline-none focus:border-[#0B192C] dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 transition-colors text-xs sm:text-sm cursor-pointer min-h-[44px]"
-                  >
-                    <option value="Under $2,500">Under $2,500</option>
-                    <option value="$2,500–$6,500">$2,500–$6,500</option>
-                    <option value="$6,500–$15,000">$6,500–$15,000</option>
-                    <option value="$15,000+">$15,000+</option>
-                    <option value="Not sure yet">Not sure yet</option>
-                  </select>
+                {/* 2-Column Row: Budget Range & Project Type */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="group">
+                    <label className="flex items-center gap-1.5 text-[11px] font-mono-tech text-[#0B192C]/80 dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold transition-colors duration-200 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-hover:text-[#0B192C]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-focus-within:bg-blue-600 dark:group-focus-within:bg-blue-400 group-focus-within:scale-125 transition-all duration-200" />
+                      <span>Budget Range</span>
+                      <span className="text-blue-600 dark:text-blue-400">*</span>
+                    </label>
+                    <div className="relative">
+                      <select
+                        required
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                        className="contact-input-field w-full bg-[#F8FAFC] dark:bg-[#0F172A]/90 border border-slate-200/90 dark:border-slate-700/80 rounded-xl px-4 py-3.5 pr-10 text-[#0B192C] dark:text-white text-xs sm:text-sm font-normal shadow-2xs hover:shadow-md hover:border-blue-400/50 dark:hover:border-slate-600 focus:outline-none focus:bg-white dark:focus:bg-[#0F172A] focus:border-[#0B192C] dark:focus:border-blue-500 focus:ring-4 focus:ring-[#0B192C]/10 dark:focus:ring-blue-500/20 focus:shadow-lg focus:shadow-[#0B192C]/5 dark:focus:shadow-blue-500/10 cursor-pointer appearance-none"
+                      >
+                        <option value="Under $2,500">Under $2,500</option>
+                        <option value="$2,500–$6,500">$2,500 – $6,500</option>
+                        <option value="$6,500–$15,000">$6,500 – $15,000</option>
+                        <option value="$15,000+">$15,000+</option>
+                        <option value="Not sure yet">Not sure yet</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-focus-within:rotate-180 transition-all duration-300">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="group">
+                    <label className="flex items-center gap-1.5 text-[11px] font-mono-tech text-[#0B192C]/80 dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold transition-colors duration-200 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-hover:text-[#0B192C]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-focus-within:bg-blue-600 dark:group-focus-within:bg-blue-400 group-focus-within:scale-125 transition-all duration-200" />
+                      <span>Project Type</span>
+                      <span className="text-blue-600 dark:text-blue-400">*</span>
+                    </label>
+                    <div className="relative">
+                      <select
+                        required
+                        value={formData.projectType}
+                        onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                        className="contact-input-field w-full bg-[#F8FAFC] dark:bg-[#0F172A]/90 border border-slate-200/90 dark:border-slate-700/80 rounded-xl px-4 py-3.5 pr-10 text-[#0B192C] dark:text-white text-xs sm:text-sm font-normal shadow-2xs hover:shadow-md hover:border-blue-400/50 dark:hover:border-slate-600 focus:outline-none focus:bg-white dark:focus:bg-[#0F172A] focus:border-[#0B192C] dark:focus:border-blue-500 focus:ring-4 focus:ring-[#0B192C]/10 dark:focus:ring-blue-500/20 focus:shadow-lg focus:shadow-[#0B192C]/5 dark:focus:shadow-blue-500/10 cursor-pointer appearance-none"
+                      >
+                        <option value="Website">Website</option>
+                        <option value="Landing Page">Landing Page</option>
+                        <option value="E-commerce Store">E-commerce Store</option>
+                        <option value="Web Application">Web Application</option>
+                        <option value="Redesign & Rebuild">Redesign & Rebuild</option>
+                        <option value="Maintenance & Support">Maintenance & Support</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-focus-within:rotate-180 transition-all duration-300">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="mb-4 sm:mb-5">
-                  <label className="block text-xs font-mono-tech text-[#0B192C] dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold">
-                    Project Type *
-                  </label>
-                  <select
-                    required
-                    value={formData.projectType}
-                    onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                    className="w-full bg-[#F8FAFC] dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-[#0B192C] dark:text-white focus:outline-none focus:border-[#0B192C] dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 transition-colors text-xs sm:text-sm cursor-pointer min-h-[44px]"
-                  >
-                    <option value="Website">Website</option>
-                    <option value="Landing Page">Landing Page</option>
-                    <option value="E-commerce Store">E-commerce Store</option>
-                    <option value="Web Application">Web Application</option>
-                    <option value="Redesign & Rebuild">Redesign & Rebuild</option>
-                    <option value="Maintenance & Support">Maintenance & Support</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div className="mb-5 sm:mb-6">
-                  <label className="block text-xs font-mono-tech text-[#0B192C] dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold">
-                    Message *
+                {/* Message Textarea */}
+                <div className="group">
+                  <label className="flex items-center gap-1.5 text-[11px] font-mono-tech text-[#0B192C]/80 dark:text-slate-300 uppercase tracking-wider mb-2 font-semibold transition-colors duration-200 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 group-hover:text-[#0B192C]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 group-focus-within:bg-blue-600 dark:group-focus-within:bg-blue-400 group-focus-within:scale-125 transition-all duration-200" />
+                    <span>Project Goals & Requirements</span>
+                    <span className="text-blue-600 dark:text-blue-400">*</span>
                   </label>
                   <textarea
                     required
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Tell us about your project goals, timelines, or requirements..."
-                    className="w-full bg-[#F8FAFC] dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-[#0B192C] dark:text-white placeholder-[#94A3B8] dark:placeholder-slate-500 focus:outline-none focus:border-[#0B192C] dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 transition-colors text-xs sm:text-sm resize-none"
+                    placeholder="Tell us about your target audience, key features, design preferences, or desired launch date..."
+                    className="contact-input-field w-full bg-[#F8FAFC] dark:bg-[#0F172A]/90 border border-slate-200/90 dark:border-slate-700/80 rounded-xl px-4 py-3.5 text-[#0B192C] dark:text-white placeholder-[#94A3B8] dark:placeholder-slate-500 text-xs sm:text-sm font-normal leading-relaxed resize-none shadow-2xs hover:shadow-md hover:border-blue-400/50 dark:hover:border-slate-600 focus:outline-none focus:bg-white dark:focus:bg-[#0F172A] focus:border-[#0B192C] dark:focus:border-blue-500 focus:ring-4 focus:ring-[#0B192C]/10 dark:focus:ring-blue-500/20 focus:shadow-lg focus:shadow-[#0B192C]/5 dark:focus:shadow-blue-500/10"
                   />
                 </div>
 
+                {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#0B192C] dark:bg-blue-600 hover:bg-[#1E3A8A] dark:hover:bg-blue-500 text-white font-medium text-sm sm:text-base rounded-lg transition-all duration-200 cursor-pointer shadow-md min-h-[44px]"
+                  disabled={loading}
+                  className="w-full py-4 px-6 bg-[#0B192C] dark:bg-blue-600 hover:bg-[#1E3A8A] dark:hover:bg-blue-500 disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold text-sm sm:text-base rounded-xl transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:translate-y-0 flex items-center justify-center gap-2.5 group min-h-[48px]"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  Send Message →
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Project Message</span>
+                      <svg
+                        className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </>
+                  )}
                 </button>
+
+                <p className="text-[11px] text-center text-slate-500 dark:text-slate-400 font-mono-tech">
+                  🔒 We respect your privacy. No spam or unsolicited sales calls.
+                </p>
               </form>
             )}
           </div>

@@ -3095,7 +3095,7 @@ function getInitialRoute(): { page: Page; projectId: number } {
   const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
   const hash = window.location.hash.replace('#', '').toLowerCase();
 
-  if (path === '/work' || hash === 'work') {
+  if (path === '/work' || path === '/projects' || hash === 'work' || hash === 'projects') {
     return { page: 'work', projectId: 1 };
   } else if (path === '/services' || hash === 'services') {
     return { page: 'services', projectId: 1 };
@@ -3307,7 +3307,7 @@ export default function App() {
       const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
       const hash = window.location.hash.replace('#', '').toLowerCase();
 
-      if (path === '/work' || hash === 'work') {
+      if (path === '/work' || path === '/projects' || hash === 'work' || hash === 'projects') {
         setCurrentPage('work');
       } else if (path === '/services' || hash === 'services') {
         setCurrentPage('services');

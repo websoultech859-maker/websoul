@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { TawkWidget } from './TawkWidget';
 
 // ==========================================
 // 1. TYPES & INTERFACES
@@ -3404,6 +3405,7 @@ export default function App() {
       </div>
 
       <Footer navigate={navigate} darkMode={darkMode} />
+      <TawkWidget />
     </div>
   );
 }

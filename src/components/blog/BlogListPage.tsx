@@ -173,10 +173,20 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ onNavigate }) => {
                   <span>{featuredBlog.readingTimeMinutes || 5} min read</span>
                 </div>
                 <h2
-                  className="text-2xl sm:text-3xl font-bold text-[#0B192C] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-3 leading-tight"
+                  className="text-2xl sm:text-3xl font-bold transition-colors mb-3 leading-tight"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  {featuredBlog.title}
+                  <a
+                    href={`/blog/${featuredBlog.slug}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onNavigate('blog-detail', featuredBlog.slug);
+                    }}
+                    className="text-[#0B192C] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                  >
+                    {featuredBlog.title}
+                  </a>
                 </h2>
                 <p className="text-sm sm:text-base text-[#475569] dark:text-slate-300 leading-relaxed mb-6">
                   {featuredBlog.excerpt}
@@ -205,48 +215,69 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                <span className="text-xs sm:text-sm font-mono-tech font-bold text-[#0B192C] dark:text-blue-400 group-hover:translate-x-1.5 transition-transform inline-flex items-center gap-1.5">
+                <a
+                  href={`/blog/${featuredBlog.slug}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onNavigate('blog-detail', featuredBlog.slug);
+                  }}
+                  className="text-xs sm:text-sm font-mono-tech font-bold text-[#0B192C] dark:text-blue-400 group-hover:translate-x-1.5 transition-transform inline-flex items-center gap-1.5 cursor-pointer"
+                >
                   Read Full Article →
-                </span>
+                </a>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Grid of Articles */}
-      {gridBlogs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {gridBlogs.map((blog) => (
-            <BlogCard
-              key={blog.id}
-              blog={blog}
-              onReadMore={(slug) => onNavigate('blog-detail', slug)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="py-16 text-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-8 bg-[#F8FAFC] dark:bg-slate-900/40">
-          <div className="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-500 mx-auto flex items-center justify-center mb-3">
-            🔍
-          </div>
-          <h3 className="text-lg font-bold text-[#0B192C] dark:text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            No matching articles found
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-4">
-            Try adjusting your search keywords or switching category filters to find what you're looking for.
-          </p>
-          <button
-            onClick={() => {
-              setSelectedCategory('All');
-              setSearchQuery('');
-            }}
-            className="px-4 py-2 rounded-xl text-xs font-mono-tech font-semibold bg-[#0B192C] dark:bg-blue-600 text-white hover:bg-[#1E3A8A] transition-all cursor-pointer"
-          >
-            Clear Filters
-          </button>
-        </div>
-      )}
+      {/* Grid of Articles / Empty State */}
+      {(() => {
+        const isSearchingOrFiltering = selectedCategory !== 'All' || searchQuery.trim() !== '';
+        const hasNoMatches = isSearchingOrFiltering && filteredBlogs.length === 0;
+
+        if (hasNoMatches) {
+          return (
+            <div className="py-16 text-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-8 bg-[#F8FAFC] dark:bg-slate-900/40">
+              <div className="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-500 mx-auto flex items-center justify-center mb-3">
+                🔍
+              </div>
+              <h3 className="text-lg font-bold text-[#0B192C] dark:text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                No matching articles found
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-4">
+                Try adjusting your search keywords or switching category filters to find what you're looking for.
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory('All');
+                  setSearchQuery('');
+                }}
+                className="px-4 py-2 rounded-xl text-xs font-mono-tech font-semibold bg-[#0B192C] dark:bg-blue-600 text-white hover:bg-[#1E3A8A] transition-all cursor-pointer"
+              >
+                Clear Filters
+              </button>
+            </div>
+          );
+        }
+
+        if (gridBlogs.length > 0) {
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {gridBlogs.map((blog) => (
+                <BlogCard
+                  key={blog.id}
+                  blog={blog}
+                  onReadMore={(slug) => onNavigate('blog-detail', slug)}
+                />
+              ))}
+            </div>
+          );
+        }
+
+        return null;
+      })()}
 
       {/* Bottom Newsletter & Contact CTA */}
       <section className="mt-16 sm:mt-24 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#0B192C] to-[#1E3A8A] text-white relative overflow-hidden shadow-2xl">

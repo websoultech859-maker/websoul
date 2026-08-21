@@ -61,10 +61,20 @@ export const BlogCard: React.FC<BlogCardProps> = ({ blog, onReadMore, featured =
 
           {/* Title */}
           <h3
-            className="text-lg sm:text-xl font-bold text-[#0B192C] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 line-clamp-2 mb-2.5"
+            className="text-lg sm:text-xl font-bold mb-2.5"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            {blog.title}
+            <a
+              href={`/blog/${blog.slug}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onReadMore(blog.slug);
+              }}
+              className="text-[#0B192C] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 line-clamp-2"
+            >
+              {blog.title}
+            </a>
           </h3>
 
           {/* Excerpt */}
@@ -92,9 +102,17 @@ export const BlogCard: React.FC<BlogCardProps> = ({ blog, onReadMore, featured =
               </span>
             </div>
 
-            <span className="text-xs font-mono-tech font-semibold text-[#0B192C] dark:text-blue-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0">
+            <a
+              href={`/blog/${blog.slug}`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onReadMore(blog.slug);
+              }}
+              className="text-xs font-mono-tech font-semibold text-[#0B192C] dark:text-blue-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0 cursor-pointer"
+            >
               Read More →
-            </span>
+            </a>
           </div>
 
           {/* Tags preview if present */}

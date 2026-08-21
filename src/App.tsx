@@ -1,11 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { TawkWidget } from './TawkWidget';
+import { BlogListPage } from './components/blog/BlogListPage';
+import { BlogDetailPage } from './components/blog/BlogDetailPage';
+import { LatestBlogsSection } from './components/blog/LatestBlogsSection';
+import { AdminLayout } from './components/admin/AdminLayout';
+import { AdminLoginPage } from './components/admin/AdminLoginPage';
+import { AdminDashboardOverview } from './components/admin/AdminDashboardOverview';
+import { AdminBlogList } from './components/admin/AdminBlogList';
+import { AdminBlogForm } from './components/admin/AdminBlogForm';
 
 // ==========================================
 // 1. TYPES & INTERFACES
 // ==========================================
-export type Page = 'home' | 'work' | 'project' | 'services' | 'about' | 'pricing' | 'contact' | '404';
+export type Page =
+  | 'home'
+  | 'work'
+  | 'project'
+  | 'services'
+  | 'about'
+  | 'pricing'
+  | 'contact'
+  | '404'
+  | 'blog'
+  | 'blog-detail'
+  | 'admin-login'
+  | 'admin'
+  | 'admin-blogs'
+  | 'admin-blog-new'
+  | 'admin-blog-edit';
+
 
 export interface ProjectResult {
   label: string;
@@ -560,24 +584,24 @@ export const PROCESS_STEPS: ProcessStep[] = [
 export const FILTER_CATEGORIES = ['All', 'Web Design', 'Web App', 'E-commerce', 'Landing Page'];
 
 export const PRICING_TIERS: PricingTier[] = [
-  // {
-  //   id: "starter",
-  //   name: "Starter",
-  //   price: "$2,500",
-  //   period: "one-time",
-  //   subtitle: "Ideal for small businesses & targeted landing pages.",
-  //   badge: null,
-  //   highlighted: false,
-  //   features: [
-  //     "Up to 5 pages",
-  //     "Mobile-responsive design",
-  //     "Contact form integration",
-  //     "Basic SEO setup",
-  //     "1 revision round",
-  //     "2 weeks delivery"
-  //   ],
-  //   cta: "Get Started"
-  // },
+  {
+    id: "starter",
+    name: "Starter",
+    price: "$900-$1200",
+    period: "one-time",
+    subtitle: "Ideal for small businesses & targeted landing pages.",
+    badge: null,
+    highlighted: false,
+    features: [
+      "Up to 5 pages",
+      "Mobile-responsive design",
+      "Contact form integration",
+      "Basic SEO setup",
+      "1 revision round",
+      "2 weeks delivery"
+    ],
+    cta: "Get Started"
+  },
   {
     id: "growth",
     name: "Growth",
@@ -1078,8 +1102,10 @@ export function Nav({
     { page: 'services', label: 'Services' },
     { page: 'about', label: 'About' },
     { page: 'pricing', label: 'Pricing' },
+    { page: 'blog', label: 'Blog' },
     { page: 'contact', label: 'Contact' },
   ];
+
 
   return (
     <>
@@ -1256,7 +1282,7 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
                 Navigate
               </h4>
               <ul className="space-y-2.5 sm:space-y-3">
-                {(['work', 'services', 'about', 'pricing', 'contact'] as Page[]).map((p) => (
+                {(['work', 'services', 'about', 'pricing', 'blog', 'contact'] as Page[]).map((p) => (
                   <li key={p}>
                     <button
                       onClick={() => navigate(p)}
@@ -1694,8 +1720,12 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
       {/* TESTIMONIALS */}
       <TestimonialsSection />
 
+      {/* LATEST 3 BLOGS SECTION */}
+      <LatestBlogsSection onNavigate={(p, param) => navigate(p as Page, param as any)} />
+
       {/* FAQ SECTION */}
       <FAQSection />
+
 
       {/* FINAL CTA */}
       <section className="py-20 sm:py-28 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
@@ -3091,22 +3121,39 @@ export function NotFoundPage({ navigate }: { navigate: (page: Page) => void }) {
   );
 }
 
-function getInitialRoute(): { page: Page; projectId: number } {
+function getInitialRoute(): { page: Page; projectId: number; blogSlug?: string; editBlogId?: string } {
   if (typeof window === 'undefined') return { page: 'home', projectId: 1 };
-  const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+  const path = window.location.pathname.replace(/\/$/, '');
+  const lowerPath = path.toLowerCase();
   const hash = window.location.hash.replace('#', '').toLowerCase();
 
-  if (path === '/work' || path === '/projects' || hash === 'work' || hash === 'projects') {
+  if (lowerPath === '/work' || lowerPath === '/projects' || hash === 'work' || hash === 'projects') {
     return { page: 'work', projectId: 1 };
-  } else if (path === '/services' || hash === 'services') {
+  } else if (lowerPath === '/services' || hash === 'services') {
     return { page: 'services', projectId: 1 };
-  } else if (path === '/about' || hash === 'about') {
+  } else if (lowerPath === '/about' || hash === 'about') {
     return { page: 'about', projectId: 1 };
-  } else if (path === '/pricing' || hash === 'pricing') {
+  } else if (lowerPath === '/pricing' || hash === 'pricing') {
     return { page: 'pricing', projectId: 1 };
-  } else if (path === '/contact' || hash === 'contact') {
+  } else if (lowerPath === '/contact' || hash === 'contact') {
     return { page: 'contact', projectId: 1 };
-  } else if (path.startsWith('/project/') || path.startsWith('/projects/') || hash.startsWith('project-')) {
+  } else if (lowerPath === '/blog' || hash === 'blog') {
+    return { page: 'blog', projectId: 1 };
+  } else if (lowerPath.startsWith('/blog/')) {
+    const slug = path.split('/')[2] || '';
+    return { page: 'blog-detail', projectId: 1, blogSlug: slug };
+  } else if (lowerPath === '/admin/login' || hash === 'admin/login' || hash === 'admin-login') {
+    return { page: 'admin-login', projectId: 1 };
+  } else if (lowerPath === '/admin' || hash === 'admin') {
+    return { page: 'admin', projectId: 1 };
+  } else if (lowerPath === '/admin/blogs' || hash === 'admin/blogs' || hash === 'admin-blogs') {
+    return { page: 'admin-blogs', projectId: 1 };
+  } else if (lowerPath === '/admin/blogs/new' || hash === 'admin/blogs/new' || hash === 'admin-blog-new') {
+    return { page: 'admin-blog-new', projectId: 1 };
+  } else if (lowerPath.startsWith('/admin/blogs/edit/')) {
+    const editId = path.split('/')[4] || '';
+    return { page: 'admin-blog-edit', projectId: 1, editBlogId: editId };
+  } else if (lowerPath.startsWith('/project/') || lowerPath.startsWith('/projects/') || hash.startsWith('project-')) {
     const pathPart = path.split('/')[2];
     const hashPart = hash.replace('project-', '');
     const id = parseInt(pathPart || hashPart, 10);
@@ -3115,7 +3162,7 @@ function getInitialRoute(): { page: Page; projectId: number } {
     } else {
       return { page: 'work', projectId: 1 };
     }
-  } else if (path === '' || path === '/' || hash === 'home' || hash === '') {
+  } else if (lowerPath === '' || lowerPath === '/' || hash === 'home' || hash === '') {
     return { page: 'home', projectId: 1 };
   } else {
     return { page: '404', projectId: 1 };
@@ -3130,6 +3177,8 @@ export default function App() {
   const [initialRoute] = useState(getInitialRoute);
   const [currentPage, setCurrentPage] = useState<Page>(initialRoute.page);
   const [projectId, setProjectId] = useState<number>(initialRoute.projectId);
+  const [currentBlogSlug, setCurrentBlogSlug] = useState<string>(initialRoute.blogSlug || '');
+  const [editBlogId, setEditBlogId] = useState<string>(initialRoute.editBlogId || '');
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('websoul_theme');
@@ -3140,6 +3189,8 @@ export default function App() {
     }
     return false;
   });
+
+  const isAdminRoute = ['admin', 'admin-blogs', 'admin-blog-new', 'admin-blog-edit', 'admin-login'].includes(currentPage);
 
   // Dynamic SEO Metadata, Open Graph, Twitter Cards, Canonical Tags & JSON-LD Head Manager
   useEffect(() => {
@@ -3181,6 +3232,19 @@ export default function App() {
       description = 'Get in touch with WebSoul to discuss your web development project, custom React/Next.js application, or e-commerce platform.';
       canonical = 'https://www.websoul.tech/contact';
       breadcrumbName = 'Contact Us';
+    } else if (currentPage === 'blog') {
+      title = 'WebSoul Blog — Web Development, Next.js & SEO Engineering Guides';
+      description = 'Read technical insights, performance optimization guides, and web development strategies from the WebSoul engineering team.';
+      canonical = 'https://www.websoul.tech/blog';
+      breadcrumbName = 'Blog';
+    } else if (currentPage === 'blog-detail') {
+      // Handled dynamically inside BlogDetailPage component
+      return;
+    } else if (isAdminRoute) {
+      title = 'WebSoul Admin Dashboard';
+      description = 'Protected administrative panel for WebSoul.';
+      canonical = 'https://www.websoul.tech/admin';
+      breadcrumbName = 'Admin';
     } else if (currentPage === '404') {
       title = '404 Page Not Found | WebSoul';
       description = 'The requested page could not be found. Return to WebSoul web development homepage or explore our services.';
@@ -3197,8 +3261,8 @@ export default function App() {
     // Update Robots Meta Tag
     const metaRobots = document.querySelector('meta[name="robots"]');
     if (metaRobots) {
-      if (currentPage === '404') {
-        metaRobots.setAttribute('content', 'noindex, follow');
+      if (currentPage === '404' || isAdminRoute) {
+        metaRobots.setAttribute('content', 'noindex, nofollow');
       } else {
         metaRobots.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
       }
@@ -3229,7 +3293,7 @@ export default function App() {
     if (canonicalLink) canonicalLink.setAttribute('href', canonical);
 
     // Inject BreadcrumbList JSON-LD Schema for Subpages
-    if (currentPage !== 'home' && currentPage !== '404') {
+    if (currentPage !== 'home' && currentPage !== '404' && !isAdminRoute) {
       const breadcrumbSchema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -3300,25 +3364,44 @@ export default function App() {
       const scriptTag = document.getElementById('services-jsonld');
       if (scriptTag) scriptTag.remove();
     }
-  }, [currentPage, projectId]);
+  }, [currentPage, projectId, isAdminRoute]);
 
   // Dual Pathname & Hash Location Sync for deep-linking & crawler parsing
   useEffect(() => {
     const handleLocationSync = () => {
-      const path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+      const path = window.location.pathname.replace(/\/$/, '');
+      const lowerPath = path.toLowerCase();
       const hash = window.location.hash.replace('#', '').toLowerCase();
 
-      if (path === '/work' || path === '/projects' || hash === 'work' || hash === 'projects') {
+      if (lowerPath === '/work' || lowerPath === '/projects' || hash === 'work' || hash === 'projects') {
         setCurrentPage('work');
-      } else if (path === '/services' || hash === 'services') {
+      } else if (lowerPath === '/services' || hash === 'services') {
         setCurrentPage('services');
-      } else if (path === '/about' || hash === 'about') {
+      } else if (lowerPath === '/about' || hash === 'about') {
         setCurrentPage('about');
-      } else if (path === '/pricing' || hash === 'pricing') {
+      } else if (lowerPath === '/pricing' || hash === 'pricing') {
         setCurrentPage('pricing');
-      } else if (path === '/contact' || hash === 'contact') {
+      } else if (lowerPath === '/contact' || hash === 'contact') {
         setCurrentPage('contact');
-      } else if (path.startsWith('/project/') || path.startsWith('/projects/') || hash.startsWith('project-')) {
+      } else if (lowerPath === '/blog' || hash === 'blog') {
+        setCurrentPage('blog');
+      } else if (lowerPath.startsWith('/blog/')) {
+        const slug = path.split('/')[2] || '';
+        setCurrentBlogSlug(slug);
+        setCurrentPage('blog-detail');
+      } else if (lowerPath === '/admin/login' || hash === 'admin/login' || hash === 'admin-login') {
+        setCurrentPage('admin-login');
+      } else if (lowerPath === '/admin' || hash === 'admin') {
+        setCurrentPage('admin');
+      } else if (lowerPath === '/admin/blogs' || hash === 'admin/blogs' || hash === 'admin-blogs') {
+        setCurrentPage('admin-blogs');
+      } else if (lowerPath === '/admin/blogs/new' || hash === 'admin/blogs/new' || hash === 'admin-blog-new') {
+        setCurrentPage('admin-blog-new');
+      } else if (lowerPath.startsWith('/admin/blogs/edit/')) {
+        const editId = path.split('/')[4] || '';
+        setEditBlogId(editId);
+        setCurrentPage('admin-blog-edit');
+      } else if (lowerPath.startsWith('/project/') || lowerPath.startsWith('/projects/') || hash.startsWith('project-')) {
         const pathPart = path.split('/')[2];
         const hashPart = hash.replace('project-', '');
         const id = parseInt(pathPart || hashPart, 10);
@@ -3328,7 +3411,7 @@ export default function App() {
         } else {
           setCurrentPage('work');
         }
-      } else if (path === '' || path === '/' || hash === 'home' || hash === '') {
+      } else if (lowerPath === '' || lowerPath === '/' || hash === 'home' || hash === '') {
         setCurrentPage('home');
       } else {
         setCurrentPage('404');
@@ -3359,7 +3442,7 @@ export default function App() {
     setDarkMode((prev) => !prev);
   };
 
-  const navigate = (page: Page, id?: number) => {
+  const navigate = (page: Page, param?: number | string) => {
     setCurrentPage(page);
     let targetPath = '/';
     if (page === 'work') targetPath = '/work';
@@ -3367,19 +3450,97 @@ export default function App() {
     else if (page === 'about') targetPath = '/about';
     else if (page === 'pricing') targetPath = '/pricing';
     else if (page === 'contact') targetPath = '/contact';
-    else if (page === 'project' && id !== undefined) {
-      setProjectId(id);
-      targetPath = `/project/${id}`;
+    else if (page === 'blog') targetPath = '/blog';
+    else if (page === 'blog-detail' && param) {
+      const slugStr = String(param);
+      setCurrentBlogSlug(slugStr);
+      targetPath = `/blog/${slugStr}`;
+    } else if (page === 'admin-login') {
+      targetPath = '/admin/login';
+    } else if (page === 'admin') {
+      targetPath = '/admin';
+    } else if (page === 'admin-blogs') {
+      targetPath = '/admin/blogs';
+    } else if (page === 'admin-blog-new') {
+      targetPath = '/admin/blogs/new';
+    } else if (page === 'admin-blog-edit' && param) {
+      const idStr = String(param);
+      setEditBlogId(idStr);
+      targetPath = `/admin/blogs/edit/${idStr}`;
+    } else if (page === 'project' && param !== undefined) {
+      const idNum = Number(param);
+      setProjectId(idNum);
+      targetPath = `/project/${idNum}`;
     } else if (page === '404') {
       targetPath = '/404';
     }
 
     if (window.location.pathname !== targetPath) {
-      window.history.pushState({ page, id }, '', targetPath);
+      window.history.pushState({ page, param }, '', targetPath);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // 1. Render Admin Protected Routes
+  if (isAdminRoute) {
+    if (currentPage === 'admin-login') {
+      return (
+        <div className="min-h-screen bg-slate-50 dark:bg-[#09101E] text-[#334155] dark:text-slate-300">
+          <AdminLoginPage onNavigate={(p, param) => navigate(p as Page, param)} darkMode={darkMode} />
+        </div>
+      );
+    }
+
+    return (
+      <AdminLayout
+        activeTab={
+          currentPage === 'admin'
+            ? 'overview'
+            : currentPage === 'admin-blogs'
+            ? 'blogs'
+            : currentPage === 'admin-blog-new'
+            ? 'new'
+            : 'edit'
+        }
+        onNavigate={(p, param) => navigate(p as Page, param)}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        title={
+          currentPage === 'admin'
+            ? 'Dashboard Overview'
+            : currentPage === 'admin-blogs'
+            ? 'Blog Management'
+            : currentPage === 'admin-blog-new'
+            ? 'Create New Blog'
+            : 'Edit Blog Article'
+        }
+        subtitle={
+          currentPage === 'admin'
+            ? 'Real-time metrics, quick publishing tools, and recent activity'
+            : currentPage === 'admin-blogs'
+            ? 'Search, filter, edit, or delete articles'
+            : currentPage === 'admin-blog-new'
+            ? 'Compose a high-ranking technical article with SEO optimization'
+            : 'Update content, tags, or SEO metadata'
+        }
+      >
+        {currentPage === 'admin' && (
+          <AdminDashboardOverview onNavigate={(p, param) => navigate(p as Page, param)} />
+        )}
+        {currentPage === 'admin-blogs' && (
+          <AdminBlogList onNavigate={(p, param) => navigate(p as Page, param)} />
+        )}
+        {currentPage === 'admin-blog-new' && (
+          <AdminBlogForm onNavigate={(p, param) => navigate(p as Page, param)} />
+        )}
+        {currentPage === 'admin-blog-edit' && (
+          <AdminBlogForm blogId={editBlogId} onNavigate={(p, param) => navigate(p as Page, param)} />
+        )}
+      </AdminLayout>
+    );
+  }
+
+  // 2. Render Public Website Routes (Preserving all existing layout, Header, and Footer)
   return (
     <div className="min-h-screen bg-white dark:bg-[#0F172A] text-[#334155] dark:text-slate-300 flex flex-col justify-between selection:bg-[#0B192C] selection:text-white transition-colors duration-300">
       {showIntro && <LogoIntro onComplete={() => setShowIntro(false)} darkMode={darkMode} />}
@@ -3387,27 +3548,32 @@ export default function App() {
       <div>
         <Nav
           currentPage={currentPage}
-          navigate={navigate}
+          navigate={(p, id) => navigate(p, id)}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
         />
 
         <main id="main-content">
-          {currentPage === 'home' && <HomePage navigate={navigate} />}
-          {currentPage === 'work' && <WorkPage navigate={navigate} />}
-          {currentPage === 'project' && <ProjectDetailPage projectId={projectId} navigate={navigate} />}
-          {currentPage === 'services' && <ServicesPage navigate={navigate} />}
-          {currentPage === 'about' && <AboutPage navigate={navigate} />}
-          {currentPage === 'pricing' && <PricingPage navigate={navigate} />}
+          {currentPage === 'home' && <HomePage navigate={(p, id) => navigate(p, id)} />}
+          {currentPage === 'work' && <WorkPage navigate={(p, id) => navigate(p, id)} />}
+          {currentPage === 'project' && <ProjectDetailPage projectId={projectId} navigate={(p, id) => navigate(p, id)} />}
+          {currentPage === 'services' && <ServicesPage navigate={(p, id) => navigate(p, id)} />}
+          {currentPage === 'about' && <AboutPage navigate={(p, id) => navigate(p, id)} />}
+          {currentPage === 'pricing' && <PricingPage navigate={(p, id) => navigate(p, id)} />}
           {currentPage === 'contact' && <ContactPage />}
-          {currentPage === '404' && <NotFoundPage navigate={navigate} />}
+          {currentPage === 'blog' && <BlogListPage onNavigate={(p, param) => navigate(p as Page, param)} />}
+          {currentPage === 'blog-detail' && (
+            <BlogDetailPage slug={currentBlogSlug} onNavigate={(p, param) => navigate(p as Page, param)} />
+          )}
+          {currentPage === '404' && <NotFoundPage navigate={(p) => navigate(p)} />}
         </main>
       </div>
 
-      <Footer navigate={navigate} darkMode={darkMode} />
+      <Footer navigate={(p, id) => navigate(p, id)} darkMode={darkMode} />
       <TawkWidget />
     </div>
   );
 }
+
 
 

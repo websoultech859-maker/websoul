@@ -52,58 +52,6 @@ export const INITIAL_BLOGS: Omit<BlogPost, 'createdAt' | 'updatedAt'>[] = [
     ],
     readingTimeMinutes: 5,
   },
-  {
-    id: 'blog-2',
-    title: 'Next.js vs React: Choosing the Right Framework for Your Next Web App',
-    slug: 'nextjs-vs-react-web-development-guide',
-    featuredImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=675&fit=crop&auto=format',
-    imageAlt: 'Code editor screen displaying React and Next.js frontend web application code',
-    category: 'Next.js & React',
-    author: 'Saad (WebSoul Lead)',
-    authorRole: 'Founder & Senior Full-Stack Engineer',
-    authorImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&auto=format',
-    publishDate: '2026-08-12',
-    excerpt: 'Confused between building a pure client-side React SPA or a full-stack Next.js application? We break down performance, SEO indexing, SSR, and hosting costs so you can choose the right architecture.',
-    content: `## The Modern Frontend Dilemma: React or Next.js?\n\nWhen starting a new web project in 2026, one of the most critical architectural decisions is deciding between a **client-side React Single Page Application (SPA)** and a **full-stack React framework like Next.js**.\n\nBoth technologies are industry leaders, both use React components, and both offer lightning-fast user experiences. However, their rendering models, SEO capabilities, and server requirements are distinctly different.\n\n---\n\n### Understanding the Fundamental Difference\n\n* **React** is an open-source JavaScript UI library for building interactive user interfaces. By default, React applications run in the user's browser (Client-Side Rendering or CSR).\n* **Next.js** is a production-grade full-stack framework built on top of React. It provides built-in routing, server-side rendering (SSR), static site generation (SSG), API route handlers, and automatic image optimization.\n\n---\n\n### 1. Search Engine Optimization (SEO) & Web Crawling\n\n* **React (Client-Side Rendering)**: Search engine bots have gotten better at executing JavaScript, but client-side rendering can still delay indexing.\n* **Next.js (Server-Side Rendering & Static Generation)**: Next.js pre-renders complete HTML on the server or at build time.\n\n> **Winner for Public SEO Sites**: **Next.js**\n\n---\n\n### 2. Performance & Initial Page Load (Core Web Vitals)\n\n* **React SPA**: The user's device must download, parse, and execute the entire JavaScript bundle before displaying the First Contentful Paint (FCP).\n* **Next.js**: Pre-rendered HTML is streamed immediately, delivering sub-second FCP and LCP scores.\n\n> **Winner for Ultra-Fast Initial Load**: **Next.js**\n\n---\n\n### 3. Internal Dashboards, SaaS Portals & Authenticated Apps\n\nIn authenticated web applications, SEO is irrelevant. A client-side React SPA paired with a fast backend API provides simpler deployment and zero server hosting overhead.\n\n> **Winner for Authenticated SaaS Portals**: **React SPA (Vite)**\n\n---\n\n## Our Engineering Recommendation\n\nAt WebSoul, we tailor our architecture to your specific business model:\n* For public marketing websites, e-commerce storefronts, and content-rich authority platforms where Google ranking is vital, we build with **Next.js**.\n* For real-time SaaS tools, interactive calculators, and authenticated enterprise dashboards, a streamlined **React + TypeScript** architecture provides maximum developer velocity.\n\nInterested in discussing the best technical architecture for your next project? [Schedule a free discovery session with WebSoul engineers](/contact) or [check out our recent web engineering case studies](/work).`,
-    seoTitle: 'Next.js vs React: Complete Framework Guide for 2026 | WebSoul',
-    seoDescription: 'Next.js vs React: Compare rendering models, SEO indexing, performance, and hosting costs. Discover which framework is best suited for your web application.',
-    focusKeyword: 'Next.js vs React',
-    isPublished: true,
-    isFeatured: false,
-    tags: ['Next.js', 'React', 'Full-Stack', 'Frontend Architecture', 'Web Engineering'],
-    internalLinks: [
-      { label: 'Custom React & Next.js Development', url: '/services' },
-      { label: 'Explore WebSoul Engineering Portfolio', url: '/work' },
-      { label: 'Discuss Your Project Architecture', url: '/contact' }
-    ],
-    readingTimeMinutes: 6,
-  },
-  {
-    id: 'blog-3',
-    title: 'How Core Web Vitals and Sub-Second Load Times Directly Drive Conversions',
-    slug: 'how-core-web-vitals-impact-conversions',
-    featuredImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=675&fit=crop&auto=format',
-    imageAlt: 'Speed performance metrics dashboard showing sub-second load times and high conversion rate graphs',
-    category: 'SEO & Performance',
-    author: 'Saad (WebSoul Lead)',
-    authorRole: 'Founder & Senior Full-Stack Engineer',
-    authorImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&auto=format',
-    publishDate: '2026-08-08',
-    excerpt: 'Website speed is not just an engineering vanity metric — it directly dictates your bottom-line revenue. Learn how shaving 500ms off your page speed doubles conversion rates and slashes bounce rates.',
-    content: `## Why Website Speed Is Your Biggest Revenue Lever\n\nFor years, website speed was treated as a secondary technical concern. Today, speed is recognized as a primary driver of customer psychology and financial conversion.\n\nCase studies across top brands consistently validate this reality:\n* **Walmart** discovered that every 100ms improvement in load time increased conversion rates by up to **1%**.\n* **Mobify** found that shaving just 100ms off their checkout page resulted in a **1.11% boost in session revenue**.\n\n---\n\n### What Are Google's Core Web Vitals?\n\nGoogle's Core Web Vitals are three standardized metrics designed to measure real-world user experience:\n\n1. **Largest Contentful Paint (LCP)**: Measures perceived loading speed.\n   * *Target*: Under **2.5 seconds** (WebSoul aims for **< 1.0s**).\n2. **Interaction to Next Paint (INP)**: Measures responsiveness.\n   * *Target*: Under **200 milliseconds** (WebSoul builds for **< 50ms**).\n3. **Cumulative Layout Shift (CLS)**: Measures visual stability.\n   * *Target*: Under **0.1** (WebSoul aims for **0.00**).\n\n---\n\n### The 4 Biggest Culprits of Sluggish Websites\n\n#### 1. Bloated Third-Party Scripts & Trackers\nInstalling 15 separate marketing pixels blocks the browser's main JavaScript thread.\n\n#### 2. Uncompressed & Non-Modern Image Formats\nServing multi-megabyte PNG or JPEG files is the #1 cause of poor LCP scores.\n\n#### 3. Render-Blocking CSS & Unused JavaScript\nGeneric WordPress themes often ship with megabytes of unused styles.\n\n#### 4. Slow Server Response Times (TTFB)\nHosting on cheap shared servers results in 800ms+ Time to First Byte.\n\n---\n\n## How WebSoul Engineers Websites for Sub-Second Speeds\n\nEvery website built by WebSoul undergoes rigorous performance profiling:\n* **Static Edge Generation**: Pre-computing pages on global CDN nodes.\n* **Modern Media Pipelines**: Responsive image rendering with zero layout shift.\n* **Zero Bloat Code Architecture**: Clean, hand-crafted TypeScript and React components.\n\nWant to audit your existing website's performance? [Contact WebSoul for a comprehensive technical performance audit](/contact) or [learn about our maintenance & performance packages](/services).`,
-    seoTitle: 'How Core Web Vitals & Page Speed Drive Revenue | WebSoul',
-    seoDescription: 'Learn why website speed is your highest ROI growth channel. Discover how optimizing LCP, INP, and CLS increases customer retention and conversion rates.',
-    focusKeyword: 'Core Web Vitals website speed',
-    isPublished: true,
-    isFeatured: false,
-    tags: ['Core Web Vitals', 'Page Speed', 'Technical SEO', 'Conversion Rate Optimization'],
-    internalLinks: [
-      { label: 'WebSoul Performance Optimization Services', url: '/services' },
-      { label: 'View Proven Client Case Studies', url: '/work' },
-      { label: 'Request a Free Website Speed Audit', url: '/contact' }
-    ],
-    readingTimeMinutes: 5,
-  }
 ];
 
 // ─── Utilities ─────────────────────────────────────────────────────────────────

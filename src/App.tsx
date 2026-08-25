@@ -596,7 +596,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: "starter",
     name: "Starter",
-    price: "$900-$1200",
+    price: "$1500-$2000",
     period: "one-time",
     subtitle: "Ideal for small businesses & targeted landing pages.",
     badge: null,
@@ -614,7 +614,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: "growth",
     name: "Growth",
-    price: "$2,500",
+    price: "$2,500-$3000",
     period: "one-time",
     subtitle: "Complete digital overhaul for growing brands & startups.",
     badge: "Most Popular",

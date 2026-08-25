@@ -383,7 +383,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#0B192C] dark:text-slate-100",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" clipRule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24ZM14.536 7.5H16.25V16.5H14.536V10.223L8.85 16.5H7.5V7.5H9.214V13.777L14.536 7.5Z" className="fill-[#0B192C] dark:fill-white"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24ZM14.536 7.5H16.25V16.5H14.536V10.223L8.85 16.5H7.5V7.5H9.214V13.777L14.536 7.5Z" className="fill-[#0B192C] dark:fill-white" />
       </svg>
     )
   },
@@ -392,11 +392,11 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#0284C7] dark:text-[#61DAFB]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+        <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
         <g stroke="#61DAFB" strokeWidth="1" fill="none">
-          <ellipse rx="11" ry="4.2"/>
-          <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
-          <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+          <ellipse rx="11" ry="4.2" />
+          <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+          <ellipse rx="11" ry="4.2" transform="rotate(120)" />
         </g>
       </svg>
     )
@@ -406,8 +406,8 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#1D4ED8] dark:text-[#60A5FA]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0 rounded-xs" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="3" fill="#3178C6"/>
-        <path d="M11.5 16.2H10.1V10H8.3V8.8H13.3V10H11.5V16.2ZM14.4 16.2V15.1C14.7 15.6 15.3 16.3 16.5 16.3C17.7 16.3 18.4 15.5 18.4 14.5C18.4 13.3 17.5 12.8 16.5 12.4L16 12.2C15.4 12 15.1 11.7 15.1 11.2C15.1 10.7 15.6 10.3 16.3 10.3C17 10.3 17.5 10.6 17.7 11.1L18.7 10.5C18.3 9.7 17.5 9.1 16.3 9.1C15 9.1 13.9 10 13.9 11.3C13.9 12.6 14.7 13.1 15.7 13.5L16.2 13.7C16.8 13.9 17.2 14.2 17.2 14.7C17.2 15.3 16.6 15.7 15.7 15.7C14.9 15.7 14.3 15.1 14.1 14.6L13.1 15.2C13.4 16.1 14.3 16.7 15.7 16.7" fill="white"/>
+        <rect width="24" height="24" rx="3" fill="#3178C6" />
+        <path d="M11.5 16.2H10.1V10H8.3V8.8H13.3V10H11.5V16.2ZM14.4 16.2V15.1C14.7 15.6 15.3 16.3 16.5 16.3C17.7 16.3 18.4 15.5 18.4 14.5C18.4 13.3 17.5 12.8 16.5 12.4L16 12.2C15.4 12 15.1 11.7 15.1 11.2C15.1 10.7 15.6 10.3 16.3 10.3C17 10.3 17.5 10.6 17.7 11.1L18.7 10.5C18.3 9.7 17.5 9.1 16.3 9.1C15 9.1 13.9 10 13.9 11.3C13.9 12.6 14.7 13.1 15.7 13.5L16.2 13.7C16.8 13.9 17.2 14.2 17.2 14.7C17.2 15.3 16.6 15.7 15.7 15.7C14.9 15.7 14.3 15.1 14.1 14.6L13.1 15.2C13.4 16.1 14.3 16.7 15.7 16.7" fill="white" />
       </svg>
     )
   },
@@ -416,7 +416,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#0284C7] dark:text-[#38BDF8]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" fill="#06B6D4"/>
+        <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" fill="#06B6D4" />
       </svg>
     )
   },
@@ -425,8 +425,17 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#16A34A] dark:text-[#5FA04E]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2L2.5 7.5v9L12 22l9.5-5.5v-9L12 2zm7.5 13.62L12 19.96l-7.5-4.34V8.38L12 4.04l7.5 4.34v7.24z" fill="#5FA04E"/>
-        <path d="M12 7.5L6.5 10.68v4.64L12 18.5l5.5-3.18v-4.64L12 7.5z" fill="#5FA04E" opacity="0.4"/>
+        <path d="M12 2L2.5 7.5v9L12 22l9.5-5.5v-9L12 2zm7.5 13.62L12 19.96l-7.5-4.34V8.38L12 4.04l7.5 4.34v7.24z" fill="#5FA04E" />
+        <path d="M12 7.5L6.5 10.68v4.64L12 18.5l5.5-3.18v-4.64L12 7.5z" fill="#5FA04E" opacity="0.4" />
+      </svg>
+    )
+  },
+  {
+    name: "Django",
+    textColorClass: "text-[#0C4B33] dark:text-[#44B78B]",
+    icon: (
+      <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.146 0h3.136v15.908c-.624.116-1.18.172-1.668.172-3.138 0-4.49-1.396-4.49-4.394 0-3.08 1.547-4.66 4.093-4.66.442 0 .807.05 1.077.155V3.344a4.42 4.42 0 00-1.27-.173c-4.436 0-7.397 2.65-7.397 8.528 0 5.626 2.768 8.444 7.644 8.444 1.132 0 2.29-.16 3.013-.414l.43 3.877c-.883.33-2.317.51-3.666.51-7.228 0-11.458-4.04-11.458-12.388C.59 3.528 4.79.006 11.146 0zm9.718 7.18v8.9c0 2.016-.36 3.376-1.16 4.382-.746.938-1.878 1.417-3.37 1.417a5.556 5.556 0 01-1.352-.162l.525-3.616c.304.08.552.11.855.11.774 0 1.298-.248 1.63-.773.303-.5.442-1.352.442-2.733V7.18h2.43zM19.375.056h2.72v4.037h-2.72V.056z" className="fill-[#0C4B33] dark:fill-[#44B78B]" />
       </svg>
     )
   },
@@ -435,7 +444,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#2563EB] dark:text-[#60A5FA]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c-2.49 0-4.5-2.01-4.5-4.5S10.51 7.5 13 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" fill="#336791"/>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c-2.49 0-4.5-2.01-4.5-4.5S10.51 7.5 13 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" fill="#336791" />
       </svg>
     )
   },
@@ -444,7 +453,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#16A34A] dark:text-[#47A248]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 1.5c-.3 0-.5.2-.6.5C9.6 7.2 5 10.3 5 15c0 3.9 3.1 7 7 7s7-3.1 7-7c0-4.7-4.6-7.8-6.4-13-.1-.3-.3-.5-.6-.5zm0 3.2c1.8 3.8 5 6.6 5 10.3 0 2.8-2.2 5-5 5v-15.3z" fill="#47A248"/>
+        <path d="M12 1.5c-.3 0-.5.2-.6.5C9.6 7.2 5 10.3 5 15c0 3.9 3.1 7 7 7s7-3.1 7-7c0-4.7-4.6-7.8-6.4-13-.1-.3-.3-.5-.6-.5zm0 3.2c1.8 3.8 5 6.6 5 10.3 0 2.8-2.2 5-5 5v-15.3z" fill="#47A248" />
       </svg>
     )
   },
@@ -453,7 +462,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#4F46E5] dark:text-[#818CF8]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C17.712.748 15.223.23 12.607.23 6.945.23 3.02 3.195 3.02 8.01c0 7.377 10.158 6.208 10.158 9.388 0 1.054-.925 1.547-2.28 1.547-2.613 0-5.385-1.163-7.25-2.164l-.946 5.602c1.942.923 4.887 1.488 7.77 1.488 5.864 0 9.948-2.868 9.948-7.854 0-7.85-10.444-6.529-10.444-9.367Z" fill="#635BFF"/>
+        <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C17.712.748 15.223.23 12.607.23 6.945.23 3.02 3.195 3.02 8.01c0 7.377 10.158 6.208 10.158 9.388 0 1.054-.925 1.547-2.28 1.547-2.613 0-5.385-1.163-7.25-2.164l-.946 5.602c1.942.923 4.887 1.488 7.77 1.488 5.864 0 9.948-2.868 9.948-7.854 0-7.85-10.444-6.529-10.444-9.367Z" fill="#635BFF" />
       </svg>
     )
   },
@@ -462,7 +471,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#0B192C] dark:text-slate-100",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 1L24 22H0L12 1Z" className="fill-[#0B192C] dark:fill-white"/>
+        <path d="M12 1L24 22H0L12 1Z" className="fill-[#0B192C] dark:fill-white" />
       </svg>
     )
   },
@@ -471,7 +480,7 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#DC2626] dark:text-[#F87171]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16.64 3.75H7.36C5.36 3.75 3.75 5.36 3.75 7.36V16.64C3.75 18.64 5.36 20.25 7.36 20.25H16.64C18.64 20.25 20.25 18.64 20.25 16.64V7.36C20.25 5.36 18.64 3.75 16.64 3.75ZM15.8 8.8L12.4 12.2L15.8 15.6H13.4L11.2 13.4L9 15.6H6.6L10 12.2L6.6 8.8H9L11.2 11L13.4 8.8H15.8Z" fill="#F03E2F"/>
+        <path d="M16.64 3.75H7.36C5.36 3.75 3.75 5.36 3.75 7.36V16.64C3.75 18.64 5.36 20.25 7.36 20.25H16.64C18.64 20.25 20.25 18.64 20.25 16.64V7.36C20.25 5.36 18.64 3.75 16.64 3.75ZM15.8 8.8L12.4 12.2L15.8 15.6H13.4L11.2 13.4L9 15.6H6.6L10 12.2L6.6 8.8H9L11.2 11L13.4 8.8H15.8Z" fill="#F03E2F" />
       </svg>
     )
   },
@@ -480,10 +489,10 @@ export const TECH_STACK: TechStackItem[] = [
     textColorClass: "text-[#D97706] dark:text-[#FFCA28]",
     icon: (
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3.89 15.672L6.16 3.428c.067-.36.544-.454.747-.156l2.973 4.364L3.89 15.672z" fill="#FFA000"/>
-        <path d="M13.435 8.784l-2.457-4.664a.434.434 0 00-.776 0L3.84 15.68l9.595-6.896z" fill="#F57C00"/>
-        <path d="M20.16 15.672l-2.585-13.43c-.073-.38-.58-.456-.757-.113l-3.383 6.643 6.725 6.9z" fill="#FFCA28"/>
-        <path d="M3.84 15.68l7.632 4.4a1.87 1.87 0 001.888 0l7.632-4.4-8.576 5.07a.936.936 0 01-.952 0L3.84 15.68z" fill="#FFCA28"/>
+        <path d="M3.89 15.672L6.16 3.428c.067-.36.544-.454.747-.156l2.973 4.364L3.89 15.672z" fill="#FFA000" />
+        <path d="M13.435 8.784l-2.457-4.664a.434.434 0 00-.776 0L3.84 15.68l9.595-6.896z" fill="#F57C00" />
+        <path d="M20.16 15.672l-2.585-13.43c-.073-.38-.58-.456-.757-.113l-3.383 6.643 6.725 6.9z" fill="#FFCA28" />
+        <path d="M3.84 15.68l7.632 4.4a1.87 1.87 0 001.888 0l7.632-4.4-8.576 5.07a.936.936 0 01-.952 0L3.84 15.68z" fill="#FFCA28" />
       </svg>
     )
   }
@@ -845,11 +854,10 @@ export function ThemeToggle({
     <button
       onClick={toggleDarkMode}
       type="button"
-      className={`p-2.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-center ${
-        darkMode
-          ? 'bg-slate-800 border-slate-700 text-amber-400 hover:bg-slate-700 hover:border-slate-600 shadow-sm'
-          : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 shadow-xs'
-      } ${className}`}
+      className={`p-2.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-center ${darkMode
+        ? 'bg-slate-800 border-slate-700 text-amber-400 hover:bg-slate-700 hover:border-slate-600 shadow-sm'
+        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 shadow-xs'
+        } ${className}`}
       aria-label={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >
@@ -971,16 +979,14 @@ export function HeaderLogo({ darkMode }: { darkMode?: boolean }) {
       <img
         src="/websoul_logo/header_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
       />
       <img
         src="/websoul_logo/dark_mode/header_logo.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
       />
     </div>
   );
@@ -992,16 +998,14 @@ export function MobileHeaderLogo({ darkMode }: { darkMode?: boolean }) {
       <img
         src="/websoul_logo/header_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
       />
       <img
         src="/websoul_logo/dark_mode/header_logo.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
       />
     </div>
   );
@@ -1013,16 +1017,14 @@ export function FooterLogo({ darkMode }: { darkMode?: boolean }) {
       <img
         src="/websoul_logo/footer_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.524] translate-y-[2.5%] transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.524] translate-y-[2.5%] transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
       />
       <img
         src="/websoul_logo/dark_mode/footer_logo.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
       />
     </div>
   );
@@ -1034,16 +1036,14 @@ export function IntroLogo({ darkMode }: { darkMode?: boolean }) {
       <img
         src="/websoul_logo/header_logo-removebg-preview.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
       />
       <img
         src="/websoul_logo/dark_mode/header_logo.png"
         alt="Web Soul Logo"
-        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${
-          darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute inset-0 w-full h-full object-contain object-center scale-[1.117] transition-opacity duration-300 ease-in-out ${darkMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
       />
     </div>
   );
@@ -1151,11 +1151,10 @@ export function Nav({
                 <button
                   key={link.page}
                   onClick={() => navigate(link.page)}
-                  className={`text-sm transition-colors cursor-pointer link-underline ${
-                    isActive
-                      ? 'text-[#0B192C] dark:text-white font-semibold'
-                      : 'text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white'
-                  }`}
+                  className={`text-sm transition-colors cursor-pointer link-underline ${isActive
+                    ? 'text-[#0B192C] dark:text-white font-semibold'
+                    : 'text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white'
+                    }`}
                 >
                   {link.label}
                 </button>
@@ -1164,9 +1163,15 @@ export function Nav({
 
             <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
-            <ButtonPrimary onClick={() => navigate('contact')}>
-              Get a Quote
-            </ButtonPrimary>
+            <a
+              href="https://websoul.trafft.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-lg font-medium text-sm text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              Get an audit
+            </a>
           </nav>
 
           {/* Mobile Hamburger & Theme Toggle */}
@@ -1198,11 +1203,10 @@ export function Nav({
 
       {/* Mobile Drawer Overlay */}
       <div
-        className={`fixed inset-x-0 top-16 bottom-0 z-40 bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-md transition-all duration-300 ease-in-out md:hidden flex flex-col justify-between overflow-y-auto ${
-          mobileMenuOpen
-            ? 'opacity-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 -translate-y-3 pointer-events-none'
-        }`}
+        className={`fixed inset-x-0 top-16 bottom-0 z-40 bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-md transition-all duration-300 ease-in-out md:hidden flex flex-col justify-between overflow-y-auto ${mobileMenuOpen
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 -translate-y-3 pointer-events-none'
+          }`}
         style={{
           boxShadow: mobileMenuOpen ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' : 'none',
         }}
@@ -1218,11 +1222,10 @@ export function Nav({
                     setMobileMenuOpen(false);
                     navigate(link.page);
                   }}
-                  className={`text-lg sm:text-xl font-medium text-left px-4 py-3.5 rounded-xl transition-all cursor-pointer flex items-center justify-between min-h-[48px] ${
-                    isActive
-                      ? 'bg-slate-100 dark:bg-slate-800/90 text-[#0B192C] dark:text-white font-semibold shadow-xs'
-                      : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-[#0B192C] dark:hover:text-white'
-                  }`}
+                  className={`text-lg sm:text-xl font-medium text-left px-4 py-3.5 rounded-xl transition-all cursor-pointer flex items-center justify-between min-h-[48px] ${isActive
+                    ? 'bg-slate-100 dark:bg-slate-800/90 text-[#0B192C] dark:text-white font-semibold shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-[#0B192C] dark:hover:text-white'
+                    }`}
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   <span>{link.label}</span>
@@ -1235,15 +1238,16 @@ export function Nav({
           </div>
 
           <div className="pt-6 pb-4 border-t border-slate-100 dark:border-slate-800/80 mt-6">
-            <ButtonPrimary
-              onClick={() => {
-                setMobileMenuOpen(false);
-                navigate('contact');
-              }}
-              className="w-full text-center py-3.5 text-base shadow-md justify-center"
+            <a
+              href="https://websoul.trafft.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-3.5 px-6 rounded-lg font-medium text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              Get a Quote
-            </ButtonPrimary>
+              Get an audit
+            </a>
           </div>
         </div>
       </div>
@@ -1414,12 +1418,25 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
               </p>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                <ButtonPrimary onClick={() => navigate('work')} className="w-full sm:w-auto justify-center text-center">
-                  Explore Web Development Portfolio →
-                </ButtonPrimary>
-                <ButtonSecondary onClick={() => navigate('contact')} className="w-full sm:w-auto justify-center text-center">
-                  Start a Web Project
-                </ButtonSecondary>
+                <a
+                  href="https://websoul.trafft.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md hover:shadow-xl hover:shadow-[#0B192C]/20 dark:hover:shadow-blue-900/30 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer w-full sm:w-auto text-center border border-[#0B192C] dark:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0B192C] dark:focus:ring-blue-400"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  <span>Get an App Audit — $399</span>
+                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => navigate('work')}
+                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[#0B192C] dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 hover:border-[#0B192C]/40 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer w-full sm:w-auto text-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  <span>Explore Web Development Portfolio</span>
+                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </button>
               </div>
 
               {/* Stat Mini Cards for Mobile & Tablet (below lg) */}
@@ -1478,9 +1495,8 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
                   {CODE_SNIPPETS.map((_, i) => (
                     <span
                       key={i}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        i === snippetIndex ? 'bg-[#38BDF8] w-5' : 'bg-slate-400 opacity-40'
-                      }`}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${i === snippetIndex ? 'bg-[#38BDF8] w-5' : 'bg-slate-400 opacity-40'
+                        }`}
                     />
                   ))}
                 </div>
@@ -1532,6 +1548,9 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
           </div>
         </div>
       </section>
+
+      {/* ABOUT SECTION */}
+      <AboutSection navigate={navigate} />
 
       {/* FEATURED WORK */}
       <section className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
@@ -1779,11 +1798,10 @@ export function WorkPage({ navigate }: { navigate: (page: Page, id?: number) => 
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-mono-tech transition-all cursor-pointer ${
-                  isActive
-                    ? 'bg-[#0B192C] dark:bg-blue-600 text-white border border-[#0B192C] dark:border-blue-500 shadow-xs'
-                    : 'bg-white dark:bg-slate-800 text-[#475569] dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-[#0B192C] dark:hover:border-slate-500 hover:text-[#0B192C] dark:hover:text-white'
-                }`}
+                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-mono-tech transition-all cursor-pointer ${isActive
+                  ? 'bg-[#0B192C] dark:bg-blue-600 text-white border border-[#0B192C] dark:border-blue-500 shadow-xs'
+                  : 'bg-white dark:bg-slate-800 text-[#475569] dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-[#0B192C] dark:hover:border-slate-500 hover:text-[#0B192C] dark:hover:text-white'
+                  }`}
               >
                 {cat}
               </button>
@@ -2143,89 +2161,271 @@ export function ServicesPage({ navigate }: { navigate: (page: Page, id?: number)
 }
 
 // ==========================================
-// 11. ABOUT PAGE
+// 11. ABOUT SECTION & ABOUT PAGE
 // ==========================================
+export interface AboutHighlight {
+  number: string;
+  badge: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
+
+export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
+  {
+    number: "01",
+    badge: "01 — Custom Built",
+    title: "Built Around Your Business",
+    description: "No generic solutions. Every website is designed and developed around your goals, brand and audience.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        <path d="m15 5 3 3" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    badge: "02 — Performance Focused",
+    title: "Fast by Design",
+    description: "We prioritize speed, clean code, responsive experiences and modern web performance from the beginning.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </svg>
+    ),
+  },
+  {
+    number: "03",
+    badge: "03 — Strategy + Design",
+    title: "Designed With Purpose",
+    description: "Every visual and interaction should have a reason — helping visitors understand, trust and take action.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+      </svg>
+    ),
+  },
+  {
+    number: "04",
+    badge: "04 — Long-Term Thinking",
+    title: "Built to Grow With You",
+    description: "We create scalable digital foundations that can evolve as your business grows.",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+        <polyline points="16 7 22 7 22 13" />
+      </svg>
+    ),
+  },
+];
+
+export function AboutSection({
+  navigate,
+  isStandalonePage = false,
+}: {
+  navigate?: (page: Page, id?: number) => void;
+  isStandalonePage?: boolean;
+}) {
+  return (
+    <section className={`transition-colors duration-300 relative ${isStandalonePage ? '' : 'py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12'}`}>
+      {/* Subtle Background Ambience */}
+      <div className="absolute top-1/4 -right-20 w-80 h-80 bg-blue-500/5 dark:bg-blue-400/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-indigo-500/5 dark:bg-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
+
+      {/* 1. Section Header: Eyebrow, Main Heading & Supporting Intro */}
+      <Reveal>
+        <div className="max-w-3xl mb-10 sm:mb-14 lg:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono-tech bg-[#0B192C]/5 dark:bg-blue-950/50 border border-[#0B192C]/15 dark:border-blue-500/30 text-[#0B192C] dark:text-blue-300 font-semibold mb-4 sm:mb-5">
+            <span className="w-2 h-2 rounded-full bg-[#0B192C] dark:bg-blue-400 animate-pulse shrink-0" />
+            <span>About WebSoul</span>
+          </div>
+
+          {isStandalonePage ? (
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] tracking-tight text-[#0B192C] dark:text-white mb-4 sm:mb-6"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              Building Digital Experiences That <span className="gradient-text">Move Businesses Forward.</span>
+            </h1>
+          ) : (
+            <h2
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] tracking-tight text-[#0B192C] dark:text-white mb-4 sm:mb-6"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              Building Digital Experiences That <span className="gradient-text">Move Businesses Forward.</span>
+            </h2>
+          )}
+
+          <p className="text-base sm:text-lg text-[#475569] dark:text-slate-300 leading-relaxed font-normal">
+            WebSoul is a web development studio focused on building modern, high-performance digital experiences for startups and growing businesses. We combine thoughtful design, clean engineering and strategic thinking to create websites that don't just look good — they work hard for your business.
+          </p>
+        </div>
+      </Reveal>
+
+      {/* 2. Main Content Grid (Two-column on Desktop, Natural on Tablet, Stacked on Mobile) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-stretch">
+        {/* Left Side — About Narrative */}
+        <div className="lg:col-span-5 flex flex-col justify-between">
+          <Reveal delay={80}>
+            <div className="bg-[#F8FAFC] dark:bg-slate-900/60 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 border border-slate-200/90 dark:border-slate-800 h-full flex flex-col justify-between shadow-xs">
+              <div>
+                <h3
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0B192C] dark:text-white mb-4 sm:mb-6 tracking-tight"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  More Than Just a Website.
+                </h3>
+
+                <div className="space-y-4 sm:space-y-4.5 text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed">
+                  <p>
+                    Your website is often the first real interaction someone has with your business. That's why we don't believe in generic templates, rushed builds or unnecessary complexity.
+                  </p>
+                  <p>
+                    At WebSoul, every project starts with understanding your business, your audience and your goals. From strategy and design to development and performance optimization, we focus on creating digital experiences that are fast, intuitive and built to support real growth.
+                  </p>
+                  <p>
+                    Whether you're launching something new, improving an outdated website or building a more powerful digital presence, we create solutions designed around what your business actually needs.
+                  </p>
+                </div>
+              </div>
+
+              {navigate && (
+                <div className="pt-6 mt-6 sm:mt-8 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-wrap items-center gap-3">
+                  <ButtonPrimary onClick={() => navigate('contact')} className="text-xs sm:text-sm py-2.5 px-5">
+                    Start a Project →
+                  </ButtonPrimary>
+                  <ButtonSecondary onClick={() => navigate('work')} className="text-xs sm:text-sm py-2.5 px-5">
+                    View Portfolio
+                  </ButtonSecondary>
+                </div>
+              )}
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Right Side — 4 Key Highlights */}
+        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          {ABOUT_HIGHLIGHTS.map((highlight, idx) => (
+            <Reveal key={highlight.number} delay={100 + idx * 70} className="h-full">
+              <div className="rounded-2xl p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-800/90 hover:border-[#0B192C]/30 dark:hover:border-blue-500/40 shadow-xs hover:shadow-md card-hover transition-all duration-300 flex flex-col justify-between h-full group relative overflow-hidden">
+                {/* Subtle Hover Bar Glow */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0B192C] dark:via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div>
+                  <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
+                    <span className="text-[11px] sm:text-xs font-mono-tech font-bold text-[#0B192C] dark:text-blue-400 tracking-wider">
+                      {highlight.badge}
+                    </span>
+                    <div className="w-8 h-8 rounded-lg bg-[#0B192C]/5 dark:bg-blue-950/60 border border-[#0B192C]/10 dark:border-blue-500/20 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0 group-hover:scale-110 group-hover:bg-[#0B192C] group-hover:text-white dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
+                      {highlight.icon}
+                    </div>
+                  </div>
+
+                  <h4
+                    className="text-base sm:text-lg font-bold text-[#0B192C] dark:text-white mb-2 group-hover:text-[#1E3A8A] dark:group-hover:text-blue-400 transition-colors"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  >
+                    {highlight.title}
+                  </h4>
+
+                  <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed font-normal">
+                    {highlight.description}
+                  </p>
+                </div>
+
+                <div className="pt-3.5 mt-3.5 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-[11px] font-mono-tech text-slate-400 dark:text-slate-500">
+                  <span>WebSoul Standard</span>
+                  <span className="group-hover:text-[#0B192C] dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all">✓</span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {/* 3. Final Trust Statement */}
+      <Reveal delay={220}>
+        <div className="mt-10 sm:mt-14 lg:mt-16 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/90 dark:border-slate-800 bg-gradient-to-br from-[#F8FAFC] via-white to-slate-100/80 dark:from-slate-900/90 dark:via-slate-800/80 dark:to-slate-900/90 shadow-xs text-center relative overflow-hidden">
+          <div className="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/5 dark:bg-blue-400/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-[#0B192C]/5 dark:bg-blue-600/10 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="max-w-3xl mx-auto relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono-tech text-[#0B192C] dark:text-blue-300 bg-[#0B192C]/5 dark:bg-blue-950/60 border border-[#0B192C]/10 dark:border-blue-500/30 mb-3.5 sm:mb-4 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse shrink-0" />
+              <span>Core Commitment</span>
+            </div>
+            <p
+              className="text-base sm:text-xl md:text-2xl font-bold text-[#0B192C] dark:text-slate-100 leading-snug tracking-tight"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              "We don't just build websites. We build the digital foundation your business can grow on."
+            </p>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 export function AboutPage({ navigate }: { navigate: (page: Page, id?: number) => void }) {
   return (
     <div className="pt-24 sm:pt-32 pb-16 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 bg-white dark:bg-[#0F172A] transition-colors duration-300">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        {/* Left Column */}
-        <Reveal>
-          <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop&auto=format"
-              alt="WebSoul Custom Web Development & Software Engineering Team"
-              loading="lazy"
-              decoding="async"
-              width="800"
-              height="600"
-              className="w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] object-cover rounded-xl sm:rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl mb-4 sm:mb-6"
-            />
-            <div className="rounded-xl p-4 sm:p-6 border-l-4 border-l-[#0B192C] dark:border-l-blue-500 bg-[#F8FAFC] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-              <p className="italic text-xs sm:text-sm text-[#0B192C] dark:text-slate-200 font-medium mb-1.5 leading-relaxed">
-                "Every line of code is a design decision. I care about both."
-              </p>
-              <span className="text-[11px] sm:text-xs font-mono-tech text-[#64748B] dark:text-slate-400 block">
-                — Web Soul Engineering Philosophy
-              </span>
-            </div>
-          </div>
-        </Reveal>
+      <AboutSection navigate={navigate} isStandalonePage={true} />
 
-        {/* Right Column */}
-        <Reveal delay={100}>
-          <div>
+      {/* Core Tech Stack Section */}
+      <Reveal delay={150}>
+        <div className="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-slate-200 dark:border-slate-800">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-blue-400 font-semibold block mb-2">
-              About Web Soul
+              Technology Stack
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B192C] dark:text-white mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              About WebSoul — Building for performance <span className="gradient-text">and people.</span>
-            </h1>
-
-            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed mb-6 sm:mb-8">
-              <p>
-                Web Soul is an independent web design and engineering studio founded with a single mission: to craft custom digital experiences that bridge high-end visual aesthetics with uncompromising technical performance.
-              </p>
-              <p>
-                We believe that modern websites shouldn't require trade-offs between speed and visual impact. By avoiding bloated site builders and template shortcuts, every project is custom-engineered using modern web standards to load instantly, convert visitors, and scale effortlessly.
-              </p>
-              <p>
-                Whether you're a venture-backed startup launching a new product or an established business seeking to overhaul your digital presence, Web Soul provides direct senior-level craftsmanship from first mockup to final production deployment.
-              </p>
-            </div>
-
-            {/* Core Tech Stack Chips */}
-            <div className="mb-6 sm:mb-8">
-              <h4 className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-slate-300 font-semibold mb-3">
-                Core Technologies
-              </h4>
-              <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                {TECH_STACK.map((t) => (
-                  <span
-                    key={t.name}
-                    className="rounded-lg px-2.5 py-1.5 sm:px-3 sm:py-1.5 font-mono-tech text-xs bg-white dark:bg-[#131C2D] border border-slate-200 dark:border-slate-800/90 font-medium flex items-center gap-2 shadow-xs hover:scale-105 transition-transform duration-200 cursor-default"
-                  >
-                    {t.icon}
-                    <span className={t.textColorClass}>
-                      {t.name}
-                    </span>
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <ButtonPrimary onClick={() => navigate('contact')} className="w-full sm:w-auto text-center justify-center">
-                Start a Project
-              </ButtonPrimary>
-              <ButtonSecondary onClick={() => navigate('work')} className="w-full sm:w-auto text-center justify-center">
-                View My Work
-              </ButtonSecondary>
-            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Engineered With Modern Standards
+            </h3>
+            <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 mt-2">
+              We leverage production-tested frameworks and cloud architecture to ensure sub-second loads and rock-solid reliability.
+            </p>
           </div>
-        </Reveal>
-      </div>
+          <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3">
+            {TECH_STACK.map((t) => (
+              <span
+                key={t.name}
+                className="rounded-xl px-3.5 py-2 sm:px-4 sm:py-2.5 font-mono-tech text-xs sm:text-sm bg-white dark:bg-[#131C2D] border border-slate-200 dark:border-slate-800 font-medium flex items-center gap-2.5 shadow-2xs hover:scale-105 transition-transform duration-200 cursor-default"
+              >
+                {t.icon}
+                <span className={t.textColorClass}>
+                  {t.name}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Bottom CTA Banner */}
+      <Reveal delay={200}>
+        <div className="mt-16 sm:mt-20 text-center bg-[#F8FAFC] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto shadow-xs">
+          <span className="text-xs font-mono-tech uppercase tracking-widest text-[#0B192C] dark:text-blue-400 font-semibold block mb-2">
+            Let's Collaborate
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-bold text-[#0B192C] dark:text-white mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            Ready to build a high-performance web presence?
+          </h3>
+          <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 max-w-xl mx-auto mb-6 sm:mb-8 leading-relaxed">
+            Whether you're starting from scratch or re-engineering an existing platform, let's create a digital solution tailored to your goals.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <ButtonPrimary onClick={() => navigate('contact')} className="w-full sm:w-auto px-7 py-3.5 text-sm sm:text-base">
+              Start a Project →
+            </ButtonPrimary>
+            <ButtonSecondary onClick={() => navigate('work')} className="w-full sm:w-auto px-7 py-3.5 text-sm sm:text-base">
+              View Our Work
+            </ButtonSecondary>
+          </div>
+        </div>
+      </Reveal>
     </div>
   );
 }
@@ -2255,11 +2455,10 @@ export function PricingPage({ navigate }: { navigate: (page: Page, id?: number) 
         {PRICING_TIERS.map((tier, idx) => (
           <Reveal key={tier.id} delay={idx * 100} className="h-full flex">
             <div
-              className={`rounded-2xl p-6 sm:p-8 flex flex-col justify-between w-full relative transition-all duration-300 ${
-                tier.highlighted
-                  ? 'border-2 border-[#0B192C] dark:border-blue-500 bg-gradient-to-b from-[#F8FAFC] to-white dark:from-slate-800 dark:to-slate-900 shadow-xl dark:shadow-blue-950/20 lg:-translate-y-2'
-                  : 'border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 card-hover shadow-xs'
-              }`}
+              className={`rounded-2xl p-6 sm:p-8 flex flex-col justify-between w-full relative transition-all duration-300 ${tier.highlighted
+                ? 'border-2 border-[#0B192C] dark:border-blue-500 bg-gradient-to-b from-[#F8FAFC] to-white dark:from-slate-800 dark:to-slate-900 shadow-xl dark:shadow-blue-950/20 lg:-translate-y-2'
+                : 'border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 card-hover shadow-xs'
+                }`}
             >
               {/* Badge for highlighted card */}
               {tier.badge && (
@@ -2755,9 +2954,8 @@ export function LogoIntro({ onComplete, darkMode }: { onComplete: () => void; da
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-white dark:bg-[#0F172A] flex flex-col items-center justify-center pointer-events-none select-none transition-all ${
-        isExiting ? 'animate-intro-exit' : ''
-      }`}
+      className={`fixed inset-0 z-[9999] bg-white dark:bg-[#0F172A] flex flex-col items-center justify-center pointer-events-none select-none transition-all ${isExiting ? 'animate-intro-exit' : ''
+        }`}
       aria-hidden="true"
     >
       <div className="flex flex-col items-center justify-center p-6 text-center">
@@ -2915,11 +3113,10 @@ export function TestimonialsSection() {
                       key={t.id}
                       onClick={() => setCurrentIndex(idx)}
                       aria-label={`Go to testimonial ${idx + 1}`}
-                      className={`h-2 rounded-full transition-all cursor-pointer ${
-                        idx === currentIndex
-                          ? 'w-7 bg-[#0B192C] dark:bg-blue-400'
-                          : 'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'
-                      }`}
+                      className={`h-2 rounded-full transition-all cursor-pointer ${idx === currentIndex
+                        ? 'w-7 bg-[#0B192C] dark:bg-blue-400'
+                        : 'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'
+                        }`}
                     />
                   ))}
                 </div>
@@ -2957,11 +3154,10 @@ export function TestimonialsSection() {
                 <div
                   key={`${t.id}-${index}`}
                   onClick={() => setCurrentIndex(t.id - 1)}
-                  className={`w-[320px] sm:w-[380px] p-5 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer shrink-0 flex flex-col justify-between ${
-                    currentIndex === (t.id - 1)
-                      ? 'border-blue-500 dark:border-blue-400 bg-white dark:bg-slate-800 shadow-md scale-[1.02]'
-                      : 'border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-800/40 hover:border-slate-300 dark:hover:border-slate-700'
-                  }`}
+                  className={`w-[320px] sm:w-[380px] p-5 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer shrink-0 flex flex-col justify-between ${currentIndex === (t.id - 1)
+                    ? 'border-blue-500 dark:border-blue-400 bg-white dark:bg-slate-800 shadow-md scale-[1.02]'
+                    : 'border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-800/40 hover:border-slate-300 dark:hover:border-slate-700'
+                    }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
@@ -3497,10 +3693,10 @@ export default function App() {
           currentPage === 'admin'
             ? 'overview'
             : currentPage === 'admin-blogs'
-            ? 'blogs'
-            : currentPage === 'admin-blog-new'
-            ? 'new'
-            : 'edit'
+              ? 'blogs'
+              : currentPage === 'admin-blog-new'
+                ? 'new'
+                : 'edit'
         }
         onNavigate={(p, param) => navigate(p as Page, param)}
         darkMode={darkMode}
@@ -3509,19 +3705,19 @@ export default function App() {
           currentPage === 'admin'
             ? 'Dashboard Overview'
             : currentPage === 'admin-blogs'
-            ? 'Blog Management'
-            : currentPage === 'admin-blog-new'
-            ? 'Create New Blog'
-            : 'Edit Blog Article'
+              ? 'Blog Management'
+              : currentPage === 'admin-blog-new'
+                ? 'Create New Blog'
+                : 'Edit Blog Article'
         }
         subtitle={
           currentPage === 'admin'
             ? 'Real-time metrics, quick publishing tools, and recent activity'
             : currentPage === 'admin-blogs'
-            ? 'Search, filter, edit, or delete articles'
-            : currentPage === 'admin-blog-new'
-            ? 'Compose a high-ranking technical article with SEO optimization'
-            : 'Update content, tags, or SEO metadata'
+              ? 'Search, filter, edit, or delete articles'
+              : currentPage === 'admin-blog-new'
+                ? 'Compose a high-ranking technical article with SEO optimization'
+                : 'Update content, tags, or SEO metadata'
         }
       >
         {currentPage === 'admin' && (

@@ -1180,7 +1180,7 @@ export function Nav({
               className="group px-4 py-2 lg:px-5 lg:py-2.5 rounded-lg font-semibold text-xs lg:text-sm text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              <span>Book a Free Call</span>
+              <span>Book a Free Meeting</span>
               <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -1259,7 +1259,7 @@ export function Nav({
               className="group w-full text-center py-3.5 px-6 rounded-xl font-semibold text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              <span>Book a Free Call</span>
+              <span>Book a Free Meeting</span>
               <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -1451,7 +1451,7 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
                   className="group relative inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md hover:shadow-xl hover:shadow-[#0B192C]/20 dark:hover:shadow-blue-900/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer w-full sm:w-auto text-center border border-[#0B192C] dark:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0B192C] dark:focus:ring-blue-400"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  <span>Book a Free Call</span>
+                  <span>Book a Free Meeting</span>
                   <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </a>
                 <a

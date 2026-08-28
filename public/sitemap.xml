@@ -48,7 +48,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
- 
+  <url>
+    <loc>https://www.websoul.tech/blog/how-much-does-a-business-website-cost-in-2026-a-complete-pricing-guide</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://www.websoul.tech/contact</loc>
     <lastmod>2026-08-20</lastmod>

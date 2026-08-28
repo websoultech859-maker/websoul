@@ -1144,14 +1144,14 @@ export function Nav({
           </button>
 
           {/* Desktop Links */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-3 lg:gap-5 xl:gap-6">
             {navLinks.map((link) => {
               const isActive = currentPage === link.page;
               return (
                 <button
                   key={link.page}
                   onClick={() => navigate(link.page)}
-                  className={`text-sm transition-colors cursor-pointer link-underline ${isActive
+                  className={`text-xs lg:text-sm transition-colors cursor-pointer link-underline ${isActive
                     ? 'text-[#0B192C] dark:text-white font-semibold'
                     : 'text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white'
                     }`}
@@ -1167,10 +1167,23 @@ export function Nav({
               href="https://websoul.trafft.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-lg font-medium text-sm text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+              className="hidden lg:inline-flex px-3.5 py-2 rounded-lg font-medium text-xs lg:text-sm text-[#0B192C] dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-[#0B192C]/40 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 cursor-pointer items-center justify-center gap-1.5"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               Get an audit
+            </a>
+
+            <a
+              href="https://websoul.trafft.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-4 py-2 lg:px-5 lg:py-2.5 rounded-lg font-semibold text-xs lg:text-sm text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              <span>Book a Free Call</span>
+              <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </a>
           </nav>
 
@@ -1237,13 +1250,26 @@ export function Nav({
             })}
           </div>
 
-          <div className="pt-6 pb-4 border-t border-slate-100 dark:border-slate-800/80 mt-6">
+          <div className="pt-6 pb-4 border-t border-slate-100 dark:border-slate-800/80 mt-6 flex flex-col gap-3">
             <a
               href="https://websoul.trafft.com"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3.5 px-6 rounded-lg font-medium text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+              className="group w-full text-center py-3.5 px-6 rounded-xl font-semibold text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              <span>Book a Free Call</span>
+              <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a
+              href="https://websoul.trafft.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-3 px-6 rounded-xl font-medium text-sm text-[#0B192C] dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/90 border border-slate-200 dark:border-slate-700 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               Get an audit
@@ -1417,24 +1443,34 @@ export function HomePage({ navigate }: { navigate: (page: Page, id?: number) => 
                 Web development and design for startups and businesses that want to grow. No templates, no shortcuts — just hand-crafted code that performs.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto flex-wrap">
                 <a
                   href="https://websoul.trafft.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md hover:shadow-xl hover:shadow-[#0B192C]/20 dark:hover:shadow-blue-900/30 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer w-full sm:w-auto text-center border border-[#0B192C] dark:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0B192C] dark:focus:ring-blue-400"
+                  className="group relative inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-white bg-[#0B192C] dark:bg-blue-600 hover:bg-[#152a4a] dark:hover:bg-blue-500 shadow-md hover:shadow-xl hover:shadow-[#0B192C]/20 dark:hover:shadow-blue-900/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer w-full sm:w-auto text-center border border-[#0B192C] dark:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0B192C] dark:focus:ring-blue-400"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  <span>Book a Free Call</span>
+                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </a>
+                <a
+                  href="https://websoul.trafft.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[#0B192C] dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 hover:border-[#0B192C]/40 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-xs hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 cursor-pointer w-full sm:w-auto text-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   <span>Get an App Audit — $399</span>
-                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </a>
                 <button
                   type="button"
                   onClick={() => navigate('work')}
-                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[#0B192C] dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 hover:border-[#0B192C]/40 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer w-full sm:w-auto text-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400"
+                  className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base text-[#475569] dark:text-slate-300 hover:text-[#0B192C] dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all duration-200 cursor-pointer w-full sm:w-auto text-center focus:outline-none"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  <span>Explore Web Development Portfolio</span>
+                  <span>Explore Portfolio</span>
                   <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </button>
               </div>

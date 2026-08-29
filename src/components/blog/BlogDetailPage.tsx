@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BlogPost } from '../../types/blog';
 import { BlogStorageService } from '../../services/blogStorage';
+import { trackPageView } from '../../lib/analytics';
 
 interface BlogDetailPageProps {
   slug: string;
@@ -172,6 +173,9 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
       document.head.appendChild(breadcrumbTag);
     }
     breadcrumbTag.textContent = JSON.stringify(breadcrumbSchema);
+
+    // Google Analytics 4: Track dynamic blog article pageview
+    trackPageView(canonicalUrl, pageTitle);
 
     return () => {
       const aTag = document.getElementById('blog-article-jsonld');

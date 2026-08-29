@@ -9,6 +9,7 @@ import { AdminLoginPage } from './components/admin/AdminLoginPage';
 import { AdminDashboardOverview } from './components/admin/AdminDashboardOverview';
 import { AdminBlogList } from './components/admin/AdminBlogList';
 import { AdminBlogForm } from './components/admin/AdminBlogForm';
+import { trackPageView } from './lib/analytics';
 
 // ==========================================
 // 1. TYPES & INTERFACES
@@ -3596,6 +3597,9 @@ export default function App() {
       const scriptTag = document.getElementById('services-jsonld');
       if (scriptTag) scriptTag.remove();
     }
+
+    // Google Analytics 4: Track pageview for client-side navigation
+    trackPageView(canonical, title);
   }, [currentPage, projectId, isAdminRoute]);
 
   // Dual Pathname & Hash Location Sync for deep-linking & crawler parsing

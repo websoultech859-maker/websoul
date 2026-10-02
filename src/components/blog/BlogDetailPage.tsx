@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BlogPost } from '../../types/blog';
-import { BlogStorageService } from '../../services/blogStorage';
+import { BlogStorageService, formatBlogAuthor } from '../../services/blogStorage';
 import { trackPageView } from '../../lib/analytics';
 
 interface BlogDetailPageProps {
@@ -46,7 +46,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
   useEffect(() => {
     if (!blog) return;
 
-    const pageTitle = blog.seoTitle || `${blog.title} | WebSoul Blog`;
+    const pageTitle = blog.seoTitle || `${blog.title} | Websoul Blog`;
     const pageDesc = blog.seoDescription || blog.excerpt;
     const canonicalUrl = `https://www.websoul.tech/blog/${blog.slug}`;
     const imageUrl = blog.featuredImage.startsWith('http') ? blog.featuredImage : `https://www.websoul.tech${blog.featuredImage}`;
@@ -116,12 +116,12 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
       dateModified: blog.updatedAt || blog.publishDate,
       author: {
         '@type': 'Person',
-        name: blog.author,
+        name: formatBlogAuthor(blog.author),
         url: 'https://www.websoul.tech/about'
       },
       publisher: {
         '@type': 'Organization',
-        name: 'WebSoul',
+        name: 'Websoul',
         logo: {
           '@type': 'ImageObject',
           url: 'https://www.websoul.tech/websoul_logo/header_logo-removebg-preview.png'
@@ -284,19 +284,16 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
 
         {/* Author Details & Date */}
         <div className="flex items-center gap-4 py-4 border-y border-slate-200 dark:border-slate-800">
-          <img
-            src="/favicon.png"
-            alt="WebSoul"
-            className="w-12 h-12 rounded-full object-cover border-2 border-slate-200 block dark:hidden"
-          />
-          <img
-            src="/websoul_logo/favicondark.png"
-            alt="WebSoul"
-            className="w-12 h-12 rounded-full object-cover border-2 border-slate-700 hidden dark:block"
-          />
+          <div className="w-12 h-12 rounded-full bg-[#0B192C] dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 p-1 flex items-center justify-center shrink-0">
+            <img
+              src="/websoul_logo/favicondark.png"
+              alt="Websoul Tech"
+              className="w-full h-full object-contain"
+            />
+          </div>
           <div>
             <div className="text-sm font-bold text-[#0B192C] dark:text-white font-mono-tech">
-              {blog.author}
+              {formatBlogAuthor(blog.author)}
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 font-mono-tech flex items-center gap-2">
               <span>{blog.authorRole || 'Senior Full-Stack Engineer'}</span>
@@ -348,7 +345,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
           <div className="flex items-center gap-2 mb-3">
             <span className="text-base">🔗</span>
             <h4 className="text-sm sm:text-base font-bold text-[#0B192C] dark:text-blue-300 font-mono-tech uppercase tracking-wide">
-              Related WebSoul Pages & Services
+              Related Websoul Pages & Services
             </h4>
           </div>
           <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-300 mb-4">
@@ -386,22 +383,19 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
 
       {/* Author Bio Box */}
       <div className="mt-10 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-900/60 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-        <img
-          src="/favicon.png"
-          alt="WebSoul"
-          className="w-16 h-16 rounded-full object-cover border-2 border-slate-200 block dark:hidden shrink-0"
-        />
-        <img
-          src="/websoul_logo/favicondark.png"
-          alt="WebSoul"
-          className="w-16 h-16 rounded-full object-cover border-2 border-slate-700 hidden dark:block shrink-0"
-        />
+        <div className="w-16 h-16 rounded-full bg-[#0B192C] dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 p-1.5 flex items-center justify-center shrink-0">
+          <img
+            src="/websoul_logo/favicondark.png"
+            alt="Websoul Tech"
+            className="w-full h-full object-contain"
+          />
+        </div>
         <div>
           <h4 className="text-base font-bold text-[#0B192C] dark:text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Written by {blog.author}
+            Written by {formatBlogAuthor(blog.author)}
           </h4>
           <p className="text-xs font-mono-tech text-blue-600 dark:text-blue-400 mb-2">
-            {blog.authorRole || 'Founder & Full-Stack Architect at WebSoul'}
+            {blog.authorRole || 'Founder & Full-Stack Architect at Websoul'}
           </p>
           <p className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 leading-relaxed">
             Engineering high-performance web products, React applications, and custom digital platforms with sub-second speeds and bulletproof technical SEO.

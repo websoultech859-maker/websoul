@@ -16,14 +16,22 @@ const DEFAULT_CATEGORIES = [
   'UI/UX Design',
   'E-commerce',
   'Case Studies',
-  'Engineering'
+  'Engineering',
+  'AI Automation',
+  'AI Agents & Integrations',
+  'Business Process Automation',
+  'No-Code & Workflow Tools',
+  'Cloud & DevOps',
+  'Analytics & Data',
+  'Cybersecurity',
+  'SaaS & Product Strategy'
 ];
 
 const PRESET_INTERNAL_LINKS: InternalLink[] = [
   { label: 'Web Development Services', url: '/services' },
   { label: 'Client Case Studies & Work', url: '/work' },
-  { label: 'Transparent Pricing Packages', url: '/pricing' },
-  { label: 'About WebSoul Agency', url: '/about' },
+  { label: 'AI Automation Services', url: '/services' },
+  { label: 'About Websoul Agency', url: '/about' },
   { label: 'Request a Free Quote / Contact', url: '/contact' }
 ];
 
@@ -34,7 +42,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
     featuredImage: '',
     imageAlt: '',
     category: 'Web Development',
-    author: 'Saad (WebSoul Lead)',
+    author: 'Websoul',
     publishDate: new Date().toISOString().split('T')[0],
     excerpt: '',
     content: '',
@@ -98,7 +106,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
       ...prev,
       title: newTitle,
       slug: isAutoSlug ? generateSlug(newTitle) : prev.slug,
-      seoTitle: prev.seoTitle || (newTitle ? `${newTitle} | WebSoul` : '')
+      seoTitle: prev.seoTitle || (newTitle ? `${newTitle} | Websoul` : '')
     }));
   };
 
@@ -274,7 +282,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 pb-16">
+    <div className="admin-page max-w-5xl mx-auto space-y-8 pb-16">
       {/* Top Header & Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -351,7 +359,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
         {/* Left Column (Main Article Fields) */}
         <div className="lg:col-span-8 space-y-6">
           {/* Section 1: Title & Slug */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               1. Title & URL Slug
             </h3>
@@ -409,7 +417,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
           </div>
 
           {/* Section 2: Excerpt & Rich Content Editor */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               2. Excerpt & Complete Blog Content
             </h3>
@@ -536,7 +544,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
           </div>
 
           {/* Section 3: SEO Meta Fields (Mandatory) */}
-          <div className="p-6 rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/30 dark:bg-blue-950/20 shadow-xs space-y-4">
+          <div className="admin-panel admin-panel-accent p-6 rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/30 dark:bg-blue-950/20 shadow-xs space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-blue-200/60 dark:border-blue-800/40">
               <h3 className="text-sm font-bold uppercase tracking-wider text-[#0B192C] dark:text-blue-300 font-mono-tech flex items-center gap-2">
                 <span>🎯 3. SEO Metadata (Required for Publishing)</span>
@@ -574,7 +582,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
                 type="text"
                 value={formData.seoTitle}
                 onChange={(e) => setFormData({ ...formData, seoTitle: e.target.value })}
-                placeholder="e.g. 10 Signs Your Business Needs a New Website in 2026 | WebSoul"
+                placeholder="e.g. 10 Signs Your Business Needs a New Website in 2026 | Websoul"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs sm:text-sm text-[#0B192C] dark:text-white focus:outline-none focus:border-blue-500 font-mono-tech"
               />
             </div>
@@ -619,7 +627,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
         {/* Right Column (Sidebar Settings: Image, Category, Author, Tags, Internal Links) */}
         <div className="lg:col-span-4 space-y-6">
           {/* Publish / Featured Settings Card */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               Publishing Settings
             </h3>
@@ -685,7 +693,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
           </div>
 
           {/* ─── Featured Image Card (Cloudinary Upload) ─── */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               Featured Image & SEO Alt Text
             </h3>
@@ -833,7 +841,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
           </div>
 
           {/* Category & Author Card */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               Category & Author
             </h3>
@@ -871,7 +879,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
           </div>
 
           {/* Tags Manager Card */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               Tags (Optional)
             </h3>
@@ -919,7 +927,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
           </div>
 
           {/* Related / Internal Links Builder Card */}
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
+          <div className="admin-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B192C] dark:text-white font-mono-tech pb-2 border-b border-slate-100 dark:border-slate-700">
               Related / Internal Links
             </h3>
@@ -927,7 +935,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
             {/* Quick Presets */}
             <div>
               <span className="text-[11px] font-mono-tech text-slate-400 block mb-2">
-                Quick WebSoul Presets:
+                Quick Websoul Presets:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {PRESET_INTERNAL_LINKS.map((preset) => (
@@ -957,7 +965,7 @@ export const AdminBlogForm: React.FC<AdminBlogFormProps> = ({ blogId, onNavigate
                   type="text"
                   value={customLinkUrl}
                   onChange={(e) => setCustomLinkUrl(e.target.value)}
-                  placeholder="URL (e.g. /pricing)"
+                  placeholder="URL (e.g. /services)"
                   className="flex-1 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs font-mono-tech"
                 />
                 <button

@@ -59,18 +59,18 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#09101E] text-slate-800 dark:text-slate-200 flex flex-col md:flex-row transition-colors duration-300">
+    <div className="admin-theme min-h-screen bg-slate-50 dark:bg-[#09101E] text-slate-800 dark:text-slate-200 flex flex-col md:flex-row transition-colors duration-300">
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-white dark:bg-[#0B1424] border-r border-slate-200 dark:border-slate-800 p-6 justify-between shrink-0 fixed top-0 bottom-0 left-0 z-30">
+      <aside className="admin-sidebar hidden md:flex flex-col w-64 lg:w-72 bg-white dark:bg-[#0B1424] border-r border-slate-200 dark:border-slate-800 p-6 justify-between shrink-0 fixed top-0 bottom-0 left-0 z-30">
         <div>
           {/* Logo & Brand */}
           <div className="flex items-center gap-3 mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
-            <div className="w-10 h-10 rounded-xl bg-[#0B192C] dark:bg-blue-600 text-white font-bold flex items-center justify-center font-mono-tech shadow-md">
-              WS
+            <div className="w-10 h-10 rounded-xl bg-[#0B192C] dark:bg-slate-900 text-white font-bold flex items-center justify-center shadow-md p-1 overflow-hidden border border-slate-700/40">
+              <img src="/websoul_logo/favicondark.png" alt="Websoul Tech" className="w-full h-full object-contain" />
             </div>
             <div>
               <h2 className="font-bold text-base text-[#0B192C] dark:text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                WebSoul Admin
+                Websoul Tech Admin
               </h2>
               <span className="text-[11px] font-mono-tech text-blue-600 dark:text-blue-400">
                 Dashboard Panel
@@ -128,14 +128,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center font-mono-tech shrink-0">
-                S
+                {user?.name ? user.name.charAt(0).toUpperCase() : 'A'}
               </div>
               <div className="truncate">
                 <div className="text-xs font-bold text-[#0B192C] dark:text-white truncate font-mono-tech">
-                  {user?.name || 'Saad (Admin)'}
+                  {user?.name || 'Administrator'}
                 </div>
                 <div className="text-[10px] text-slate-400 truncate font-mono-tech">
-                  {user?.email || 'websoul.tech859@gmail.com'}
+                  {user?.email || 'admin@websoul.tech'}
                 </div>
               </div>
             </div>
@@ -187,8 +187,11 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="w-4/5 max-w-xs bg-white dark:bg-[#0B1424] h-full p-6 flex flex-col justify-between overflow-y-auto">
             <div>
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
-                <span className="font-bold text-base text-[#0B192C] dark:text-white font-mono-tech">
-                  WebSoul Admin
+                <span className="font-bold text-base text-[#0B192C] dark:text-white font-mono-tech flex items-center gap-2">
+                  <div className="w-6 h-6 rounded bg-[#0B192C] dark:bg-slate-900 p-0.5 flex items-center justify-center">
+                    <img src="/websoul_logo/favicondark.png" alt="Websoul Tech" className="w-full h-full object-contain" />
+                  </div>
+                  Websoul Tech Admin
                 </span>
                 <button
                   onClick={() => setMobileSidebarOpen(false)}
@@ -257,7 +260,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 md:ml-64 lg:ml-72 min-h-screen flex flex-col justify-between">
+      <main className="admin-main min-w-0 flex-1 md:ml-64 lg:ml-72 min-h-screen flex flex-col justify-between">
         {/* Top Header Bar for Desktop */}
         <div className="hidden md:flex items-center justify-between px-8 py-5 bg-white dark:bg-[#0B1424] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-20">
           <div>
@@ -289,14 +292,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
         </div>
 
         {/* Content Body */}
-        <div className="p-4 sm:p-6 lg:p-8 flex-1">
+        <div className="min-w-0 p-4 sm:p-6 lg:p-8 flex-1">
           {children}
         </div>
 
         {/* Footer */}
         <footer className="px-8 py-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B1424] text-xs text-slate-400 font-mono-tech flex items-center justify-between">
-          <span>WebSoul Content Management System • v2.0</span>
-          <span>Authenticated as Saad (websoul.tech859@gmail.com)</span>
+          <span>Websoul Content Management System • v2.0</span>
+          <span>Authenticated as {user?.name || 'Administrator'} ({user?.email || ''})</span>
         </footer>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { BlogPost } from '../../types/blog';
-import { BlogStorageService } from '../../services/blogStorage';
+import { BlogStorageService, formatBlogAuthor } from '../../services/blogStorage';
 import { BlogCard } from './BlogCard';
 
 interface BlogListPageProps {
@@ -195,19 +195,16 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ onNavigate }) => {
 
               <div className="pt-6 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <img
-                    src="/favicon.png"
-                    alt="WebSoul"
-                    className="w-8 h-8 rounded-full object-cover border border-slate-200 block dark:hidden"
-                  />
-                  <img
-                    src="/websoul_logo/favicondark.png"
-                    alt="WebSoul"
-                    className="w-8 h-8 rounded-full object-cover border border-slate-700 hidden dark:block"
-                  />
+                  <div className="w-8 h-8 rounded-full bg-[#0B192C] dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-0.5 flex items-center justify-center shrink-0">
+                    <img
+                      src="/websoul_logo/favicondark.png"
+                      alt="Websoul Tech"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                   <div>
                     <div className="text-xs font-bold text-[#0B192C] dark:text-white font-mono-tech">
-                      {featuredBlog.author}
+                      {formatBlogAuthor(featuredBlog.author)}
                     </div>
                     <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono-tech">
                       {featuredBlog.authorRole || 'Author'}

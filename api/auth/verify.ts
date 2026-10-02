@@ -1,37 +1,69 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import crypto from 'crypto';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'websoul_super_secret_jwt_key_2026';
+interface DecodedTokenPayload {
+  email: string;
+  name?: string;
+  role?: string;
+  iat: number;
+  exp: number;
+}
 
-function verifyToken(token: string): boolean {
+function getJwtSecret(): string {
+  return process.env.JWT_SECRET || 'websoul_dev_fallback_secret_key_only';
+}
+
+function verifyToken(token: string): DecodedTokenPayload | null {
   try {
     const parts = token.split('.');
-    if (parts.length !== 3) return false;
+    if (parts.length !== 3) return null;
 
     const [header, payload, signature] = parts;
-    const crypto = require('crypto');
+    const secret = getJwtSecret();
     const expectedSig = crypto
-      .createHmac('sha256', JWT_SECRET)
+      .createHmac('sha256', secret)
       .update(`${header}.${payload}`)
       .digest('base64url');
 
-    if (signature !== expectedSig) return false;
+    const sigBuf = Buffer.from(signature, 'utf8');
+    const expBuf = Buffer.from(expectedSig, 'utf8');
 
-    const decodedPayload = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
-    if (decodedPayload.exp < Date.now()) {
-      return false; // Expired
+    if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+      return null;
     }
 
-    return true;
+    const decoded = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as DecodedTokenPayload;
+    if (!decoded.exp || decoded.exp < Date.now()) {
+      return null; // Expired
+    }
+
+    return decoded;
   } catch {
-    return false;
+    return null;
   }
 }
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+function setCorsHeaders(req: VercelRequest, res: VercelResponse) {
+  const origin = req.headers.origin || '';
+  const isAllowedOrigin =
+    origin === 'https://www.websoul.tech' ||
+    origin === 'https://websoul.tech' ||
+    origin.startsWith('http://localhost:') ||
+    origin.endsWith('.vercel.app');
+
+  if (isAllowedOrigin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.websoul.tech');
+  }
+
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+}
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  setCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -40,16 +72,21 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   const authHeader = req.headers.authorization || '';
   const token = authHeader.replace(/^Bearer\s+/i, '') || (req.body && req.body.token);
 
-  if (!token || !verifyToken(token)) {
+  if (!token) {
+    return res.status(401).json({ authenticated: false, error: 'Authorization token is required.' });
+  }
+
+  const decoded = verifyToken(token);
+  if (!decoded) {
     return res.status(401).json({ authenticated: false, error: 'Invalid or expired session.' });
   }
 
   return res.status(200).json({
     authenticated: true,
     user: {
-      email: 'websoul.tech859@gmail.com',
-      name: 'Saad (WebSoul Admin)',
-      role: 'Administrator'
-    }
+      email: decoded.email,
+      name: decoded.name || 'Websoul Admin',
+      role: decoded.role || 'Administrator',
+    },
   });
 }

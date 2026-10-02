@@ -99,7 +99,7 @@ export const AdminBlogList: React.FC<AdminBlogListProps> = ({ onNavigate }) => {
   }
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="admin-page space-y-6 max-w-7xl mx-auto">
       {/* Top Header & New Button */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -120,9 +120,9 @@ export const AdminBlogList: React.FC<AdminBlogListProps> = ({ onNavigate }) => {
       </div>
 
       {/* Filters Bar */}
-      <div className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+      <div className="admin-panel min-w-0 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         {/* Search */}
-        <div className="relative flex-1 min-w-[240px]">
+        <div className="relative flex-1 min-w-0">
           <input
             type="text"
             value={searchQuery}
@@ -180,7 +180,7 @@ export const AdminBlogList: React.FC<AdminBlogListProps> = ({ onNavigate }) => {
       </div>
 
       {/* Blogs Table */}
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 overflow-hidden shadow-xs">
+      <div className="admin-panel rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 overflow-hidden shadow-xs">
         {filteredBlogs.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono-tech">

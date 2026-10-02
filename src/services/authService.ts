@@ -6,7 +6,11 @@ export class AuthService {
   private static getStoredSession(): AuthSession | null {
     if (typeof window === 'undefined') return null;
     try {
-      const stored = localStorage.getItem(SESSION_STORAGE_KEY) || sessionStorage.getItem(SESSION_STORAGE_KEY);
+      const stored =
+        localStorage.getItem(SESSION_STORAGE_KEY) ||
+        sessionStorage.getItem(SESSION_STORAGE_KEY) ||
+        localStorage.getItem('websoul_admin_session_v1') ||
+        sessionStorage.getItem('websoul_admin_session_v1');
       if (!stored) return null;
       const session = JSON.parse(stored) as AuthSession;
       if (!session || !session.token || session.expiresAt < Date.now()) {
@@ -40,6 +44,8 @@ export class AuthService {
     try {
       localStorage.removeItem(SESSION_STORAGE_KEY);
       sessionStorage.removeItem(SESSION_STORAGE_KEY);
+      localStorage.removeItem('websoul_admin_session_v1');
+      sessionStorage.removeItem('websoul_admin_session_v1');
       window.dispatchEvent(new CustomEvent('websoul_auth_changed', { detail: null }));
     } catch (e) {
       console.error('Error clearing session:', e);
@@ -67,15 +73,16 @@ export class AuthService {
     rememberMe = true
   ): Promise<{ success: boolean; error?: string; user?: AdminUser }> {
     try {
-      // 1. Attempt API serverless login first
+      // Authenticate exclusively through the secure serverless API endpoint
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
 
-      if (res.ok) {
-        const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success && data.token) {
         const session: AuthSession = {
           token: data.token,
           expiresAt: data.expiresAt || Date.now() + 7 * 24 * 60 * 60 * 1000,
@@ -83,39 +90,19 @@ export class AuthService {
         };
         this.setStoredSession(session, rememberMe);
         return { success: true, user: data.user };
-      } else if (res.status === 401) {
-        const errorData = await res.json().catch(() => ({ error: 'Invalid admin credentials.' }));
-        return { success: false, error: errorData.error || 'Invalid admin credentials. Please verify your email and password.' };
       }
+
+      return {
+        success: false,
+        error: data.error || 'Invalid admin credentials. Please verify your email and password.'
+      };
     } catch (apiErr) {
-      console.warn('API authentication endpoint unreachable, trying client fallback verification:', apiErr);
-    }
-
-    // 2. Client-side fallback verification (for static hosting or offline environments)
-    // Secure constant-time string comparison against expected admin email and password
-    const normalizedEmail = email.trim().toLowerCase();
-    const expectedEmail = 'websoul.tech859@gmail.com';
-    const expectedPass = 'S@@d1234';
-
-    if (normalizedEmail === expectedEmail && password === expectedPass) {
-      const user: AdminUser = {
-        email: normalizedEmail,
-        name: 'Saad (WebSoul Admin)',
-        role: 'Administrator'
+      console.error('Authentication request failed:', apiErr);
+      return {
+        success: false,
+        error: 'Authentication service is unreachable. Please verify your internet connection.'
       };
-      const session: AuthSession = {
-        token: `ws_client_token_${Date.now()}_${Math.random().toString(36).substring(2)}`,
-        expiresAt: Date.now() + (rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000),
-        user
-      };
-      this.setStoredSession(session, rememberMe);
-      return { success: true, user };
     }
-
-    return {
-      success: false,
-      error: 'Invalid admin credentials. Please check your email or password.'
-    };
   }
 
   public static logout(): void {

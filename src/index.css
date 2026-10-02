@@ -85,6 +85,135 @@ html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark 
   font-family: 'JetBrains Mono', monospace;
 }
 
+/* Shared public-site visual language for the protected workspace. */
+.admin-theme {
+  min-width: 0;
+  overflow-x: hidden;
+  background-color: #f6f8fb !important;
+  background-image:
+    radial-gradient(circle at 86% 0%, rgba(30, 58, 138, 0.07), transparent 32rem),
+    radial-gradient(circle at 0% 80%, rgba(56, 189, 248, 0.05), transparent 28rem);
+}
+
+.admin-theme .admin-sidebar,
+.admin-theme .admin-main > .hidden.md\:flex,
+.admin-theme footer {
+  background-color: rgba(255, 255, 255, 0.86) !important;
+  border-color: rgba(11, 25, 44, 0.1) !important;
+  backdrop-filter: blur(18px);
+}
+
+.admin-theme .admin-sidebar {
+  box-shadow: 12px 0 40px rgba(11, 25, 44, 0.04);
+}
+
+.admin-theme .admin-welcome {
+  background: #0b192c;
+  background-image:
+    radial-gradient(circle at 86% 20%, rgba(56, 189, 248, 0.24), transparent 18rem),
+    linear-gradient(135deg, #0b192c 0%, #102b4c 100%);
+}
+
+.admin-theme .admin-panel,
+.admin-theme .admin-login-card {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(11, 25, 44, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(11, 25, 44, 0.045);
+}
+
+.admin-theme .admin-panel-accent {
+  background-color: rgba(239, 246, 255, 0.72) !important;
+  border-color: rgba(30, 58, 138, 0.2) !important;
+}
+
+.admin-login-shell {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(30, 58, 138, 0.1), transparent 24rem),
+    radial-gradient(circle at 85% 80%, rgba(56, 189, 248, 0.1), transparent 22rem);
+}
+
+.admin-theme .rounded-2xl,
+.admin-theme .rounded-3xl {
+  border-radius: 1rem;
+}
+
+.admin-theme .shadow-xl,
+.admin-theme .shadow-2xl {
+  box-shadow: 0 18px 45px rgba(11, 25, 44, 0.09);
+}
+
+.admin-theme button,
+.admin-theme input,
+.admin-theme select,
+.admin-theme textarea {
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.admin-theme button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.admin-theme button:focus-visible,
+.admin-theme input:focus-visible,
+.admin-theme select:focus-visible,
+.admin-theme textarea:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.admin-theme .admin-page {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.admin-theme table {
+  min-width: 680px;
+}
+
+@media (max-width: 639px) {
+  .admin-theme .admin-page {
+    width: 100%;
+  }
+
+  .admin-theme .admin-welcome {
+    padding: 1.25rem;
+  }
+
+  .admin-theme .admin-panel {
+    max-width: 100%;
+  }
+
+  .admin-theme .admin-panel > .overflow-x-auto {
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+html.dark .admin-theme {
+  background-color: #0f172a !important;
+  background-image:
+    radial-gradient(circle at 86% 0%, rgba(30, 58, 138, 0.22), transparent 32rem),
+    radial-gradient(circle at 0% 80%, rgba(14, 116, 144, 0.14), transparent 28rem);
+}
+
+html.dark .admin-theme .admin-sidebar,
+html.dark .admin-theme .admin-main > .hidden.md\:flex,
+html.dark .admin-theme footer {
+  background-color: rgba(11, 20, 36, 0.88) !important;
+  border-color: rgba(148, 163, 184, 0.14) !important;
+}
+
+html.dark .admin-theme .admin-panel,
+html.dark .admin-theme .admin-login-card {
+  background-color: rgba(15, 23, 42, 0.86) !important;
+  border-color: rgba(148, 163, 184, 0.14) !important;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .admin-theme .admin-panel-accent {
+  background-color: rgba(23, 37, 84, 0.55) !important;
+  border-color: rgba(96, 165, 250, 0.28) !important;
+}
+
 /* Keyframe animations */
 @keyframes meshFloat {
   0% {

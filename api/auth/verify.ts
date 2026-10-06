@@ -50,30 +50,47 @@ function verifyToken(token: string): DecodedTokenPayload | null {
   }
 }
 
-function setCorsHeaders(req: VercelRequest, res: VercelResponse) {
-  const origin = req.headers.origin || '';
-  const isAllowedOrigin =
-    origin === 'https://www.websoul.tech' ||
-    origin === 'https://websoul.tech' ||
-    origin.startsWith('http://localhost:') ||
-    origin.endsWith('.vercel.app');
+function isAllowedOrigin(origin: string): boolean {
+  if (!origin) return false;
 
-  if (isAllowedOrigin) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.websoul.tech');
+  // Production websoul domains
+  if (origin === 'https://www.websoul.tech' || origin === 'https://websoul.tech') {
+    return true;
   }
 
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  // Websoul Vercel preview and staging deployments only (e.g. websoul.vercel.app, websoul-git-*.vercel.app)
+  if (/^https:\/\/websoul(-[a-z0-9_-]+)?\.vercel\.app$/i.test(origin)) {
+    return true;
+  }
+
+  // Local development
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {
+    return true;
+  }
+
+  return false;
+}
+
+function setCorsHeaders(req: VercelRequest, res: VercelResponse): boolean {
+  const origin = req.headers.origin || '';
+  const allowed = isAllowedOrigin(origin);
+
+  if (allowed) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+    res.setHeader('Vary', 'Origin');
+  }
+
+  return allowed;
 }
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
-  setCorsHeaders(req, res);
+  const isAllowed = setCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(isAllowed ? 204 : 403).end();
   }
 
   const authHeader = req.headers.authorization || '';

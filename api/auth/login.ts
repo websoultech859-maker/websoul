@@ -3,7 +3,7 @@ import crypto from 'crypto';
 
 interface AdminAccount {
   email: string;
-  password: string;
+  passwordHash: string;
   name: string;
   role: string;
 }
@@ -22,7 +22,59 @@ function timingSafeEqualStrings(a: string, b: string): boolean {
 }
 
 /**
- * Parse configured administrators from environment variables (Approach C)
+ * Verify a plaintext password against a stored cryptographic hash or legacy plaintext string.
+ * Supports memory-hard scrypt (scrypt:salt:hash) and PBKDF2 (pbkdf2:salt:iterations:hash).
+ */
+function verifyPassword(plainPassword: string, storedHashOrPassword: string): boolean {
+  if (!plainPassword || !storedHashOrPassword) return false;
+
+  // 1. scrypt password hash format (scrypt:salt:derivedKeyHex) - Preferred
+  if (storedHashOrPassword.startsWith('scrypt:')) {
+    const parts = storedHashOrPassword.split(':');
+    if (parts.length !== 3) return false;
+    const [, salt, expectedHashHex] = parts;
+    try {
+      const derivedKey = crypto.scryptSync(plainPassword, salt, 64);
+      const derivedBuf = Buffer.from(derivedKey.toString('hex'), 'utf8');
+      const expectedBuf = Buffer.from(expectedHashHex, 'utf8');
+      if (derivedBuf.length !== expectedBuf.length) {
+        crypto.timingSafeEqual(derivedBuf, derivedBuf);
+        return false;
+      }
+      return crypto.timingSafeEqual(derivedBuf, expectedBuf);
+    } catch (e) {
+      console.error('Password hash verification failed:', e);
+      return false;
+    }
+  }
+
+  // 2. PBKDF2 password hash format (pbkdf2:salt:iterations:derivedKeyHex)
+  if (storedHashOrPassword.startsWith('pbkdf2:')) {
+    const parts = storedHashOrPassword.split(':');
+    if (parts.length !== 4) return false;
+    const [, salt, iterationsStr, expectedHashHex] = parts;
+    const iterations = parseInt(iterationsStr, 10) || 100000;
+    try {
+      const derivedKey = crypto.pbkdf2Sync(plainPassword, salt, iterations, 64, 'sha512');
+      const derivedBuf = Buffer.from(derivedKey.toString('hex'), 'utf8');
+      const expectedBuf = Buffer.from(expectedHashHex, 'utf8');
+      if (derivedBuf.length !== expectedBuf.length) {
+        crypto.timingSafeEqual(derivedBuf, derivedBuf);
+        return false;
+      }
+      return crypto.timingSafeEqual(derivedBuf, expectedBuf);
+    } catch (e) {
+      console.error('PBKDF2 verification failed:', e);
+      return false;
+    }
+  }
+
+  // 3. Fallback: Timing-safe plain string comparison for legacy unhashed passwords
+  return timingSafeEqualStrings(plainPassword, storedHashOrPassword);
+}
+
+/**
+ * Parse configured administrators from environment variables
  */
 function getConfiguredAdmins(): AdminAccount[] {
   const admins: AdminAccount[] = [];
@@ -33,10 +85,11 @@ function getConfiguredAdmins(): AdminAccount[] {
       const parsed = JSON.parse(process.env.ADMIN_USERS);
       if (Array.isArray(parsed)) {
         for (const u of parsed) {
-          if (u && u.email && u.password) {
+          const pass = u && (u.passwordHash || u.password);
+          if (u && u.email && pass) {
             admins.push({
               email: String(u.email).trim().toLowerCase(),
-              password: String(u.password),
+              passwordHash: String(pass),
               name: u.name || 'Websoul Admin',
               role: u.role || 'Administrator',
             });
@@ -48,15 +101,15 @@ function getConfiguredAdmins(): AdminAccount[] {
     }
   }
 
-  // 2. Backward compatibility with ADMIN_EMAIL and ADMIN_PASSWORD
+  // 2. Backward compatibility with ADMIN_EMAIL and ADMIN_PASSWORD_HASH / ADMIN_PASSWORD
   const fallbackEmail = process.env.ADMIN_EMAIL;
-  const fallbackPass = process.env.ADMIN_PASSWORD;
+  const fallbackPass = process.env.ADMIN_PASSWORD_HASH || process.env.ADMIN_PASSWORD;
   if (fallbackEmail && fallbackPass) {
     const normalized = fallbackEmail.trim().toLowerCase();
     if (!admins.some((a) => a.email === normalized)) {
       admins.push({
         email: normalized,
-        password: String(fallbackPass),
+        passwordHash: String(fallbackPass),
         name: process.env.ADMIN_NAME || 'Websoul Admin',
         role: 'Administrator',
       });
@@ -170,10 +223,13 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     // Find admin by normalized email
     const matchedAdmin = admins.find((a) => a.email === normalizedEmail);
 
-    // Timing-safe password check
+    // Constant-time password check with dummy hash simulation to resist timing attacks
+    const DUMMY_SCRYPT_HASH =
+      'scrypt:0000000000000000:00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000';
+
     const isPasswordValid = matchedAdmin
-      ? timingSafeEqualStrings(String(password), matchedAdmin.password)
-      : timingSafeEqualStrings(String(password), 'dummy_password_for_timing');
+      ? verifyPassword(String(password), matchedAdmin.passwordHash)
+      : verifyPassword(String(password), DUMMY_SCRYPT_HASH);
 
     if (!matchedAdmin || !isPasswordValid) {
       return res.status(401).json({ error: 'Invalid admin credentials. Please check email or password.' });

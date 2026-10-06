@@ -3,6 +3,26 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
+import crypto from 'crypto'
+
+function verifyDevPassword(plainPassword: string, storedHashOrPassword: string): boolean {
+  if (!plainPassword || !storedHashOrPassword) return false;
+  if (storedHashOrPassword.startsWith('scrypt:')) {
+    const parts = storedHashOrPassword.split(':');
+    if (parts.length !== 3) return false;
+    const [, salt, expectedHashHex] = parts;
+    try {
+      const derivedKey = crypto.scryptSync(plainPassword, salt, 64);
+      const derivedBuf = Buffer.from(derivedKey.toString('hex'), 'utf8');
+      const expectedBuf = Buffer.from(expectedHashHex, 'utf8');
+      if (derivedBuf.length !== expectedBuf.length) return false;
+      return crypto.timingSafeEqual(derivedBuf, expectedBuf);
+    } catch {
+      return false;
+    }
+  }
+  return plainPassword === storedHashOrPassword;
+}
 
 function authDevPlugin(env: Record<string, string>): Plugin {
   return {
@@ -27,10 +47,10 @@ function authDevPlugin(env: Record<string, string>): Plugin {
                   const parsed = JSON.parse(rawUsers);
                   if (Array.isArray(parsed)) {
                     configuredAdmins = parsed
-                      .filter((u) => u && u.email && u.password)
+                      .filter((u) => u && u.email && (u.passwordHash || u.password))
                       .map((u) => ({
                         email: String(u.email).trim().toLowerCase(),
-                        password: String(u.password),
+                        password: String(u.passwordHash || u.password),
                         name: u.name || 'Websoul Admin',
                         role: u.role || 'Administrator',
                       }));
@@ -40,9 +60,13 @@ function authDevPlugin(env: Record<string, string>): Plugin {
                 }
               }
 
-              // 2. Parse from ADMIN_EMAIL / ADMIN_PASSWORD in env
+              // 2. Parse from ADMIN_EMAIL / ADMIN_PASSWORD_HASH / ADMIN_PASSWORD in env
               const fallbackEmail = env.ADMIN_EMAIL || process.env.ADMIN_EMAIL;
-              const fallbackPass = env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+              const fallbackPass =
+                env.ADMIN_PASSWORD_HASH ||
+                env.ADMIN_PASSWORD ||
+                process.env.ADMIN_PASSWORD_HASH ||
+                process.env.ADMIN_PASSWORD;
               if (fallbackEmail && fallbackPass) {
                 const normEmail = fallbackEmail.trim().toLowerCase();
                 if (!configuredAdmins.some((a) => a.email === normEmail)) {
@@ -67,10 +91,10 @@ function authDevPlugin(env: Record<string, string>): Plugin {
                         const parsed = JSON.parse(match[1]);
                         if (Array.isArray(parsed)) {
                           configuredAdmins = parsed
-                            .filter((u) => u && u.email && u.password)
+                            .filter((u) => u && u.email && (u.passwordHash || u.password))
                             .map((u) => ({
                               email: String(u.email).trim().toLowerCase(),
-                              password: String(u.password),
+                              password: String(u.passwordHash || u.password),
                               name: u.name || 'Websoul Admin',
                               role: u.role || 'Administrator',
                             }));
@@ -96,7 +120,7 @@ function authDevPlugin(env: Record<string, string>): Plugin {
               }
 
               const matchedAdmin = configuredAdmins.find(
-                (a) => a.email.trim().toLowerCase() === normalized && String(a.password) === String(password)
+                (a) => a.email.trim().toLowerCase() === normalized && verifyDevPassword(String(password), String(a.password))
               );
 
               if (matchedAdmin) {

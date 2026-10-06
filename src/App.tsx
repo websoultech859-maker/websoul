@@ -8,6 +8,8 @@ import { AdminLoginPage } from './components/admin/AdminLoginPage';
 import { AdminDashboardOverview } from './components/admin/AdminDashboardOverview';
 import { AdminBlogList } from './components/admin/AdminBlogList';
 import { AdminBlogForm } from './components/admin/AdminBlogForm';
+import { AutomationsPage } from './components/AutomationsPage';
+import { PayloadPipePage } from './components/PayloadPipePage';
 import { trackPageView } from './lib/analytics';
 
 // ==========================================
@@ -27,7 +29,9 @@ export type Page =
   | 'admin'
   | 'admin-blogs'
   | 'admin-blog-new'
-  | 'admin-blog-edit';
+  | 'admin-blog-edit'
+  | 'automations'
+  | 'payloadpipe';
 
 
 export interface ProjectResult {
@@ -1133,6 +1137,7 @@ export function Nav({
   // Pricing removed — nav links updated
   const navLinks: { page: Page; label: string }[] = [
     { page: 'work', label: 'Work' },
+    { page: 'automations', label: 'Automations' },
     { page: 'about', label: 'About' },
     { page: 'blog', label: 'Blog' },
     { page: 'contact', label: 'Contact' },
@@ -1265,7 +1270,7 @@ export function Nav({
               </div>
             </div>
 
-            {/* Remaining links (About, Blog, Contact) */}
+            {/* Remaining links (Automations, About, Blog, Contact) */}
             {navLinks.slice(1).map((link) => {
               const isActive = currentPage === link.page;
               return (
@@ -1431,7 +1436,7 @@ export function Nav({
 // ==========================================
 export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: number) => void; darkMode?: boolean }) {
   // Pricing removed from footer navigation
-  const footerLinks: Page[] = ['work', 'services', 'about', 'blog', 'contact'];
+  const footerLinks: Page[] = ['work', 'services', 'automations', 'about', 'blog', 'contact'];
 
   return (
     <footer className="border-t border-slate-200 dark:border-slate-800 mt-16 sm:mt-20 py-10 sm:py-12 bg-[#F8FAFC] dark:bg-slate-900/60 transition-colors duration-300">
@@ -1466,7 +1471,7 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
                       onClick={() => navigate(p)}
                       className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white link-underline capitalize cursor-pointer font-medium"
                     >
-                      {p}
+                      {p === 'automations' ? 'Automations' : p}
                     </button>
                   </li>
                 ))}
@@ -3355,8 +3360,12 @@ function getInitialRoute(): { page: Page; projectId: number; blogSlug?: string; 
     } else {
       return { page: 'work', projectId: 1 };
     }
+  } else if (lowerPath === '/automations' || hash === 'automations') {
+    return { page: 'automations', projectId: 1 };
   } else if (lowerPath === '' || lowerPath === '/' || hash === 'home' || hash === '') {
     return { page: 'home', projectId: 1 };
+  } else if (lowerPath === '/payloadpipe' || hash === 'payloadpipe') {
+    return { page: 'payloadpipe', projectId: 1 };
   } else {
     return { page: '404', projectId: 1 };
   }
@@ -3405,6 +3414,11 @@ export default function App() {
         canonical = `https://www.websoul.tech/project/${projectId}`;
         breadcrumbName = `${project.title} Case Study`;
       }
+    } else if (currentPage === 'automations') {
+      title = 'Automation Projects | Websoul';
+      description = 'Explore workflow integrations built to connect tools, handle data reliably, and reduce repetitive work.';
+      canonical = 'https://www.websoul.tech/automations';
+      breadcrumbName = 'Automations';
     } else if (currentPage === 'services') {
       title = 'Web Development & Digital Solutions Services | Websoul';
       description = 'Websites, web applications, AI automation, intelligent agents, integrations, e-commerce, UI/UX design, and ongoing support.';
@@ -3592,8 +3606,12 @@ export default function App() {
         } else {
           setCurrentPage('work');
         }
+      } else if (lowerPath === '/automations' || hash === 'automations') {
+        setCurrentPage('automations');
       } else if (lowerPath === '' || lowerPath === '/' || hash === 'home' || hash === '') {
         setCurrentPage('home');
+      } else if (lowerPath === '/payloadpipe' || hash === 'payloadpipe') {
+        setCurrentPage('payloadpipe');
       } else {
         setCurrentPage('404');
       }
@@ -3627,6 +3645,7 @@ export default function App() {
     setCurrentPage(page);
     let targetPath = '/';
     if (page === 'work') targetPath = '/work';
+    else if (page === 'automations') targetPath = '/automations';
     else if (page === 'services') targetPath = '/services';
     else if (page === 'about') targetPath = '/about';
     else if (page === 'contact') targetPath = '/contact';
@@ -3651,6 +3670,8 @@ export default function App() {
       const idNum = Number(param);
       setProjectId(idNum);
       targetPath = `/project/${idNum}`;
+    } else if (page === 'payloadpipe') {
+      targetPath = '/payloadpipe';
     } else if (page === '404') {
       targetPath = '/404';
     }
@@ -3738,6 +3759,8 @@ export default function App() {
           {currentPage === 'work' && <WorkPage navigate={(p, id) => navigate(p, id)} />}
           {currentPage === 'project' && <ProjectDetailPage projectId={projectId} navigate={(p, id) => navigate(p, id)} />}
           {currentPage === 'services' && <ServicesPage navigate={(p, id) => navigate(p, id)} />}
+          {currentPage === 'automations' && <AutomationsPage navigate={(p) => navigate(p)} />}
+          {currentPage === 'payloadpipe' && <PayloadPipePage navigate={(p, id) => navigate(p, id)} />}
           {currentPage === 'about' && <AboutPage navigate={(p, id) => navigate(p, id)} />}
           {currentPage === 'contact' && <ContactPage />}
           {currentPage === 'blog' && <BlogListPage onNavigate={(p, param) => navigate(p as Page, param)} />}

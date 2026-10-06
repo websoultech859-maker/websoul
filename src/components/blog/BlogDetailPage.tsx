@@ -352,31 +352,39 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug, onNavigate
             Explore relevant services and case studies mentioned in this guide:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {blog.internalLinks.map((link, idx) => (
-              <a
-                key={idx}
-                href={link.url}
-                onClick={(e) => {
-                  if (link.url.startsWith('/')) {
-                    e.preventDefault();
-                    const route = link.url.replace(/^\//, '') || 'home';
-                    if (route.startsWith('blog/')) {
-                      onNavigate('blog-detail', route.replace('blog/', ''));
-                    } else {
-                      onNavigate(route);
+            {blog.internalLinks.map((link, idx) => {
+              const safeUrl = sanitizeUrl(link.url);
+              if (!safeUrl) return null;
+              const isInternal = safeUrl.startsWith('/');
+
+              return (
+                <a
+                  key={idx}
+                  href={safeUrl}
+                  onClick={(e) => {
+                    if (isInternal) {
+                      e.preventDefault();
+                      const route = safeUrl.replace(/^\//, '') || 'home';
+                      if (route.startsWith('blog/')) {
+                        onNavigate('blog-detail', route.replace('blog/', ''));
+                      } else {
+                        onNavigate(route);
+                      }
                     }
-                  }
-                }}
-                className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
-              >
-                <span className="text-xs sm:text-sm font-semibold text-[#0B192C] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 font-mono-tech">
-                  {link.label}
-                </span>
-                <span className="text-slate-400 group-hover:translate-x-1 transition-transform text-xs">
-                  →
-                </span>
-              </a>
-            ))}
+                  }}
+                  target={isInternal ? undefined : '_blank'}
+                  rel={isInternal ? undefined : 'noopener noreferrer'}
+                  className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                >
+                  <span className="text-xs sm:text-sm font-semibold text-[#0B192C] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 font-mono-tech">
+                    {link.label}
+                  </span>
+                  <span className="text-slate-400 group-hover:translate-x-1 transition-transform text-xs">
+                    →
+                  </span>
+                </a>
+              );
+            })}
           </div>
         </section>
       )}
@@ -592,6 +600,31 @@ function renderRichContent(content: string, onNavigate: (page: string, param?: s
   });
 }
 
+/**
+ * Validate and sanitize URLs to prevent Stored XSS attacks via javascript:, data:, vbscript: protocols.
+ */
+function sanitizeUrl(rawUrl: string): string | null {
+  if (!rawUrl) return null;
+  const trimmed = rawUrl.trim();
+
+  // Allow internal relative paths starting with single '/' (disallow '//' protocol-relative)
+  if (trimmed.startsWith('/') && !trimmed.startsWith('//')) {
+    return trimmed;
+  }
+
+  // Allow safe absolute protocols: https:, http:, mailto:, tel:
+  try {
+    const parsed = new URL(trimmed);
+    if (['https:', 'http:', 'mailto:', 'tel:'].includes(parsed.protocol)) {
+      return trimmed;
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
 function renderFormattedInlineText(text: string, onNavigate: (page: string, param?: string | number) => void): React.ReactNode {
   // Replace links [label](url), bold **text**, inline `code`
   const linkRegex = /\[(.*?)\]\((.*?)\)/g;
@@ -606,15 +639,19 @@ function renderFormattedInlineText(text: string, onNavigate: (page: string, para
     }
 
     const label = match[1];
-    const url = match[2];
+    const rawUrl = match[2];
+    const safeUrl = sanitizeUrl(rawUrl);
 
-    if (url.startsWith('/')) {
+    if (!safeUrl) {
+      // Disarm dangerous schemes (e.g. javascript:, data:, vbscript:) by rendering label safely without anchor
+      parts.push(parseBoldAndCode(label));
+    } else if (safeUrl.startsWith('/')) {
       parts.push(
         <button
           key={`link-${matchIndex}`}
           type="button"
           onClick={() => {
-            const route = url.replace(/^\//, '') || 'home';
+            const route = safeUrl.replace(/^\//, '') || 'home';
             if (route.startsWith('blog/')) {
               onNavigate('blog-detail', route.replace('blog/', ''));
             } else {
@@ -623,19 +660,19 @@ function renderFormattedInlineText(text: string, onNavigate: (page: string, para
           }}
           className="font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer inline"
         >
-          {label}
+          {parseBoldAndCode(label)}
         </button>
       );
     } else {
       parts.push(
         <a
           key={`ext-${matchIndex}`}
-          href={url}
+          href={safeUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="font-semibold text-blue-600 dark:text-blue-400 hover:underline inline"
         >
-          {label}
+          {parseBoldAndCode(label)}
         </a>
       );
     }

@@ -70,7 +70,7 @@ export interface AdminUser {
 }
 
 export interface AuthSession {
-  token: string;
+  token?: string;
   expiresAt: number;
   user: AdminUser;
 }

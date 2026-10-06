@@ -10,16 +10,31 @@ interface DecodedTokenPayload {
 }
 
 function getJwtSecret(): string {
-  return process.env.JWT_SECRET || 'websoul_dev_fallback_secret_key_only';
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
+    if (isProduction) {
+      throw new Error('JWT_SECRET environment variable is missing on the server.');
+    }
+    console.warn('[SECURITY WARNING] Using fallback JWT secret for non-production development.');
+    return 'websoul_dev_fallback_secret_key_only';
+  }
+  return secret;
 }
 
-function verifyToken(token: string): DecodedTokenPayload | null {
+function verifyToken(token: string, secret: string): DecodedTokenPayload | null {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
 
     const [header, payload, signature] = parts;
-    const secret = getJwtSecret();
+
+    // Validate header algorithm and token type to prevent algorithm confusion attacks
+    const decodedHeader = JSON.parse(Buffer.from(header, 'base64url').toString('utf8'));
+    if (!decodedHeader || decodedHeader.alg !== 'HS256' || decodedHeader.typ !== 'JWT') {
+      return null;
+    }
+
     const expectedSig = crypto
       .createHmac('sha256', secret)
       .update(`${header}.${payload}`)
@@ -33,7 +48,11 @@ function verifyToken(token: string): DecodedTokenPayload | null {
     }
 
     const decoded = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as DecodedTokenPayload;
-    if (!decoded.exp || decoded.exp < Date.now()) {
+    if (!decoded || !decoded.email || typeof decoded.email !== 'string') {
+      return null;
+    }
+
+    if (!decoded.exp || typeof decoded.exp !== 'number' || decoded.exp < Date.now()) {
       return null; // Expired
     }
 
@@ -43,50 +62,103 @@ function verifyToken(token: string): DecodedTokenPayload | null {
   }
 }
 
-function setCorsHeaders(req: VercelRequest, res: VercelResponse) {
-  const origin = req.headers.origin || '';
-  const isAllowedOrigin =
-    origin === 'https://www.websoul.tech' ||
-    origin === 'https://websoul.tech' ||
-    origin.startsWith('http://localhost:') ||
-    origin.endsWith('.vercel.app');
+function isAllowedOrigin(origin: string): boolean {
+  if (!origin) return false;
 
-  if (isAllowedOrigin) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.websoul.tech');
+  // Production websoul domains
+  if (origin === 'https://www.websoul.tech' || origin === 'https://websoul.tech') {
+    return true;
   }
 
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  // Websoul Vercel preview and staging deployments only (e.g. websoul.vercel.app, websoul-git-*.vercel.app)
+  if (/^https:\/\/websoul(-[a-z0-9_-]+)?\.vercel\.app$/i.test(origin)) {
+    return true;
+  }
+
+  // Local development
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {
+    return true;
+  }
+
+  return false;
+}
+
+function setCorsHeaders(req: VercelRequest, res: VercelResponse): boolean {
+  const origin = req.headers.origin || '';
+  const allowed = isAllowedOrigin(origin);
+
+  if (allowed) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+    res.setHeader('Vary', 'Origin');
+  }
+
+  return allowed;
+}
+
+function extractToken(req: VercelRequest): string | null {
+  // 1. Extract from HttpOnly cookie
+  const cookieHeader = req.headers.cookie || '';
+  if (cookieHeader) {
+    const match = cookieHeader.match(/(?:^|;\s*)websoul_auth_token=([^;]+)/);
+    if (match && match[1]) {
+      return decodeURIComponent(match[1]);
+    }
+  }
+
+  // 2. Extract from Authorization header (Bearer token)
+  const authHeader = req.headers.authorization || '';
+  if (authHeader.toLowerCase().startsWith('bearer ')) {
+    return authHeader.substring(7).trim();
+  }
+
+  // 3. Extract from request body if present
+  if (req.body && req.body.token) {
+    return String(req.body.token);
+  }
+
+  return null;
 }
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
-  setCorsHeaders(req, res);
+  const isAllowed = setCorsHeaders(req, res);
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(isAllowed ? 204 : 403).end();
   }
 
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.replace(/^Bearer\s+/i, '') || (req.body && req.body.token);
-
-  if (!token) {
-    return res.status(401).json({ authenticated: false, error: 'Authorization token is required.' });
+  if (req.method !== 'POST' && req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const decoded = verifyToken(token);
-  if (!decoded) {
-    return res.status(401).json({ authenticated: false, error: 'Invalid or expired session.' });
-  }
+  try {
+    const token = extractToken(req);
 
-  return res.status(200).json({
-    authenticated: true,
-    user: {
-      email: decoded.email,
-      name: decoded.name || 'Websoul Admin',
-      role: decoded.role || 'Administrator',
-    },
-  });
+    if (!token) {
+      return res.status(401).json({ authenticated: false, error: 'Authorization token or session cookie is required.' });
+    }
+
+    const secret = getJwtSecret();
+    const decoded = verifyToken(token, secret);
+    if (!decoded) {
+      return res.status(401).json({ authenticated: false, error: 'Invalid or expired session.' });
+    }
+
+    return res.status(200).json({
+      authenticated: true,
+      user: {
+        email: decoded.email,
+        name: decoded.name || 'Websoul Admin',
+        role: decoded.role || 'Administrator',
+      },
+    });
+  } catch (err: unknown) {
+    console.error('Session verification error:', err);
+    return res.status(500).json({
+      authenticated: false,
+      error: 'Authentication service configuration error on server.',
+    });
+  }
 }

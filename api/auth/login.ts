@@ -69,9 +69,11 @@ function getConfiguredAdmins(): AdminAccount[] {
 function getJwtSecret(): string {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('JWT_SECRET environment variable is missing.');
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
+    if (isProduction) {
+      throw new Error('JWT_SECRET environment variable is missing on the server.');
     }
+    console.warn('[SECURITY WARNING] Using fallback JWT secret for non-production development.');
     return 'websoul_dev_fallback_secret_key_only';
   }
   return secret;

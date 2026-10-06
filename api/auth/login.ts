@@ -57,7 +57,7 @@ function getConfiguredAdmins(): AdminAccount[] {
       admins.push({
         email: normalized,
         password: String(fallbackPass),
-        name: process.env.ADMIN_NAME || 'Saad (Websoul Admin)',
+        name: process.env.ADMIN_NAME || 'Websoul Admin',
         role: 'Administrator',
       });
     }

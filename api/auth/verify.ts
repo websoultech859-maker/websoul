@@ -10,7 +10,14 @@ interface DecodedTokenPayload {
 }
 
 function getJwtSecret(): string {
-  return process.env.JWT_SECRET || 'websoul_dev_fallback_secret_key_only';
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('JWT_SECRET environment variable is missing.');
+    }
+    return 'websoul_dev_fallback_secret_key_only';
+  }
+  return secret;
 }
 
 function verifyToken(token: string): DecodedTokenPayload | null {

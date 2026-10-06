@@ -2618,9 +2618,15 @@ export function ContactPage() {
     setLoading(true);
     setErrorMessage(null);
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bntrtbu';
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_dsjtgs7';
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'bicQOLaodBsBqDqKy';
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setErrorMessage('Contact service is not configured. Please reach out to contact@websoul.tech directly.');
+      setLoading(false);
+      return;
+    }
 
     // NOTE: `budget` has been removed from template params.
     // Make sure your EmailJS template no longer references {{budget}}.

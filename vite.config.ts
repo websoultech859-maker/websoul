@@ -100,12 +100,13 @@ function authDevPlugin(env: Record<string, string>): Plugin {
               );
 
               if (matchedAdmin) {
+                const devToken = `websoul_dev_token_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+                res.setHeader('Set-Cookie', `websoul_auth_token=${devToken}; Path=/; HttpOnly; SameSite=Strict`);
                 res.setHeader('Content-Type', 'application/json');
                 res.statusCode = 200;
                 res.end(
                   JSON.stringify({
                     success: true,
-                    token: `websoul_dev_token_${Date.now()}_${Math.random().toString(36).substring(2)}`,
                     expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000,
                     user: {
                       email: matchedAdmin.email,
@@ -128,6 +129,39 @@ function authDevPlugin(env: Record<string, string>): Plugin {
           });
           return;
         }
+
+        if (req.url === '/api/auth/logout' && (req.method === 'POST' || req.method === 'GET')) {
+          res.setHeader('Set-Cookie', 'websoul_auth_token=; Path=/; Max-Age=0; HttpOnly; SameSite=Strict');
+          res.setHeader('Content-Type', 'application/json');
+          res.statusCode = 200;
+          res.end(JSON.stringify({ success: true, message: 'Logged out successfully.' }));
+          return;
+        }
+
+        if (req.url === '/api/auth/verify' && (req.method === 'GET' || req.method === 'POST')) {
+          const cookieHeader = req.headers.cookie || '';
+          const match = cookieHeader.match(/(?:^|;\s*)websoul_auth_token=([^;]+)/);
+          if (match && match[1]) {
+            res.setHeader('Content-Type', 'application/json');
+            res.statusCode = 200;
+            res.end(
+              JSON.stringify({
+                authenticated: true,
+                user: {
+                  email: 'admin@websoul.tech',
+                  name: 'Websoul Admin',
+                  role: 'Administrator',
+                },
+              })
+            );
+            return;
+          }
+          res.setHeader('Content-Type', 'application/json');
+          res.statusCode = 401;
+          res.end(JSON.stringify({ authenticated: false, error: 'Unauthorized.' }));
+          return;
+        }
+
         next();
       });
     },

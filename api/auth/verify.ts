@@ -98,6 +98,30 @@ function setCorsHeaders(req: VercelRequest, res: VercelResponse): boolean {
   return allowed;
 }
 
+function extractToken(req: VercelRequest): string | null {
+  // 1. Extract from HttpOnly cookie
+  const cookieHeader = req.headers.cookie || '';
+  if (cookieHeader) {
+    const match = cookieHeader.match(/(?:^|;\s*)websoul_auth_token=([^;]+)/);
+    if (match && match[1]) {
+      return decodeURIComponent(match[1]);
+    }
+  }
+
+  // 2. Extract from Authorization header (Bearer token)
+  const authHeader = req.headers.authorization || '';
+  if (authHeader.toLowerCase().startsWith('bearer ')) {
+    return authHeader.substring(7).trim();
+  }
+
+  // 3. Extract from request body if present
+  if (req.body && req.body.token) {
+    return String(req.body.token);
+  }
+
+  return null;
+}
+
 export default function handler(req: VercelRequest, res: VercelResponse) {
   const isAllowed = setCorsHeaders(req, res);
 
@@ -110,11 +134,10 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const authHeader = req.headers.authorization || '';
-    const token = authHeader.replace(/^Bearer\s+/i, '') || (req.body && req.body.token);
+    const token = extractToken(req);
 
     if (!token) {
-      return res.status(401).json({ authenticated: false, error: 'Authorization token is required.' });
+      return res.status(401).json({ authenticated: false, error: 'Authorization token or session cookie is required.' });
     }
 
     const secret = getJwtSecret();

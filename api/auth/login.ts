@@ -182,9 +182,21 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     const token = createToken(matchedAdmin);
     const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
 
+    // Secure HttpOnly session cookie to protect token against XSS exfiltration
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
+    const cookieFlags = [
+      `websoul_auth_token=${encodeURIComponent(token)}`,
+      'Path=/',
+      `Max-Age=${7 * 24 * 60 * 60}`,
+      'HttpOnly',
+      'SameSite=Strict',
+      isProduction ? 'Secure' : '',
+    ].filter(Boolean).join('; ');
+
+    res.setHeader('Set-Cookie', cookieFlags);
+
     return res.status(200).json({
       success: true,
-      token,
       expiresAt,
       user: {
         email: matchedAdmin.email,

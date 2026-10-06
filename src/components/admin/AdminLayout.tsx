@@ -25,15 +25,22 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const user = AuthService.getCurrentUser();
 
-  // Authentication guard
+  // Authentication guard with server-side cookie verification
   useEffect(() => {
     if (!AuthService.isAuthenticated()) {
       onNavigate('admin-login');
+      return;
     }
+
+    AuthService.verifySession().then((isValid) => {
+      if (!isValid) {
+        onNavigate('admin-login');
+      }
+    });
   }, [onNavigate]);
 
-  const handleLogout = () => {
-    AuthService.logout();
+  const handleLogout = async () => {
+    await AuthService.logout();
     onNavigate('admin-login');
   };
 

@@ -1506,7 +1506,7 @@ export function Footer({ navigate, darkMode }: { navigate: (page: Page, id?: num
                 </li>
                 <li>
                   <a
-                    href="https://www.linkedin.com/company/websoultechnologies/"
+                    href="https://www.linkedin.com/company/websoultech/"
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs sm:text-sm text-[#475569] dark:text-slate-400 hover:text-[#0B192C] dark:hover:text-white link-underline cursor-pointer font-medium"
@@ -2733,7 +2733,7 @@ export function ContactPage() {
                     <a href="https://www.upwork.com/freelancers/~01d7d412bcc5a680b1" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
                       Upwork
                     </a>
-                    <a href="https://www.linkedin.com/company/websoultechnologies/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
+                    <a href="https://www.linkedin.com/company/websoultech/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:border-[#0B192C] dark:hover:border-blue-400 transition-colors">
                       LinkedIn
                     </a>
                   </div>

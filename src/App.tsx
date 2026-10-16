@@ -2595,6 +2595,7 @@ export function AboutPage({ navigate }: { navigate: (page: Page, id?: number) =>
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submittedInfo, setSubmittedInfo] = useState({ name: '', email: '' });
@@ -2609,6 +2610,12 @@ export function ContactPage() {
     navigator.clipboard.writeText('contact@websoul.tech');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText('44 7401890201');
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -2702,6 +2709,30 @@ export function ContactPage() {
                   </button>
                 </div>
 
+                <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/50 flex items-center justify-between gap-3 group hover:border-[#0B192C]/30 dark:hover:border-blue-500/40 transition-all">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0 shadow-2xs">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.684l1.5 4.5a1 1 0 01-.5 1.21l-2.2 1.1a11.04 11.04 0 005.47 5.47l1.1-2.2a1 1 0 011.21-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.163 21 3 14.837 3 7V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">Phone</div>
+                      <a href="tel:+447401890201" className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        44 7401890201
+                      </a>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyPhone}
+                    className="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0B192C] dark:text-slate-200 hover:bg-[#0B192C] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all cursor-pointer shadow-2xs shrink-0"
+                    title="Copy phone number to clipboard"
+                  >
+                    {copiedPhone ? '✓ Copied' : 'Copy'}
+                  </button>
+                </div>
+
                 <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/50 flex items-center gap-3.5">
                   <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 flex items-center justify-center text-[#0B192C] dark:text-blue-400 shrink-0 shadow-2xs">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2712,7 +2743,7 @@ export function ContactPage() {
                   <div>
                     <div className="text-[11px] font-mono-tech font-semibold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">HQ Location</div>
                     <div className="text-xs sm:text-sm font-bold text-[#0B192C] dark:text-slate-100">
-                      Islamabad, Pakistan <span className="font-normal text-slate-500 text-xs">(Remote Worldwide)</span>
+                      UK, 3 Fir street Bury BL9 7QG <span className="font-normal text-slate-500 text-xs">(Remote Worldwide)</span>
                     </div>
                   </div>
                 </div>

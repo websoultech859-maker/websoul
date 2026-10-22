@@ -1,0 +1,29 @@
+{
+  "name": "websoul",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "hash-password": "node scripts/hash-password.mjs"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "firebase": "^12.18.0",
+    "next-cloudinary": "^6.18.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vercel/node": "^5.10.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0"
+  }
+}

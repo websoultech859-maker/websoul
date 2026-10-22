@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Blogs collection rules
+    match /blogs/{document=**} {
+      // Allow anyone to read the blogs
+      allow read: if true;
+      
+      // Since the admin login in this app is entirely custom and doesn't use Firebase Auth, 
+      // we are allowing writes to everyone by default so your admin panel works.
+      // Warning: In a true production app, you'd want to integrate Firebase Auth for the admin 
+      // and use a rule like: allow write: if request.auth != null;
+      allow write: if true;
+    }
+  }
+}
